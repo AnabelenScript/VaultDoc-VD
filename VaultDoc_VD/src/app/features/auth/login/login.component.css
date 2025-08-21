@@ -1,0 +1,67 @@
+.LoginInfo{
+    width: 30vw;
+    height: 70%;
+    background-color: white;
+    
+    z-index: 30;
+    border-radius: 5px;
+    top: 15%;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 80px 60px;
+    box-sizing: border-box;
+}
+
+.LoginInfoContainer{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 60px;
+
+    position: absolute;
+    z-index: 20;
+}
+
+.LoginInfo h1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.inputform{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+}
+
+.inputform input{
+    height: 100%;
+    border-radius: 8px;
+    border: solid #656565 0.5px;
+}
+
+.loginbutton{
+    width: 100%;
+    height: 60%;
+    color: white;
+    background-color: #C90166;
+    border: 0;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.logosGOB{
+    width: 30%;
+}
