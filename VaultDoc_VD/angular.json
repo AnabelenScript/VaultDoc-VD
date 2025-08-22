@@ -35,7 +35,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/core/services/alerts/alerts.css"
+              
             ],
             "scripts": [],
             "server": "src/main.server.ts",
