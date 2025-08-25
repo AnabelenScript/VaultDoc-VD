@@ -7,6 +7,7 @@ import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layou
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { FilesModule } from './features/files/files.module';
 
 
 
@@ -21,7 +22,8 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
     MainLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    DashboardModule
+    DashboardModule,
+    FilesModule,
   ],
   providers: [
     provideClientHydration(),

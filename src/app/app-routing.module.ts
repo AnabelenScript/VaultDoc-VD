@@ -5,6 +5,8 @@ import { AuthModule } from './features/auth/auth.module';
 import { LoginPageComponent } from './features/auth/views/login-page/login-page.component';
 import { AuthGuard } from '../app/core/services/auth/auth_guard'; 
 import { DashboardPageComponent } from './features/dashboard/views/dashboard-page/dashboard-page.component';
+import { FoldersPageComponent } from './features/files/views/folders-page/folders-page.component';
+import { FilesPageComponent } from './features/files/views/files-page/files-page.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,14 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardPageComponent
+      },
+      {
+        path: 'folders',
+        component: FoldersPageComponent
+      },
+      {
+        path: 'files/:id_folder/:folder_name',
+        component: FilesPageComponent
       }
     ],
   },
