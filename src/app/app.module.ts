@@ -4,6 +4,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layout.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -13,10 +17,13 @@ import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layou
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    MainLayoutModule
+    MainLayoutModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
