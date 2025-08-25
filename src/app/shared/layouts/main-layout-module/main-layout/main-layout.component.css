@@ -1,0 +1,42 @@
+
+.navbar-main-container{
+    width: 11%;
+    padding: 0;
+
+
+}
+
+.navbar-main-container:hover{
+    width: 22%;
+}
+
+
+.main{
+    width: 100%;
+    display: flex;
+    gap: 40px;
+}
+
+.main-layout{
+    width: 100%;
+    padding: 20px 0;
+}
+
+
+@media (max-width: 768px) {
+  .main-layout {
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-layout {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .content-wrapper {
+    min-height: calc(100vh - 200px); 
+  }
+}

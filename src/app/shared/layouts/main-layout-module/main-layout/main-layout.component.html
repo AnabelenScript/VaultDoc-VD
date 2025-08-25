@@ -1,2 +1,6 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="main"><div class="navbar-main-container">
+    <app-navbar (expandedChange)="onNavbarExpandedChange($event)"></app-navbar></div>
+
+<div class="main-layout" [class.expanded]="isNavbarExpanded">
+  <router-outlet></router-outlet>
+</div></div>
