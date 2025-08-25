@@ -6,12 +6,13 @@ import { RouterModule } from '@angular/router';
 import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 
 
 
 @NgModule({
   declarations: [
-   AppComponent
+   AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +20,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     RouterModule,
     MainLayoutModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DashboardModule
   ],
   providers: [
     provideClientHydration(),
