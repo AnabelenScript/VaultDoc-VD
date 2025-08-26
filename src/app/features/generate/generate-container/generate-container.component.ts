@@ -1,20 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard-container',
-  templateUrl: './dashboard-container.component.html',
-  styleUrl: './dashboard-container.component.css'
+  selector: 'app-generate-container',
+  templateUrl: './generate-container.component.html',
+  styleUrl: './generate-container.component.css'
 })
-export class DashboardContainerComponent {
-
-  recentFolders = [
-    { name: 'Acuerdos', icon: 'folder' },
-    { name: 'Jurídicos', icon: 'folder' },
-    { name: 'Administrativo', icon: 'folder' },
-    { name: 'Confidencial', icon: 'folder' }
-  ];
-
-  recentFiles = [
+export class GenerateContainerComponent {
+recentFiles = [
     { 
       name: 'Constancia_DG_2025', 
       lastModified: '30 de Jun', 
@@ -61,23 +53,22 @@ export class DashboardContainerComponent {
 
   archiveCount = 178;
   searchTerm = '';
-  showRecentFolders = true;
   showRecentFiles = true;
+  showGenerateOptions = true;
 
   onSearch() {
     console.log('Buscando:', this.searchTerm);
-  }
-
-  toggleRecentFolders() {
-    this.showRecentFolders = !this.showRecentFolders;
   }
 
   toggleRecentFiles() {
     this.showRecentFiles = !this.showRecentFiles;
   }
 
-  createNewFolder() {
+  toggleGenerateOptions() {
+    this.showGenerateOptions = !this.showGenerateOptions;
+  }
 
+  createNewFolder() {
     console.log('Crear nueva carpeta');
   }
 
@@ -86,6 +77,7 @@ export class DashboardContainerComponent {
   }
 
   onFileClick(file: any) {
+
     console.log('Archivo seleccionado:', file.name);
   }
 

@@ -5,6 +5,8 @@
 
 body{
     overflow-y: hidden;   
+    overflow-x: hidden;
+    scrollbar-width: hidden;
 }
 
 .LoginContainer{
@@ -16,8 +18,8 @@ body{
 
 .LogoContainer{
     position: absolute;
-  width: 80%;
-  left: -10%; 
+  width: 75%;
+  left: -14%; 
   top: -25%;
   height: 150%;
   border-radius: 50%;
@@ -42,4 +44,22 @@ body{
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+@media (max-width: 1200px) {
+  .LogoContainer{
+     position: absolute;
+  width: 75%;
+  left: -14%; 
+  top: -25%;
+  height: 150%;
+  border-radius: 50%;
+  background-color: #009887; 
+  z-index: 3;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  }
+  
+ 
 }

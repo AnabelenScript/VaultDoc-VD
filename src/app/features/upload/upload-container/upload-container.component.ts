@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard-container',
-  templateUrl: './dashboard-container.component.html',
-  styleUrl: './dashboard-container.component.css'
+  selector: 'app-upload-container',
+  templateUrl: './upload-container.component.html',
+  styleUrl: './upload-container.component.css'
 })
-export class DashboardContainerComponent {
+export class UploadContainerComponent {
 
-  recentFolders = [
-    { name: 'Acuerdos', icon: 'folder' },
-    { name: 'Jurídicos', icon: 'folder' },
-    { name: 'Administrativo', icon: 'folder' },
-    { name: 'Confidencial', icon: 'folder' }
-  ];
+    archiveCount = 178;
+  searchTerm = '';
+  showUploadOptions = true;
+  showRecentFiles = true;
+
+  inputType = 'Finanzas';
+  outputType = 'all';
 
   recentFiles = [
     { 
@@ -59,25 +60,18 @@ export class DashboardContainerComponent {
     }
   ];
 
-  archiveCount = 178;
-  searchTerm = '';
-  showRecentFolders = true;
-  showRecentFiles = true;
-
   onSearch() {
     console.log('Buscando:', this.searchTerm);
-  }
-
-  toggleRecentFolders() {
-    this.showRecentFolders = !this.showRecentFolders;
   }
 
   toggleRecentFiles() {
     this.showRecentFiles = !this.showRecentFiles;
   }
+  toggleUploadOptions() {
+    this.showUploadOptions = !this.showUploadOptions;
+  }
 
   createNewFolder() {
-
     console.log('Crear nueva carpeta');
   }
 
@@ -86,6 +80,7 @@ export class DashboardContainerComponent {
   }
 
   onFileClick(file: any) {
+
     console.log('Archivo seleccionado:', file.name);
   }
 

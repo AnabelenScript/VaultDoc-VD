@@ -7,7 +7,10 @@ import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layou
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardModule } from './features/dashboard/dashboard.module';
-import { FilesModule } from './features/files/files.module';
+import { ConvertModule } from './features/convert/convert.module';
+import { GenerateModule } from './features/generate/generate.module';
+import { UploadModule } from './features/upload/upload.module';
+import { BinModule } from './features/bin/bin.module';
 
 
 
@@ -23,7 +26,10 @@ import { FilesModule } from './features/files/files.module';
     ReactiveFormsModule,
     FormsModule,
     DashboardModule,
-    FilesModule,
+    ConvertModule,
+    GenerateModule,
+    UploadModule,
+    BinModule
   ],
   providers: [
     provideClientHydration(),
