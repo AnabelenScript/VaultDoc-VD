@@ -8,7 +8,7 @@ import { LoginResponse } from './auth_model';
 export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  private apiUrl = 'http://localhost:8080/users/login';
+  private apiUrl = 'http://localhost:8081/users/login';
 
   constructor(private http: HttpClient) {}
 

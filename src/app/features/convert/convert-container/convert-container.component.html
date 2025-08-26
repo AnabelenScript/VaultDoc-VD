@@ -1,0 +1,98 @@
+<div class="Convert-container">
+  <div class="convert-header">
+    <div class="search-section">
+      <div class="search-bar">
+        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
+        <input 
+          type="text" 
+          placeholder="Buscar" 
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+          class="search-input">
+        <button class="filter-button" type="button"></button>
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <div class="archive-count">
+        <span class="archive-label">Archivos:</span>
+        <span class="archive-number">{{ archiveCount }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-header" (click)="toggleConvertOptions()">
+      <i class="toggle-icon" [class.rotated]="!showConvertOptions">▼</i>
+      <h3>Convertir archivo</h3>
+    </div>
+
+    <ng-container *ngIf="showConvertOptions">
+      <div class="conversion-controls">
+        <div class="dropdown-row">
+          <div class="dropdown-group">
+            <label>Tipo de archivo de entrada</label>
+            <select [(ngModel)]="inputType">
+              <option value="pdf">PDF</option>
+              <option value="docx">DOCX</option>
+              <option value="jpg">JPG</option>
+            </select>
+          </div>
+          <div class="dropdown-group">
+            <label>Tipo de archivo de salida</label>
+            <select [(ngModel)]="outputType">
+              <option value="txt">TXT</option>
+              <option value="docx">DOCX</option>
+              <option value="xlsx">XLSX</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="upload-btn" (click)="uploadFile()">
+            <i class='bx bx-plus'></i> Subir archivo
+          </button>
+           <button class="upload-btn" (click)="uploadFile()">
+            <i class='bx bx-plus'></i> Convertir
+          </button>
+          <button class="download-btn" (click)="downloadFile()">
+            <i class='bx bx-download'></i> Descargar archivo
+          </button>
+          
+        </div>
+      </div>
+       </ng-container>
+
+         <div class="content-section">
+    <div class="section-header" (click)="toggleRecentFiles()">
+      <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
+      <h3>Archivos recientes</h3>
+    </div>
+
+       <div  class="files-table-container" *ngIf="showRecentFiles">
+      <div class="file-row">
+        <div class="file-block">
+          <h4>Archivos subidos recientes</h4>
+          <div class="file-list">
+             <div class="types"> <p>Nombre</p> <p>Tipo</p></div>
+            <div class="file-item" *ngFor="let file of uploadedFiles">
+              <span class="file-name">{{ file.name }}</span>
+              <span class="file-type">{{ file.type }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="file-block">
+          <h4>Archivos convertidos recientes</h4>
+          <div class="types"> <p>Nombre</p> <p>Tipo</p></div>
+          <div class="file-list">
+            <div class="file-item" *ngFor="let file of convertedFiles">
+              <span class="file-name">{{ file.name }}</span>
+              <span class="file-type">{{ file.type }}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+      </div>
+  </div>
+</div>

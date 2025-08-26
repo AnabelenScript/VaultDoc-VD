@@ -1,0 +1,7 @@
+.bin-container{
+     padding: 50px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+}
