@@ -22,8 +22,9 @@ export class NavbarComponent implements OnChanges {
     { id: 'dashboard', label: 'Dashboard', route: '/dashboard', icon: 'bx bxs-dashboard' },
     { id: 'convertir', label: 'Convertir', route: '/convert', svg: 'assets/convert.svg' },
     { id: 'crear-doc', label: 'Crear doc', route: '/generate', icon: 'fa-solid fa-file-circle-plus' },
-    { id: 'anadir', label: 'Añadir', route: '/anadir', icon: 'fa-solid fa-upload' },
-    { id: 'papelera', label: 'Papelera', route: '/papelera', svg: 'assets/bin.svg' }
+    { id: 'anadir', label: 'Añadir', route: '/upload', icon: 'fa-solid fa-upload' },
+    { id: 'papelera', label: 'Papelera', route: '/bin', svg: 'assets/bin.svg' },
+    { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out'}
   ];
 
   constructor(private router: Router, private sanitizer: DomSanitizer, private http: HttpClient) {
@@ -58,9 +59,14 @@ export class NavbarComponent implements OnChanges {
   }
 
   navigateTo(item: any) {
-    this.activeRoute = item.id;
-    this.router.navigate([item.route]);
+  this.activeRoute = item.id;
+
+  if (item.id === 'logout') {
+    localStorage.clear();
   }
+  this.router.navigate([item.route]);
+}
+
 
   private detectActiveRoute() {
     const currentUrl = this.router.url;

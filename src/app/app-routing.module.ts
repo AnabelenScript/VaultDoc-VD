@@ -7,6 +7,8 @@ import { AuthGuard } from '../app/core/services/auth/auth_guard';
 import { DashboardPageComponent } from './features/dashboard/views/dashboard-page/dashboard-page.component';
 import { ConvertPageComponent } from './features/convert/views/convert-page/convert-page.component';
 import { GeneratePageComponent } from './features/generate/views/generate-page/generate-page.component';
+import { UploadPageComponent } from './features/upload/views/upload-page/upload-page.component';
+import { BinPageComponent } from './features/bin/views/bin-page/bin-page.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
       {
         path: 'generate',
         component: GeneratePageComponent
+      },
+       {
+        path: 'upload',
+        component: UploadPageComponent
+      },
+       {
+        path: 'bin',
+        component: BinPageComponent
       }
     ],
   },
