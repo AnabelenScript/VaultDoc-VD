@@ -1,5 +1,4 @@
-// navbar.component.ts
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -9,8 +8,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnChanges {
   @Output() expandedChange = new EventEmitter<boolean>();
+  @Input() forceExpanded = false;
 
   logoCollapsed = 'assets/logo_collapsed.svg';
   logoExpanded = 'assets/logo_expanded.svg';
@@ -20,8 +20,8 @@ export class NavbarComponent {
 
   menuItems = [
     { id: 'dashboard', label: 'Dashboard', route: '/dashboard', icon: 'bx bxs-dashboard' },
-    { id: 'convertir', label: 'Convertir', route: '/convertir', svg: 'assets/convert.svg' },
-    { id: 'crear-doc', label: 'Crear doc', route: '/crear-doc', icon: 'fa-solid fa-file-circle-plus' },
+    { id: 'convertir', label: 'Convertir', route: '/convert', svg: 'assets/convert.svg' },
+    { id: 'crear-doc', label: 'Crear doc', route: '/generate', icon: 'fa-solid fa-file-circle-plus' },
     { id: 'anadir', label: 'Añadir', route: '/anadir', icon: 'fa-solid fa-upload' },
     { id: 'papelera', label: 'Papelera', route: '/papelera', svg: 'assets/bin.svg' }
   ];
@@ -31,14 +31,30 @@ export class NavbarComponent {
     this.loadAllSVGs();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['forceExpanded']) {
+      if (this.forceExpanded) {
+        this.isExpanded = true;
+        this.expandedChange.emit(true);
+      } else {
+        this.isExpanded = false;
+        this.expandedChange.emit(false);
+      }
+    }
+  }
+
   onMouseEnter() {
-    this.isExpanded = true;
-    this.expandedChange.emit(true);
+    if (!this.forceExpanded) {
+      this.isExpanded = true;
+      this.expandedChange.emit(true);
+    }
   }
 
   onMouseLeave() {
-    this.isExpanded = false;
-    this.expandedChange.emit(false);
+    if (!this.forceExpanded) {
+      this.isExpanded = false;
+      this.expandedChange.emit(false);
+    }
   }
 
   navigateTo(item: any) {

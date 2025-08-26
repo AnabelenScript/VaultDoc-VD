@@ -9,6 +9,7 @@ export class AlertService {
   success(message: string, title: string = 'Éxito'): void {
   Swal.fire({
     title: title,
+    timer: 1500,
     text: message,
     imageUrl: 'assets/succesfull_logo.png',
     imageWidth:162,
@@ -28,6 +29,7 @@ export class AlertService {
     Swal.fire({
        title: title,
     text: message,
+    timer:3000,
     imageUrl: 'assets/error_logo.png',
     imageWidth: 155,
     imageHeight: 150,

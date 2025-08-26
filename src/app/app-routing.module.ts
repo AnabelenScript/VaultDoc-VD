@@ -5,6 +5,8 @@ import { AuthModule } from './features/auth/auth.module';
 import { LoginPageComponent } from './features/auth/views/login-page/login-page.component';
 import { AuthGuard } from '../app/core/services/auth/auth_guard'; 
 import { DashboardPageComponent } from './features/dashboard/views/dashboard-page/dashboard-page.component';
+import { ConvertPageComponent } from './features/convert/views/convert-page/convert-page.component';
+import { GeneratePageComponent } from './features/generate/views/generate-page/generate-page.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,14 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardPageComponent
+      },
+      {
+        path: 'convert',
+        component: ConvertPageComponent
+      },
+      {
+        path: 'generate',
+        component: GeneratePageComponent
       }
     ],
   },

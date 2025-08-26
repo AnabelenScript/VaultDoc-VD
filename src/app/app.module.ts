@@ -7,6 +7,8 @@ import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layou
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { ConvertModule } from './features/convert/convert.module';
+import { GenerateModule } from './features/generate/generate.module';
 
 
 
@@ -21,7 +23,9 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
     MainLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    DashboardModule
+    DashboardModule,
+    ConvertModule,
+    GenerateModule
   ],
   providers: [
     provideClientHydration(),

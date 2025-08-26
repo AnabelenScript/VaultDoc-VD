@@ -12,6 +12,7 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.197);
 }
 
 .LoginInfoContainer{
@@ -20,10 +21,12 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    gap: 60px;
-
+    gap: 110px;
     position: absolute;
     z-index: 20;
+}
+.logosGOB{
+    width: 430px;
 }
 
 .LoginInfo h1{
@@ -74,4 +77,52 @@ button{
     margin: 0;
     border: 0;
     font-weight: 600;
+}
+
+@media (max-width: 1050px) {
+
+    .LoginInfoContainer{
+        display: flex;
+        gap: 60px;
+
+    }
+
+  .LoginInfo {
+    width: 40vw;
+    height: 70%;
+    top: auto;
+  }
+
+  .logosGOB{
+    width: 38vw;
+  }
+
+
+  .loginForm {
+    gap: 30px;
+  }
+
+  .LoginInfo h1 {
+    font-size: 38px;
+  }
+
+ 
+}
+
+@media (max-width: 820px) {
+  .LoginInfo {
+    width: 60vw;
+  }
+
+  .logosGOB {
+    display: none;
+  }
+
+  .LoginInfo h1 {
+    font-size: 38px;
+  }
+
+  .loginForm {
+    gap: 20px;
+  }
 }
