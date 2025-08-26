@@ -9,6 +9,8 @@ import { ConvertPageComponent } from './features/convert/views/convert-page/conv
 import { GeneratePageComponent } from './features/generate/views/generate-page/generate-page.component';
 import { UploadPageComponent } from './features/upload/views/upload-page/upload-page.component';
 import { BinPageComponent } from './features/bin/views/bin-page/bin-page.component';
+import { FoldersPageComponent } from './features/files/views/folders-page/folders-page.component';
+import { FilesPageComponent } from './features/files/views/files-page/files-page.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,15 @@ const routes: Routes = [
        {
         path: 'bin',
         component: BinPageComponent
-      }
+      },
+      {
+        path: 'folders',
+        component: FoldersPageComponent
+      },
+      {
+        path: 'files/:id_folder/:folder_name',
+        component: FilesPageComponent
+      },
     ],
   },
   {
