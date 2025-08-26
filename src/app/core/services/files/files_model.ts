@@ -10,3 +10,9 @@ export interface FileData {
 	id_uploader: number
 	directorio: string
 }
+
+export interface FileDataReceive {
+	count: number
+	data: FileData[]
+	message: string
+}

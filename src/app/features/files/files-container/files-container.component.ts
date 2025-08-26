@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FileServices } from '../../../core/services/files/files_service';
+import { FileData } from '../../../core/services/files/files_model';
 
 @Component({
   selector: 'app-files-container',
@@ -7,8 +9,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './files-container.component.css'
 })
 export class FilesContainerComponent implements OnInit{
-  folderName: string | null = "Proyectos"
-  idFolder: number | null = 0
+  folderName: string | null = "Proyectos";
+  idFolder: number | null = 0;
+
+  files: FileData[] = [];
   // Datos mock para archivos recientes
   recentFiles = [
     { 
@@ -59,12 +63,21 @@ export class FilesContainerComponent implements OnInit{
   searchTerm = '';
   showFiles = true;
 
-  constructor(private route: ActivatedRoute){  }
+  constructor(private route: ActivatedRoute, private fileService: FileServices){  }
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id_folder')
     this.folderName = this.route.snapshot.paramMap.get('folder_name')
     console.log("ID de carpeta:", id, " | Nombre:", this.folderName)
+    this.fileService.getFilesByFolder(Number(id)).subscribe(
+      (response) => {
+        console.log("Respuesta del servidor:", response)
+        this.files = response.data
+      },
+      (error) => {
+        console.log("Error:", error);
+      }
+    )
   }
 
   onSearch() {
@@ -89,5 +102,9 @@ export class FilesContainerComponent implements OnInit{
   loadMoreFiles() {
     // Lógica para cargar más archivos
     console.log('Cargar más archivos');
+  }
+
+  extensionWhitoutPoints(extension: string): string{
+    return ""
   }
 }

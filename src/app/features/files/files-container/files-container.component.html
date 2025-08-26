@@ -42,15 +42,15 @@
         </thead>
         <tbody>
           <tr 
-            *ngFor="let file of recentFiles" 
+            *ngFor="let file of files" 
             class="file-row"
             (click)="onFileClick(file)">
-            <td class="file-name">{{ file.name }}</td>
-            <td class="file-modified">{{ file.lastModified }}</td>
-            <td class="file-created">{{ file.creationDate }}</td>
+            <td class="file-name">{{ file.nombre }}</td>
+            <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
+            <td class="file-created">{{ "02/12/2005 12:23" }}</td>
             <td class="file-type">
-              <span class="type-badge" [class]="'type-' + file.type.toLowerCase()">
-                {{ file.type }}
+              <span class="type-badge" [class]="'type-' + file.extension.toLowerCase()">
+                {{ file.extension }}
               </span>
             </td>
           </tr>

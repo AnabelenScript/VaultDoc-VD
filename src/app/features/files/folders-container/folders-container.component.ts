@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FolderData } from '../../../core/services/folders/folders_model';
 import { FolderServices } from '../../../core/services/folders/folders_service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-folders-container',
@@ -61,7 +62,7 @@ export class FoldersContainerComponent implements OnInit {
   showFolders = true;
   showRecentFiles = true;
 
-  constructor(private folderServices: FolderServices) {  }
+  constructor(private folderServices: FolderServices, private router: Router) {  }
 
   ngOnInit(): void {
     this.folderServices.getFolders("Departamento de Voz y Datos").subscribe(
@@ -93,14 +94,9 @@ export class FoldersContainerComponent implements OnInit {
     console.log('Crear nueva carpeta');
   }
 
-  onFolderClick(folder: any) {
+  onFolderClick(folder_id: number, folder_name: string) {
     // Lógica para abrir carpeta
-    console.log('Carpeta seleccionada:', folder.name);
-  }
-
-  onFileClick(file: any) {
-    // Lógica para abrir archivo
-    console.log('Archivo seleccionado:', file.name);
+    this.router.navigate(['/files/' + folder_id + "/" + folder_name])
   }
 
   loadMoreFiles() {

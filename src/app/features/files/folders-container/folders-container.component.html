@@ -47,7 +47,7 @@
           <tr 
             *ngFor="let folder of folders" 
             class="file-row"
-            (click)="onFileClick(folder)">
+            (click)="onFolderClick(folder.id, folder.name)">
             <td class="file-name">{{ folder.name }}</td>
             <td class="file-modified">{{ folder.updated_at }}</td>
             <td class="file-created">{{ folder.created_at }}</td>
