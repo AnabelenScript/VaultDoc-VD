@@ -18,8 +18,8 @@
 
     <div class="actions-section">
       <div class="archive-count">
-        <span class="archive-label">Archivos:</span>
-        <span class="archive-number">{{ archiveCount }}</span>
+        <span class="archive-label">Carpetas:</span>
+        <span class="archive-number">{{ folders.length }}</span>
       </div>
       
       <button class="create-folder-btn" (click)="createNewFolder()" *ngIf="getIDRol() == 2">
@@ -29,9 +29,10 @@
   </div>
 
   <div class="content-section">
-    <div class="section-header" (click)="toggleFolders()">
-      <i class="toggle-icon" [class.rotated]="!showFolders">▼</i>
-      <h3>Carpetas</h3>
+    <div class="section-header">
+      <h3>{{ getDepartament() }}</h3>
+      <div class="section-line"></div>
+      <i [ngClass]="'bx bxs-folder'" class="icon-placeholder"></i>
     </div>
     
     <div class="files-table-container" *ngIf="showFolders">
