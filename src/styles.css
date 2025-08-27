@@ -4,9 +4,6 @@ body {
     margin: 0;
     box-sizing: border-box;
     background-image: url('assets/Fondo_Claro.png');
-    background-repeat: repeat-y;
-    background-size: 100% auto;
-    background-position: top center;
-    scrollbar-width: none; /* Firefox */
-    overflow-x: hidden;
+    background-size: cover;
+ 
 }
