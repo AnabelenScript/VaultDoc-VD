@@ -11,9 +11,8 @@ import { ConvertModule } from './features/convert/convert.module';
 import { GenerateModule } from './features/generate/generate.module';
 import { UploadModule } from './features/upload/upload.module';
 import { BinModule } from './features/bin/bin.module';
+import { UsersModule } from './features/users/users.module';
 import { FilesModule } from './features/files/files.module';
-
-
 
 @NgModule({
   declarations: [
@@ -31,6 +30,7 @@ import { FilesModule } from './features/files/files.module';
     GenerateModule,
     UploadModule,
     BinModule,
+    UsersModule
     FilesModule,
   ],
   providers: [
