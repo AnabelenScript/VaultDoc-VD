@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { MainLayoutModule } from './shared/layouts/main-layout-module/main-layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { ConvertModule } from './features/convert/convert.module';
 import { GenerateModule } from './features/generate/generate.module';
@@ -13,6 +13,7 @@ import { UploadModule } from './features/upload/upload.module';
 import { BinModule } from './features/bin/bin.module';
 import { UsersModule } from './features/users/users.module';
 import { FilesModule } from './features/files/files.module';
+import { AuthInterceptor } from './core/services/auth/auth_interceptor';
 
 @NgModule({
   declarations: [
@@ -32,10 +33,16 @@ import { FilesModule } from './features/files/files.module';
     BinModule,
     UsersModule,
     FilesModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
