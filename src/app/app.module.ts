@@ -30,7 +30,7 @@ import { FilesModule } from './features/files/files.module';
     GenerateModule,
     UploadModule,
     BinModule,
-    UsersModule
+    UsersModule,
     FilesModule,
   ],
   providers: [

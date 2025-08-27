@@ -22,7 +22,7 @@
         <span class="archive-number">{{ archiveCount }}</span>
       </div>
       
-      <button class="create-folder-btn" (click)="createNewFolder()">
+      <button class="create-folder-btn" (click)="createNewFolder()" *ngIf="id_rol == 2">
         Crear carpeta
       </button>
     </div>
