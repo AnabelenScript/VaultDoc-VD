@@ -108,7 +108,6 @@ export class FoldersContainerComponent implements OnInit {
     let string_user: string | null = localStorage.getItem('user_data')
     if (string_user != null){
       let user = JSON.parse(string_user)
-      console.log(user)
       return user.department
     } else {
       return "General"
@@ -119,7 +118,6 @@ export class FoldersContainerComponent implements OnInit {
     let string_user: string | null = localStorage.getItem('user_data')
     if (string_user != null){
       let user = JSON.parse(string_user)
-      console.log(user)
       return user.roleId
     } else {
       return 1

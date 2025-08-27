@@ -16,3 +16,11 @@ export interface FileDataReceive {
 	data: FileData[]
 	message: string
 }
+
+export interface FileCreated {
+	message: string
+	filename: string
+	size: number
+	department: string
+	folio: string
+}
