@@ -10,6 +10,8 @@ import { GeneratePageComponent } from './features/generate/views/generate-page/g
 import { UploadPageComponent } from './features/upload/views/upload-page/upload-page.component';
 import { BinPageComponent } from './features/bin/views/bin-page/bin-page.component';
 import { ProfilePageComponent } from './features/users/views/profile-page/profile-page.component';
+import { FoldersPageComponent } from './features/files/views/folders-page/folders-page.component';
+import { FilesPageComponent } from './features/files/views/files-page/files-page.component';
 
 const routes: Routes = [
   {
@@ -40,7 +42,15 @@ const routes: Routes = [
        {
         path: 'profile',
         component: ProfilePageComponent
-      }
+      },
+      {
+        path: 'folders',
+        component: FoldersPageComponent
+      },
+      {
+        path: 'files/:id_folder/:folder_name',
+        component: FilesPageComponent
+      },
     ],
   },
   {
