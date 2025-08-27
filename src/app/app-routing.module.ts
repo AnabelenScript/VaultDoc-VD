@@ -9,6 +9,7 @@ import { ConvertPageComponent } from './features/convert/views/convert-page/conv
 import { GeneratePageComponent } from './features/generate/views/generate-page/generate-page.component';
 import { UploadPageComponent } from './features/upload/views/upload-page/upload-page.component';
 import { BinPageComponent } from './features/bin/views/bin-page/bin-page.component';
+import { ProfilePageComponent } from './features/users/views/profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
        {
         path: 'bin',
         component: BinPageComponent
+      },
+       {
+        path: 'profile',
+        component: ProfilePageComponent
       }
     ],
   },
