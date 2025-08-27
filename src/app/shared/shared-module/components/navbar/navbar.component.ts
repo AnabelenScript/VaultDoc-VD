@@ -20,6 +20,7 @@ export class NavbarComponent implements OnChanges {
 
   menuItems = [
     { id: 'dashboard', label: 'Dashboard', route: '/dashboard', icon: 'bx bxs-dashboard' },
+    { id: 'archivos', label: 'Archivos', route: '/folders', icon: 'folder'},
     { id: 'convertir', label: 'Convertir', route: '/convert', svg: 'assets/convert.svg' },
     { id: 'crear-doc', label: 'Crear doc', route: '/generate', icon: 'fa-solid fa-file-circle-plus' },
     { id: 'anadir', label: 'Añadir', route: '/upload', icon: 'fa-solid fa-upload' },
