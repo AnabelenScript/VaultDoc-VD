@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BinContainerComponent } from './bin-container/bin-container.component';
 import { BinPageComponent } from './views/bin-page/bin-page.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { BinPageComponent } from './views/bin-page/bin-page.component';
     BinPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports:[
     BinContainerComponent,
