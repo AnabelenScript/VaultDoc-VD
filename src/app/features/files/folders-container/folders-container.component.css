@@ -139,13 +139,15 @@
   display: flex;
   align-items: center;
   padding: 20px 24px;
-  cursor: pointer;
+  gap: 12px;
   transition: background 0.2s ease;
   user-select: none;
 }
 
-.section-header:hover {
-  background: #f8f9fa;
+.section-line {
+  flex: 1;
+  height: 2px;
+  background-color: #ddd;
 }
 
 .toggle-icon {

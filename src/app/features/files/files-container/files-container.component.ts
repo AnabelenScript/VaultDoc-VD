@@ -105,6 +105,12 @@ export class FilesContainerComponent implements OnInit{
   }
 
   extensionWhitoutPoints(extension: string): string{
-    return ""
+    let ext = extension.split(".", 2)
+    return ext[1]
+  }
+
+  filenameWhitoutExtensions(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[0]
   }
 }
