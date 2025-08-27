@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserData } from '../../../core/services/auth/auth_model';
 
 @Component({
   selector: 'app-dashboard-container',
   templateUrl: './dashboard-container.component.html',
   styleUrl: './dashboard-container.component.css'
 })
-export class DashboardContainerComponent {
+export class DashboardContainerComponent implements OnInit {
+  id_rol: number = 1
 
   recentFolders = [
     { name: 'Acuerdos', icon: 'folder' },
@@ -64,6 +66,10 @@ export class DashboardContainerComponent {
   showRecentFolders = true;
   showRecentFiles = true;
 
+  ngOnInit(): void {
+      this.id_rol = this.getIDRol()
+  }
+
   onSearch() {
     console.log('Buscando:', this.searchTerm);
   }
@@ -91,5 +97,16 @@ export class DashboardContainerComponent {
 
   loadMoreFiles() {
     console.log('Cargar más archivos');
+  }
+
+  getIDRol() {
+    let string_user: string | null = localStorage.getItem('user_data')
+    if (string_user != null){
+      let user = JSON.parse(string_user)
+      console.log(user)
+      return user.roleId
+    } else {
+      return 1
+    }
   }
 }
