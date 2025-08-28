@@ -20,7 +20,7 @@
   padding: 0;
   margin: 0;
   transition: none;
-  z-index: 1102;
+  z-index: 10;
 }
 
 .navbar-main-container:hover{

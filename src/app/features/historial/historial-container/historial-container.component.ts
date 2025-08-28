@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-persons-container',
-  templateUrl: './persons-container.component.html',
-  styleUrl: './persons-container.component.css'
+  selector: 'app-historial-container',
+  templateUrl: './historial-container.component.html',
+  styleUrl: './historial-container.component.css'
 })
-export class PersonsContainerComponent {
+export class HistorialContainerComponent {
   archiveCount = 30;
   searchTerm = '';
   showConvertOptions = true;

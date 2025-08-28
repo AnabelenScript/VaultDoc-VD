@@ -14,6 +14,7 @@ import { BinModule } from './features/bin/bin.module';
 import { UsersModule } from './features/users/users.module';
 import { FilesModule } from './features/files/files.module';
 import { AuthInterceptor } from './core/services/auth/auth_interceptor';
+import { HistorialModule } from './features/historial/historial.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AuthInterceptor } from './core/services/auth/auth_interceptor';
     BinModule,
     UsersModule,
     FilesModule,
+    HistorialModule,
     HttpClientModule
   ],
   providers: [

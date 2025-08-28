@@ -6,6 +6,7 @@ import { BinModule } from "../bin/bin.module";
 import { PersonsContainerComponent } from './persons-container/persons-container.component';
 import { PersonsPageComponent } from './views/persons-page/persons-page.component';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from "../../app-routing.module";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     BinModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
 ],
   exports: [
     ProfileContainerComponent,

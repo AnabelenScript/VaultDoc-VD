@@ -13,6 +13,7 @@ import { ProfilePageComponent } from './features/users/views/profile-page/profil
 import { FoldersPageComponent } from './features/files/views/folders-page/folders-page.component';
 import { FilesPageComponent } from './features/files/views/files-page/files-page.component';
 import { PersonsPageComponent } from './features/users/views/persons-page/persons-page.component';
+import { HistorialPageComponent } from './features/historial/views/historial-page/historial-page.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: 'persons',
         component: PersonsPageComponent
+      },
+      {
+        path: 'historial',
+        component: HistorialPageComponent
       },
     ],
   },

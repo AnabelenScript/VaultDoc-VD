@@ -113,6 +113,7 @@
     width: 100%;
     display: flex;
     gap: 30px;
+    margin-bottom: 30px;
 }
 
 .action-buttons button{
@@ -135,3 +136,177 @@
 .action-buttons button:hover{
     background-color:#016c60;
 }
+
+.content-section {
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(211, 194, 180, 0.3);
+}
+
+.section-header:hover{
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
+}
+
+
+.toggle-icon {
+  font-size: 12px;
+  margin-right: 12px;
+  transition: transform 0.3s ease;
+  color: #666;
+}
+
+.toggle-icon.rotated {
+  transform: rotate(-90deg);
+}
+
+.section-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.userinfo{
+  display: flex;
+  padding: 10px 25px;
+  box-sizing: border-box;
+  border: 1px solid #656565;
+  border-radius: 10px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.userinfo h4{
+  font-weight: 400;
+}
+
+.userinfo:hover{
+  background-color: #F2F2F2;
+}
+
+.user-img{
+  width: 6%;
+  border: 1px solid #656565;
+  border-radius: 50%;
+}
+
+.Addmodal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100svw;
+}
+
+.modalbackground{
+  position: fixed;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+}
+
+.Addcontainer {
+  background-color: white;
+  border-radius: 10px;
+  position: fixed;
+  width: 550px;
+  height: 430px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  gap: 15px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+}
+
+.Addcontainer h4{
+  margin: 5px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.inputform{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+
+}
+
+.inputform input{
+  width: 100%;
+  height: 45px;
+  border-radius: 10px;
+  border: 0.5px solid #656565;
+  font-size: 16px;
+}
+
+.datosPersonales{
+  width: 100%;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Optionsbuttons{
+  margin-top: 10px;
+  width: 290px;
+  height: 45px;
+  display: flex;
+  gap: 10px;
+}
+
+.Optionsbuttons button{
+  width: 100%;
+  border: 0;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.cancelButton{
+  background-color: #AE1922;
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+}
+
+.Addbutton{
+  background-color: #009887;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.cancelButton:hover{
+  background-color: #811119;
+  cursor: pointer;
+}
+
+.Addbutton:hover{
+  background-color:#016c60;
+  cursor: pointer;
+}
+
