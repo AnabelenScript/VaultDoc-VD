@@ -1,0 +1,66 @@
+<div class="profile-container">
+     <div class="content-section">
+    <div class="section-header" (click)="toggleGenerateOptions()">
+      <i class="toggle-icon" [class.rotated]="!showGenerateOptions">▼</i>
+      <h3>Datos de trabajo</h3>
+    </div>
+
+    <ng-container *ngIf="showGenerateOptions">
+        <div class="datosTrabajoContainer">
+            <div class="datosTrabajo1">
+                <div class="data1">
+                <div class="inputform">
+                    <label for="">Departamento al que pertenece</label>
+                    <input type="text">
+                </div>
+                 <div class="inputform">
+                    <label for="">Puesto</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="inputform">
+                    <label for="">Jefe inmediato</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="perfilphoto">
+                <img src="assets/user.png" alt="" class="userphoto">
+            </div>
+        </div>
+    </ng-container>
+
+     <div class="section-header" (click)="toggleRecentFiles()">
+      <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
+      <h3>Datos personales</h3>
+    </div>
+
+     <ng-container *ngIf="showRecentFiles">
+        <div class="datosPersonalesContainer">
+             <div class="inputform">
+                    <label for="">Nombre completo</label>
+                    <input type="text">
+                </div>
+            <div class="inputform">
+                    <label for="">Correo electronico</label>
+                    <input type="text">
+                </div>
+            
+            <div class="data1">
+                 <div class="inputform">
+                    <label for="">Numero telefonico</label>
+                    <input type="text">
+                </div>
+                 <div class="inputform">
+                    <label for="">Contraseña</label>
+                    <input type="text">
+                </div>
+                <button class="editarPerfil">
+                    Editar perfil
+                </button>
+            </div>
+        </div>
+
+
+    </ng-container>
+    </div>
+</div>

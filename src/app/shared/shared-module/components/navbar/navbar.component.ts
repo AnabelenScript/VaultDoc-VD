@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, Input, OnChanges, SimpleChanges } from
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -29,9 +30,26 @@ export class NavbarComponent implements OnChanges {
   ];
 
   constructor(private router: Router, private sanitizer: DomSanitizer, private http: HttpClient) {
-    this.detectActiveRoute();
-    this.loadAllSVGs();
+  const userData = localStorage.getItem('user_data');
+  const user = userData ? JSON.parse(userData) : null;
+  const roleId = user?.roleId;
+  if (roleId === 3) {
+    this.menuItems = [
+      { id: 'personas', label: 'Personas', route: '/persons', icon: 'fa-solid fa-users' },
+      { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out' }
+    ];
   }
+
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      this.detectActiveRoute();
+    }
+  });
+
+  this.detectActiveRoute();
+  this.loadAllSVGs();
+}
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['forceExpanded']) {
@@ -69,13 +87,17 @@ export class NavbarComponent implements OnChanges {
 }
 
 
-  private detectActiveRoute() {
-    const currentUrl = this.router.url;
-    const activeItem = this.menuItems.find(item => item.route === currentUrl);
-    if (activeItem) {
-      this.activeRoute = activeItem.id;
-    }
+private detectActiveRoute() {
+  const currentUrl = this.router.url;
+  const activeItem = this.menuItems.find(item => item.route === currentUrl);
+  if (activeItem) {
+    this.activeRoute = activeItem.id;
+  } else if (currentUrl === '/profile') {
+    this.activeRoute = 'profile';
   }
+}
+
+
 
   private loadAllSVGs() {
     this.menuItems.forEach(item => {

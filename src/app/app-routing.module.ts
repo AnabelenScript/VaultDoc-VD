@@ -12,6 +12,7 @@ import { BinPageComponent } from './features/bin/views/bin-page/bin-page.compone
 import { ProfilePageComponent } from './features/users/views/profile-page/profile-page.component';
 import { FoldersPageComponent } from './features/files/views/folders-page/folders-page.component';
 import { FilesPageComponent } from './features/files/views/files-page/files-page.component';
+import { PersonsPageComponent } from './features/users/views/persons-page/persons-page.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
       {
         path: 'files/:id_folder/:folder_name',
         component: FilesPageComponent
+      },
+      {
+        path: 'persons',
+        component: PersonsPageComponent
       },
     ],
   },
