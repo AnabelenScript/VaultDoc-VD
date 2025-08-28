@@ -25,9 +25,10 @@
   </div>
 
   <div class="content-section">
-    <div class="section-header" (click)="toggleFiles()">
-      <i class="toggle-icon" [class.rotated]="!showFiles">▼</i>
+    <div class="section-header">
       <h3>{{folderName}}</h3>
+      <div class="section-line"></div>
+      <i [ngClass]="'bx bxs-folder'" class="icon-placeholder"></i>
     </div>
     
     <div class="files-table-container" *ngIf="showFiles">
@@ -45,23 +46,26 @@
             *ngFor="let file of files" 
             class="file-row"
             (click)="onFileClick(file)">
-            <td class="file-name">{{ file.nombre }}</td>
+            <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
             <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
             <td class="file-created">{{ "02/12/2005 12:23" }}</td>
             <td class="file-type">
-              <span class="type-badge" [class]="'type-' + file.extension.toLowerCase()">
-                {{ file.extension }}
+              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                {{ extensionWhitoutPoints(file.extension) }}
               </span>
             </td>
           </tr>
         </tbody>
       </table>
+      
       <div class="load-more-container">
         <button class="load-more-btn" (click)="loadMoreFiles()">
           <i class="load-more-icon">▼</i>
         </button>
       </div>
-    </div>
+    </div><button class="create-folder-btn" (click)="createNewFolder()">
+        Subir archivo
+      </button>
   </div>
 
 </div>

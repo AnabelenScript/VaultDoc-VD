@@ -103,4 +103,24 @@ export class FoldersContainerComponent implements OnInit {
     // Lógica para cargar más archivos
     console.log('Cargar más archivos');
   }
+
+  getDepartament(): string{
+    let string_user: string | null = localStorage.getItem('user_data')
+    if (string_user != null){
+      let user = JSON.parse(string_user)
+      return user.department
+    } else {
+      return "General"
+    }
+  }
+
+  getIDRol(): number {
+    let string_user: string | null = localStorage.getItem('user_data')
+    if (string_user != null){
+      let user = JSON.parse(string_user)
+      return user.roleId
+    } else {
+      return 1
+    }
+  }
 }

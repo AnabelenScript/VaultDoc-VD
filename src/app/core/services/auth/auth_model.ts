@@ -3,7 +3,8 @@ export interface UserData {
   nombre: string;
   apellidos: string;
   email: string;
-  id_rol: number;
+  roleID: number;
+  departament: string;
 }
 
 export interface LoginResponse {
