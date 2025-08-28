@@ -24,3 +24,12 @@ export interface FileCreated {
 	department: string
 	folio: string
 }
+
+export interface FileUpdated {
+	message: string
+	id: number
+	department: string 
+	subject: string
+	new_file: string
+	size: number
+}
