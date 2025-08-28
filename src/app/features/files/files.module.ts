@@ -5,6 +5,7 @@ import { FoldersPageComponent } from './views/folders-page/folders-page.componen
 import { FoldersContainerComponent } from './folders-container/folders-container.component';
 import { FormsModule } from '@angular/forms';
 import { FilesContainerComponent } from './files-container/files-container.component';
+import { SharedModule } from "../../shared/shared-module/shared.module";
 
 
 
@@ -17,8 +18,9 @@ import { FilesContainerComponent } from './files-container/files-container.compo
   ],
   imports: [
     CommonModule,
-    FormsModule
-  ],
+    FormsModule,
+    SharedModule
+],
   exports: [
     FilesPageComponent,
     FoldersPageComponent,

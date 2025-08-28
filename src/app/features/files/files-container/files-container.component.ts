@@ -22,6 +22,8 @@ export class FilesContainerComponent implements OnInit{
   showUploadModal = false;
   newFolio = "";
 
+  openFileId: number | null = null;
+
   constructor(private route: ActivatedRoute, private fileService: FileServices){  }
 
   ngOnInit(): void {
@@ -50,6 +52,16 @@ export class FilesContainerComponent implements OnInit{
 
   toggleFiles() {
     this.showFiles = !this.showFiles;
+    this.showFiles = !this.showFiles;
+    this.showFiles = !this.showFiles;
+  }
+
+  toggleOptions(fileId: number) {
+    if (this.openFileId === fileId) {
+      this.openFileId = null;
+    } else {
+      this.openFileId = fileId;
+    }
   }
 
   createNewFolder() {
@@ -112,7 +124,7 @@ export class FilesContainerComponent implements OnInit{
     const file = event.target.files[0];
     this.showUploadModal = false;
 
-    if (file || this.idFolder != null || this.getIDUser()) {
+    if (file && this.idFolder != null && this.getIDUser()) {
       this.fileService.uploadFile(file, this.newFolio, this.idFolder, this.getIDUser()).subscribe(
         (response) => {
           console.log("Respuesta del servidor:", response);

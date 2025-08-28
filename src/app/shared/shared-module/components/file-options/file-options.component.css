@@ -1,0 +1,41 @@
+/* Contenedor del menú */
+.options-menu {
+  display: flex;
+  flex-direction: column;   /* vertical */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  position: absolute;
+  right: 0;                 /* pegado al botón */
+  top: calc(100% + 2px);    /* un poco más abajo del ícono */
+  z-index: 1000;            /* que quede arriba */
+  width: max-content;       /* 👈 ajusta el ancho al contenido */
+  min-width: unset;         /* 👈 elimina el ancho mínimo */
+  overflow: hidden;
+  padding: 4px 0;           /* un poco de espacio vertical */
+}
+
+/* Botones internos sin formato */
+.options-menu button {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;              /* que abarquen el ancho del menú */
+  padding: 8px 14px;
+  text-align: left;         /* íconos/texto alineados a la izquierda */
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-radius: 0;         /* 👈 evita esquinas blancas raras */
+}
+
+/* Hover en toda la fila */
+.options-menu button:hover {
+  background: #f0f0f0;      /* gris claro */
+  color: #000;
+}
