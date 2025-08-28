@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FileCreated, FileData, FileDataReceive } from "./files_model";
+import { FileCreated, FileData, FileDataReceive, FileUpdated } from "./files_model";
 
 @Injectable({ providedIn: "root" })
 export class FileServices{
@@ -28,5 +28,36 @@ export class FileServices{
 
     getFilesByFolder(folder_id: number): Observable<FileDataReceive>{
         return this.__http.get<FileDataReceive>(this.__apiUrl + "folder/" + folder_id);
+    }
+
+    downloadFile(file_id: number, user_id: number): Observable<null>{
+        return this.__http.get<null>(this.__apiUrl + "/download/" + file_id + "/" + user_id);
+    }
+
+    updateFile(
+        id_file: number,
+        id_user: number,
+        file: File | null,
+        folio: string,
+        id_folder: number,
+        id_uploader: number,
+    ): Observable<FileUpdated>{
+        const formData = new FormData();
+        let requestJson;
+        if (file)
+            formData.append("file", file);
+        if (folio || id_folder || id_uploader) {
+            requestJson = {
+                folio: folio,
+                id_folder: id_folder,
+                id_uploader: id_uploader
+            }
+        }
+        formData.append("json", JSON.stringify(requestJson))
+        return this.__http.put<FileUpdated>(this.__apiUrl + id_file + "/" + id_user, formData);
+    }
+
+    deleteFile(id_file: number, id_user: number): Observable<{message: string, id: number}>{
+        return this.__http.delete<{message: string, id: number}>(this.__apiUrl + id_file + "/" + id_user);
     }
 }
