@@ -1,0 +1,39 @@
+/* Contenedor del menú */
+.options-menu {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff00;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  position: absolute;
+  right: 0;
+  top: calc(100% + 2px);
+  z-index: 1000;
+  width: max-content;
+  min-width: unset;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.options-menu button {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 8px 14px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-radius: 0;
+}
+
+.options-menu button:hover {
+  background: #f0f0f0;
+  color: #000;
+}

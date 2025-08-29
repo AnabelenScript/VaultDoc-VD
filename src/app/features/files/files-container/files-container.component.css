@@ -217,7 +217,6 @@
 }
 
 .files-table th {
-  background: #f8f9fa;
   padding: 16px 24px;
   text-align: left;
   font-weight: 600;
@@ -373,3 +372,108 @@
     padding: 12px;
   }
 }
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  width: 300px;
+  text-align: center;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px;
+  margin: 12px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.file-options {
+  position: relative;
+}
+
+.options-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.options-wrapper i {
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.options-wrapper i:hover {
+  background: #f0f0f0;
+}
+
+app-file-options {
+  position: absolute;
+  top: 10%;
+  right: 72%;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid #e0e0e000;
+  border-radius: 8px;
+  padding: 6px;
+  /*box-shadow: 0 4px 8px rgba(0,0,0,0.15);*/
+  z-index: 10;
+}
+
+app-file-options button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  color: #444;
+  transition: background 0.2s ease;
+}
+
+app-file-options button:hover {
+  background: #f5f5f5;
+}
+
+.options-btn {
+  background: none;
+  border: none;
+  outline: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.options-btn:hover {
+  background: #e0e0e0;
+  color: #000;
+}
+

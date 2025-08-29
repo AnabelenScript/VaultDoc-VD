@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
@@ -9,75 +9,40 @@ import { FileData } from '../../../core/services/files/files_model';
   styleUrl: './files-container.component.css'
 })
 export class FilesContainerComponent implements OnInit{
+  @ViewChild('fileInput') fileInput!: ElementRef
+
   folderName: string | null = "Proyectos";
-  idFolder: number | null = 0;
+  idFolder: number = 0;
 
   files: FileData[] = [];
-  // Datos mock para archivos recientes
-  recentFiles = [
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PNG' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PNG' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PNG' 
-    }
-  ];
 
-  archiveCount = 178;
   searchTerm = '';
   showFiles = true;
+
+  showUploadModal = false;
+  newFolio = "";
+
+  openFileId: number | null = null;
 
   constructor(private route: ActivatedRoute, private fileService: FileServices){  }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id_folder')
-    this.folderName = this.route.snapshot.paramMap.get('folder_name')
-    console.log("ID de carpeta:", id, " | Nombre:", this.folderName)
-    this.fileService.getFilesByFolder(Number(id)).subscribe(
-      (response) => {
-        console.log("Respuesta del servidor:", response)
-        this.files = response.data
-      },
-      (error) => {
-        console.log("Error:", error);
-      }
-    )
+    const id = this.route.snapshot.paramMap.get('id_folder');
+    const nameFolder = this.route.snapshot.paramMap.get('folder_name');
+    if (id || nameFolder) {
+      this.idFolder = Number(id);
+      this.folderName = nameFolder
+      console.log("ID de carpeta:", this.idFolder, " | Nombre:", this.folderName);
+      this.fileService.getFilesByFolder(this.idFolder).subscribe(
+        (response) => {
+          console.log("Respuesta del servidor:", response)
+          this.files = response.data
+        },
+        (error) => {
+          console.log("Error:", error);
+        }
+      );
+    }
   }
 
   onSearch() {
@@ -87,6 +52,16 @@ export class FilesContainerComponent implements OnInit{
 
   toggleFiles() {
     this.showFiles = !this.showFiles;
+    this.showFiles = !this.showFiles;
+    this.showFiles = !this.showFiles;
+  }
+
+  toggleOptions(fileId: number) {
+    if (this.openFileId === fileId) {
+      this.openFileId = null;
+    } else {
+      this.openFileId = fileId;
+    }
   }
 
   createNewFolder() {
@@ -113,4 +88,71 @@ export class FilesContainerComponent implements OnInit{
     let ext = extension.split(".", 2)
     return ext[0]
   }
+
+  getIDUser(): number {
+    let string_user: string | null = localStorage.getItem('user_data');
+    if (string_user != null){
+      const user = JSON.parse(string_user);
+      return user.userId;
+    } else {
+      return 0;
+    }
+  }
+
+  uploadFile(){
+    this.showUploadModal = true;
+  }
+
+  cancelUpload(){
+    this.showUploadModal = false;
+    this.newFolio = "";
+  }
+
+  checkNewFolio(){
+    const regex = /^[0-9]{3}$/;
+    console.log(this.newFolio);
+    if (!regex.test(this.newFolio)) {
+      console.log("El formato del folio no es el correcto");
+      return;
+      // Lógica para el alert del error
+    }
+    this.showUploadModal = false;
+    this.fileInput.nativeElement.click();
+  }
+
+  onSelectedFile(event: any){
+    const file = event.target.files[0];
+    this.showUploadModal = false;
+
+    if (file && this.idFolder != null && this.getIDUser()) {
+      this.fileService.uploadFile(file, this.newFolio, this.idFolder, this.getIDUser()).subscribe(
+        (response) => {
+          console.log("Respuesta del servidor:", response);
+        },
+        (error) => {
+          console.log("Error:", error);
+        }
+      );
+      this.newFolio = "";
+    } else {
+      console.log("Sin archivo");
+    }
+  }
+
+  countFiles(): number{
+    if (this.files.length)
+      return this.files.length;
+    else
+      return 0;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent){
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.options-btn') && !target.closest('.options-menu'))
+      this.openFileId = null;
+  }
+
+  onClickedFile(id: number){console.log("Archivo clickeado:", id)}
 }

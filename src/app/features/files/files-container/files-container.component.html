@@ -19,7 +19,7 @@
     <div class="actions-section">
       <div class="archive-count">
         <span class="archive-label">Archivos:</span>
-        <span class="archive-number">{{ archiveCount }}</span>
+        <span class="archive-number">{{ countFiles() }}</span>
       </div>
     </div>
   </div>
@@ -39,13 +39,11 @@
             <th>Última modificación</th>
             <th>Fecha de creación</th>
             <th>Tipo</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr 
-            *ngFor="let file of files" 
-            class="file-row"
-            (click)="onFileClick(file)">
+          <tr *ngFor="let file of files" class="file-row" (click)="onClickedFile(file.id)">
             <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
             <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
             <td class="file-created">{{ "02/12/2005 12:23" }}</td>
@@ -53,6 +51,12 @@
               <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
                 {{ extensionWhitoutPoints(file.extension) }}
               </span>
+            </td>
+            <td class="file-options">
+              <div class="options-wraper">
+                <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id"></app-file-options>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -63,9 +67,27 @@
           <i class="load-more-icon">▼</i>
         </button>
       </div>
-    </div><button class="create-folder-btn" (click)="createNewFolder()">
+    </div>
+      <div class="modal" *ngIf="showUploadModal">
+        <div class="modal-content">
+          <h3>Ingrese el folio del archivo</h3>
+          <input 
+            type="text" 
+            [(ngModel)]="newFolio" 
+            maxlength="3" 
+            pattern="[0-9]{3}" 
+            placeholder="Solo se admite 3 dígitos" 
+            class="modal-input">
+          <div class="modal-actions">
+            <button (click)="checkNewFolio()">Subir</button>
+            <button (click)="cancelUpload()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+      <button class="create-folder-btn" (click)="uploadFile()">
         Subir archivo
       </button>
+      <input type="file" #fileInput style="display: none;" (change)="onSelectedFile($event)"/>
   </div>
 
 </div>
