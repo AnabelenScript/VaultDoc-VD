@@ -37,7 +37,7 @@ export class FileServices{
         }).subscribe((blob: Blob) => {
             const createdURL = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = `archivo_${file_id}`;
+            a.href = createdURL;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
