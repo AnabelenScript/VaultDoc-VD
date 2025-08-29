@@ -70,9 +70,10 @@
             [(ngModel)]="newFolder.name" 
             maxlength="30" 
             class="modal-input">
+            autofocus
           <div class="modal-actions">
-            <button (click)="createFolder()">Subir</button>
-            <button (click)="cancelCreationNewFolder()">Cancelar</button>
+            <button (click)="createFolder()" class="create-folder-btn">Subir</button>
+            <button (click)="cancelCreationNewFolder()" class="create-folder-btn">Cancelar</button>
           </div>
     </div>
   </div>

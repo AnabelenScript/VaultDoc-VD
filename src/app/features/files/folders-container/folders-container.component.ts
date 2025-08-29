@@ -172,7 +172,7 @@ export class FoldersContainerComponent implements OnInit {
   }
 
   countFolders(): number{
-    if (this.folders.length)
+    if (this.folders)
       return this.folders.length;
     else
       return 0;

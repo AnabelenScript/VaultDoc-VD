@@ -10,6 +10,7 @@ import { FileData } from '../../../core/services/files/files_model';
 })
 export class FilesContainerComponent implements OnInit{
   @ViewChild('fileInput') fileInput!: ElementRef
+  @ViewChild('folioInput') folioInput!: ElementRef
 
   folderName: string | null = "Proyectos";
   idFolder: number = 0;
@@ -101,6 +102,7 @@ export class FilesContainerComponent implements OnInit{
 
   uploadFile(){
     this.showUploadModal = true;
+    this.folioInput.nativeElement.focus();
   }
 
   cancelUpload(){
@@ -140,7 +142,7 @@ export class FilesContainerComponent implements OnInit{
   }
 
   countFiles(): number{
-    if (this.files.length)
+    if (this.files)
       return this.files.length;
     else
       return 0;
