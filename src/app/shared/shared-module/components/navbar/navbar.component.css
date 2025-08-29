@@ -27,11 +27,13 @@
   border: 2px solid #e0e0e0;
   margin-bottom: 25px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.profile-image i {
-  font-size:58px;
-  object-fit: cover;
+.usericon{
+  width: 60px;
   color: #656565;
 }
 

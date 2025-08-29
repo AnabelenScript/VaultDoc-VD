@@ -1,9 +1,7 @@
 <nav class="navbar" [class.expanded]="isExpanded" (mouseenter)="onMouseEnter()"(mouseleave)="onMouseLeave()">
   <div class="profile-section">
-    <div   class="profile-image" 
-    routerLink="/profile"
-    [class.profile-active]="activeRoute === 'profile'">>
-    <i class="fa-solid fa-circle-user"></i>
+    <div class="profile-image" routerLink="/profile" [class.profile-active]="activeRoute === 'profile'">
+    <img src="assets/user_icon.svg" alt="" class="usericon">
     </div>
   </div>
 
