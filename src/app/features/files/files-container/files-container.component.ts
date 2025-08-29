@@ -138,4 +138,13 @@ export class FilesContainerComponent implements OnInit{
       console.log("Sin archivo");
     }
   }
+
+  countFiles(): number{
+    if (this.files.length)
+      return this.files.length;
+    else
+      return 0;
+  }
+
+  onClickedFile(id: number){console.log("Archivo clickeado:", id)}
 }

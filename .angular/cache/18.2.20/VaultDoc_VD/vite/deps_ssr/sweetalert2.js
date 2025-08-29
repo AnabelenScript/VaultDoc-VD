@@ -3043,7 +3043,7 @@ Object.keys(instanceMethods).forEach((key) => {
   };
 });
 SweetAlert.DismissReason = DismissReason;
-SweetAlert.version = "11.22.5";
+SweetAlert.version = "11.22.4";
 var Swal = SweetAlert;
 Swal.default = Swal;
 "undefined" != typeof document && function(e, t) {
@@ -3062,7 +3062,7 @@ export {
 
 sweetalert2/dist/sweetalert2.esm.all.js:
   (*!
-  * sweetalert2 v11.22.5
+  * sweetalert2 v11.22.4
   * Released under the MIT License.
   *)
 */

@@ -19,7 +19,7 @@
     <div class="actions-section">
       <div class="archive-count">
         <span class="archive-label">Carpetas:</span>
-        <span class="archive-number">{{ folders.length }}</span>
+        <span class="archive-number">{{ countFolders() }}</span>
       </div>
       
       <button class="create-folder-btn" (click)="toggleCreateModal()" *ngIf="getIDRol() == 2">
