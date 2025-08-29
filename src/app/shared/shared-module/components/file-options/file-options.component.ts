@@ -10,12 +10,13 @@ import { error } from 'console';
 export class FileOptionsComponent {
   @Input() idUser: number | null = 0;
   @Input() idFile: number | null = 0;
+  @Input() filename: string | null = "";
 
   constructor(private fileService: FileServices){  }
 
-  downloadFile(idUser: number | null, idFile: number | null){
-    if (idUser && idFile) {
-      this.fileService.downloadFile(idFile, idUser);
+  downloadFile(){
+    if (this.idUser && this.idFile && this.filename) {
+      this.fileService.downloadFile(this.idFile, this.idUser, this.filename);
     }
   }
 

@@ -31,13 +31,14 @@ export class FileServices{
         return this.__http.get<FileDataReceive>(this.__apiUrl + "folder/" + folder_id);
     }
 
-    downloadFile(file_id: number, user_id: number) {
+    downloadFile(file_id: number, user_id: number, name: string) {
         this.__http.get(`${this.__apiUrl}download/${file_id}/${user_id}`, {
             responseType: 'blob',
         }).subscribe((blob: Blob) => {
             const createdURL = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = createdURL;
+            a.download = name;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
