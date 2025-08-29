@@ -384,6 +384,19 @@
   z-index: 1000;
 }
 
+.modal input, button{
+    height: 42px; 
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.modal input{
+    border: 0.3px solid #656565;
+    padding:  0px 15px;
+}
+
 .modal-content {
   background: white;
   padding: 20px;
