@@ -1,3 +1,4 @@
+/* features/users/persons-container/persons-container.component.css */
 .persons-container{
      padding: 50px;
   background: white;
@@ -14,8 +15,6 @@
   gap: 20px;
   flex-wrap: wrap;
 }
-
-
 
 .search-section {
   flex: 1;
@@ -158,7 +157,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
 }
 
-
 .toggle-icon {
   font-size: 12px;
   margin-right: 12px;
@@ -185,23 +183,66 @@
   border-radius: 10px;
   justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .userinfo h4{
   font-weight: 400;
+  margin: 0;
 }
 
 .userinfo:hover{
   background-color: #F2F2F2;
 }
 
-.user-img{
-  width: 6%;
-  border: 1px solid #656565;
-  border-radius: 50%;
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.Addmodal{
+.user-img{
+  width: 40px;
+  height: 40px;
+  border: 1px solid #656565;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  color: #AE1922;
+  font-size: 18px;
+}
+
+.delete-btn:hover {
+  background-color: rgba(174, 25, 34, 0.1);
+}
+
+.no-users-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-style: italic;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px dashed #ddd;
+}
+
+.no-users-message p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.Addmodal, .AddModal, .DeleteModal{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,12 +260,10 @@
   left: 0;
 }
 
-.Addcontainer {
+.Addcontainer, .DeleteContainer {
   background-color: white;
   border-radius: 10px;
   position: fixed;
-  width: 550px;
-  height: 430px;
   top: 0;
   bottom: 0;
   left: 0;
@@ -241,11 +280,33 @@
   font-family: "Poppins", sans-serif;
 }
 
-.Addcontainer h4{
+.Addcontainer {
+  width: 550px;
+  height: 520px;
+}
+
+.DeleteContainer {
+  width: 450px;
+  height: 250px;
+}
+
+.Addcontainer h4, .DeleteContainer h4{
   margin: 5px;
   padding: 0;
   font-size: 16px;
   font-weight: 400;
+}
+
+.DeleteContainer p {
+  text-align: center;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
+.warning-text {
+  color: #AE1922;
+  font-weight: 500;
+  font-size: 12px;
 }
 
 .inputform{
@@ -253,15 +314,28 @@
   flex-direction: column;
   gap: 5px;
   width: 100%;
-
 }
 
-.inputform input{
+.inputform input, .department-select{
   width: 100%;
   height: 45px;
   border-radius: 10px;
   border: 0.5px solid #656565;
   font-size: 16px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.department-select {
+  background-color: white;
+  cursor: pointer;
+}
+
+.department-select:focus {
+  outline: none;
+  border-color: #009887;
+  box-shadow: 0 0 0 2px rgba(0, 152, 135, 0.2);
 }
 
 .datosPersonales{
@@ -286,6 +360,8 @@
   font-size: 14px;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .cancelButton{
@@ -300,13 +376,44 @@
   border-top-right-radius: 40px;
 }
 
+.deleteButton {
+  background-color: #AE1922;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
 .cancelButton:hover{
   background-color: #811119;
-  cursor: pointer;
 }
 
 .Addbutton:hover{
   background-color:#016c60;
-  cursor: pointer;
 }
 
+.deleteButton:hover {
+  background-color: #811119;
+}
+
+.Addbutton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.Addbutton:disabled:hover {
+  background-color: #cccccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .Addcontainer {
+    width: 90%;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .DeleteContainer {
+    width: 90%;
+    height: auto;
+  }
+}

@@ -1,5 +1,5 @@
 <div class="persons-container">
-      <div class="convert-header">
+  <div class="convert-header">
     <div class="search-section">
       <div class="search-bar">
         <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
@@ -20,54 +20,94 @@
       </div>
     </div>
   </div>
+
   <div class="action-buttons">
     <button routerLink="/historial">Historial de acciones</button>
-    <button (click)="toggleEditModal()">Agregar jefe de departamento</button></div>
-    <div class="content-section">
-    <div class="section-header" (click)="toggleRecentFiles()">
-      <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
-      <h3>Dirección general</h3>
-    </div>
-       <div  class="files-table-container" *ngIf="showRecentFiles">
-        <div class="userinfo">
-          <h4>Alejandro López Martínez</h4>
-          <div class="user-img">
-          </div>
-        </div>
-        <div class="userinfo">
-          <h4>Alejandro López Martínez</h4>
-          <div class="user-img">
-          </div>
-        </div>
-        <div class="userinfo">
-          <h4>Alejandro López Martínez</h4>
-          <div class="user-img">
-          </div>
-        </div>
+    <button (click)="toggleAddModal()">Agregar jefe de departamento</button>
   </div>
-</div>
 
-<div class="AddModal" *ngIf="showAddModal">
-  <div class="modalbackground"></div>
-  <div class="Addcontainer">
-    <h4>Agregar jefe</h4>
-    <div class="inputform">
-        <label for="">Nombre del departamento al que pertenece</label>
-        <input type="text">
+  <!-- Iterar por todos los departamentos -->
+  <div class="content-section" *ngFor="let department of departments">
+    <div class="section-header" (click)="toggleDepartmentVisibility(department)">
+      <i class="toggle-icon" [class.rotated]="!departmentVisibility[department]">▼</i>
+      <h3>{{ department }}</h3>
     </div>
-    <div class="datosPersonales">
-      <div class="inputform">
-        <label for="">Correo electronico</label>
-        <input type="text">
+
+    <div class="files-table-container" *ngIf="departmentVisibility[department]">
+      <!-- Si hay usuarios en el departamento -->
+      <div *ngIf="hasUsersInDepartment(department)">
+        <div class="userinfo" *ngFor="let user of getUsersForDepartment(department)">
+          <h4>{{ user.name || user.email }}</h4>
+          <div class="user-actions">
+            <div class="user-img"></div>
+            <button class="delete-btn" (click)="openDeleteModal(user)" title="Eliminar usuario">
+              <i class='bx bx-trash'></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="inputform">
-        <label for="">Password</label>
-        <input type="text">
+
+      <!-- Si no hay usuarios en el departamento -->
+      <div *ngIf="!hasUsersInDepartment(department)" class="no-users-message">
+        <p>No hay usuarios para este departamento</p>
       </div>
     </div>
-    <div class="Optionsbuttons">
-      <button class="cancelButton" (click)="toggleEditModal()">Cancelar</button>
-      <button class="Addbutton">Guardar datos</button>
+  </div>
+
+  <!-- Modal para agregar usuario -->
+  <div class="AddModal" *ngIf="showAddModal">
+    <div class="modalbackground" (click)="toggleAddModal()"></div>
+    <div class="Addcontainer">
+      <h4>Agregar jefe</h4>
+      
+      <div class="inputform">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" [(ngModel)]="newUser.nombre" placeholder="Nombre">
+      </div>
+
+      <div class="inputform">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" id="apellidos" [(ngModel)]="newUser.apellidos" placeholder="Apellidos">
+      </div>
+
+      <div class="inputform">
+        <label for="department">Departamento</label>
+        <select id="department" [(ngModel)]="newUser.department" class="department-select">
+          <option value="">Seleccionar departamento</option>
+          <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+        </select>
+      </div>
+
+      <div class="datosPersonales">
+        <div class="inputform">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" [(ngModel)]="newUser.email" placeholder="correo@ejemplo.com">
+        </div>
+        <div class="inputform">
+          <label for="password">Password</label>
+          <input type="password" id="password" [(ngModel)]="newUser.password" placeholder="Contraseña">
+        </div>
+      </div>
+
+      <div class="Optionsbuttons">
+        <button class="cancelButton" (click)="toggleAddModal()">Cancelar</button>
+        <button class="Addbutton" (click)="addUser()" [disabled]="!validateForm()">Guardar datos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación para eliminar -->
+  <div class="DeleteModal" *ngIf="showDeleteModal">
+    <div class="modalbackground" (click)="closeDeleteModal()"></div>
+    <div class="DeleteContainer">
+      <h4>Confirmar eliminación</h4>
+      <p>¿Está seguro de que desea eliminar al usuario <strong>{{ userToDelete?.nombre }} {{ userToDelete?.apellidos }}</strong>?</p>
+      <p class="warning-text">Esta acción no se puede deshacer.</p>
+      
+      <div class="Optionsbuttons">
+        <button class="cancelButton" (click)="closeDeleteModal()">Cancelar</button>
+        <button class="deleteButton" (click)="confirmDeleteUser()">Eliminar</button>
+      </div>
     </div>
   </div>
 </div>

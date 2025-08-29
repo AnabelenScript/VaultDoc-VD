@@ -5,16 +5,16 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-  private apiUrl = 'http://localhost:8081/users/';
+  private apiUrl = 'http://localhost:8081/users';
 
   constructor(private http: HttpClient) {}
 
   getProfile(): Observable<any> {
-    return this.http.get(this.apiUrl + 'profile');
+    return this.http.get(this.apiUrl + '/profile');
   }
 
   updateProfile(data: any): Observable<any> {
-  return this.http.put(this.apiUrl + 'profile', data);
+    return this.http.put(this.apiUrl + '/profile', data);
   }
 
   getAllUsers(): Observable<any> {
@@ -38,7 +38,8 @@ export class ProfileService {
   }
 
   getUserByDepartment(department: string): Observable<any> {
-    return this.http.get(this.apiUrl + 'department/' + department);
+    // Codificar el nombre del departamento para la URL
+    const encodedDepartment = encodeURIComponent(department);
+    return this.http.get(this.apiUrl + '/department/' + encodedDepartment);
   }
-
 }
