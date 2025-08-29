@@ -39,13 +39,11 @@
             <th>Última modificación</th>
             <th>Fecha de creación</th>
             <th>Tipo</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr 
-            *ngFor="let file of files" 
-            class="file-row"
-            (click)="onFileClick(file)">
+          <tr *ngFor="let file of files" class="file-row">
             <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
             <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
             <td class="file-created">{{ "02/12/2005 12:23" }}</td>
@@ -53,6 +51,12 @@
               <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
                 {{ extensionWhitoutPoints(file.extension) }}
               </span>
+            </td>
+            <td class="file-options">
+              <div class="options-wraper">
+                <button (click)="toggleOptions(file.id)" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id"></app-file-options>
+              </div>
             </td>
           </tr>
         </tbody>

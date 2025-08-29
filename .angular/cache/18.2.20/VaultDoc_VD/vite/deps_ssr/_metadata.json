@@ -1,147 +1,73 @@
 {
-  "hash": "50edd35e",
-  "configHash": "8c149a45",
+  "hash": "5153a835",
+  "configHash": "1a36d00f",
   "lockfileHash": "780f5f79",
-  "browserHash": "b5f5db89",
+  "browserHash": "ff5e645b",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-<<<<<<< HEAD
       "fileHash": "6ecf8db6",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "824b379d",
-=======
-      "fileHash": "68dccb00",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-<<<<<<< HEAD
       "fileHash": "d6fa3b84",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "b4b44921",
-=======
-      "fileHash": "0ec7b468",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-<<<<<<< HEAD
       "fileHash": "36b14b47",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "02bedf1c",
-=======
-      "fileHash": "83f5abf3",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-<<<<<<< HEAD
       "fileHash": "72bc5052",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "c214f276",
-=======
-      "fileHash": "ee27ed9e",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-<<<<<<< HEAD
       "fileHash": "e31281c0",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "76a9178d",
-=======
-      "fileHash": "2852fd5b",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "@angular/platform-server": {
       "src": "../../../../../../node_modules/@angular/platform-server/fesm2022/platform-server.mjs",
       "file": "@angular_platform-server.js",
-<<<<<<< HEAD
       "fileHash": "f157efb8",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "aea4cbef",
-=======
-      "fileHash": "345ecd15",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-<<<<<<< HEAD
       "fileHash": "2d14fcb4",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "47f050ac",
-=======
-      "fileHash": "fba3d227",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../../node_modules/rxjs/dist/cjs/index.js",
       "file": "rxjs.js",
-<<<<<<< HEAD
       "fileHash": "5d139464",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "f38d9fab",
-=======
-      "fileHash": "6bada025",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": true
     },
     "rxjs/operators": {
       "src": "../../../../../../node_modules/rxjs/dist/cjs/operators/index.js",
       "file": "rxjs_operators.js",
-<<<<<<< HEAD
       "fileHash": "83dc84ee",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "57c2101f",
-=======
-      "fileHash": "c29e5b00",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
       "needsInterop": true
     },
     "sweetalert2": {
       "src": "../../../../../../node_modules/sweetalert2/dist/sweetalert2.esm.all.js",
       "file": "sweetalert2.js",
-<<<<<<< HEAD
       "fileHash": "d42d6236",
-=======
-<<<<<<< Updated upstream
-      "fileHash": "f427f399",
-=======
-      "fileHash": "314edb71",
->>>>>>> Stashed changes
->>>>>>> Anita_Features
+      "needsInterop": false
+    },
+    "tslib": {
+      "src": "../../../../../../node_modules/tslib/tslib.es6.mjs",
+      "file": "tslib.js",
+      "fileHash": "4deee55b",
       "needsInterop": false
     }
   },

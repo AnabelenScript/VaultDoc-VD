@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FolderData } from '../../../core/services/folders/folders_model';
 import { FolderServices } from '../../../core/services/folders/folders_service';
 import { Router } from '@angular/router';
+import { response } from 'express';
 
 @Component({
   selector: 'app-folders-container',
@@ -10,6 +11,15 @@ import { Router } from '@angular/router';
 })
 export class FoldersContainerComponent implements OnInit {
   folders: FolderData[] = []
+
+  newFolder: FolderData = {
+    id: 0,
+    name: "",
+    departamento: "",
+    id_uploader: 0,
+    created_at: "",
+    updated_at: ""
+  }
   // Datos mock para las carpetas recientes
   recentFolders = [
     { name: 'Acuerdos', icon: 'folder' },
@@ -57,10 +67,11 @@ export class FoldersContainerComponent implements OnInit {
     }
   ];
 
-  archiveCount = 178;
   searchTerm = '';
   showFolders = true;
   showRecentFiles = true;
+
+  modalNewFolder = false;
 
   constructor(private folderServices: FolderServices, private router: Router) {  }
 
@@ -87,6 +98,15 @@ export class FoldersContainerComponent implements OnInit {
 
   toggleRecentFiles() {
     this.showRecentFiles = !this.showRecentFiles;
+  }
+
+  toggleCreateModal() {
+    this.modalNewFolder = !this.modalNewFolder;
+  }
+
+  cancelCreationNewFolder() {
+    this.modalNewFolder = false;
+    this.newFolder.name = "";
   }
 
   createNewFolder() {
@@ -121,6 +141,31 @@ export class FoldersContainerComponent implements OnInit {
       return user.roleId
     } else {
       return 1
+    }
+  }
+
+  getIDUser(): number {
+    let string_user: string | null = localStorage.getItem('user_data');
+    if (string_user != null){
+      const user = JSON.parse(string_user);
+      return user.userId;
+    } else {
+      return 0;
+    }
+  }
+
+  createFolder(){
+    if (this.getIDUser() && this.getDepartament() !== "General" && this.newFolder.name !== ""){
+      this.newFolder.id_uploader = this.getIDUser();
+      this.newFolder.departamento = this.getDepartament();
+
+      this.folderServices.createFolder(this.newFolder).subscribe(
+        (response) => console.log("Respuesta del servidor:", response),
+        (error) => console.log("Error:", error)
+      );
+      this.newFolder.name = "";
+      this.newFolder.departamento = "";
+      this.newFolder.id = 0;
     }
   }
 }

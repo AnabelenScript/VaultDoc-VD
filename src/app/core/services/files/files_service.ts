@@ -31,7 +31,7 @@ export class FileServices{
     }
 
     downloadFile(file_id: number, user_id: number): Observable<null>{
-        return this.__http.get<null>(this.__apiUrl + "/download/" + file_id + "/" + user_id);
+        return this.__http.get<null>(this.__apiUrl + "download/" + file_id + "/" + user_id);
     }
 
     updateFile(
