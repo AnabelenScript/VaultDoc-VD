@@ -27,6 +27,66 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
 }
 
+.inputform input:disabled {
+  background-color: #f5f5f5;
+  color: #555;
+  cursor: default;
+  pointer-events: none;
+  border: solid 0.5px #ccc;
+  padding: 10px 15px;
+  box-sizing: border-box;
+}
+
+.inputform input:enabled{
+  padding: 10px 15px;
+}
+
+.editModebuttons{
+  width: 70%;
+  display: flex;
+  gap: 15px;
+}
+
+.noeditmode{
+  width: 60%;
+}
+
+.editmode{
+  display: flex;
+}
+
+.guardarCambiosPerfil{
+  height: 45px;
+    width: 100%;
+    background-color: #009887;
+    color: white;
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+
+.guardarCambiosPerfil:hover{
+     background-color:#016c60;
+     cursor: pointer;
+}
+
+.cancelEdit{
+   height: 45px;
+    width: 100%;
+    background-color: #AE1922;
+    color: white;
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.cancelEdit:hover{
+  background-color: #811119;
+  cursor: pointer;
+}
 
 .toggle-icon {
   font-size: 12px;
@@ -108,7 +168,7 @@
 
 .editarPerfil{
     height: 45px;
-    width: 25%;
+    width: 100%;
     background-color:#009887;
     color: white;
     border: none;
