@@ -19,7 +19,7 @@
     <div class="actions-section">
       <div class="archive-count">
         <span class="archive-label">Archivos:</span>
-        <span class="archive-number">{{ files.length }}</span>
+        <span class="archive-number">{{ countFiles() }}</span>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let file of files" class="file-row">
+          <tr *ngFor="let file of files" class="file-row" (click)="onClickedFile(file.id)">
             <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
             <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
             <td class="file-created">{{ "02/12/2005 12:23" }}</td>

@@ -76,15 +76,17 @@ export class FoldersContainerComponent implements OnInit {
   constructor(private folderServices: FolderServices, private router: Router) {  }
 
   ngOnInit(): void {
-    this.folderServices.getFolders("Departamento de Voz y Datos").subscribe(
-      (response) => {
-        console.log("Response received:", response);
-        this.folders = response.folders;
-      },
-      (error) => {
-        console.log("Error al obtener folders:", error);
-      }
-    );
+    if (this.getDepartament() !== "General"){
+      this.folderServices.getFolders(this.getDepartament()).subscribe(
+        (response) => {
+          console.log("Response received:", response);
+          this.folders = response.folders;
+        },
+        (error) => {
+          console.log("Error al obtener folders:", error);
+        }
+      );
+    }
   }
 
   onSearch() {
@@ -167,5 +169,12 @@ export class FoldersContainerComponent implements OnInit {
       this.newFolder.departamento = "";
       this.newFolder.id = 0;
     }
+  }
+
+  countFolders(): number{
+    if (this.folders.length)
+      return this.folders.length;
+    else
+      return 0;
   }
 }
