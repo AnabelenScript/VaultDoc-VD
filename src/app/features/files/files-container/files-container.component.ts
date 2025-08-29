@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
@@ -146,7 +146,13 @@ export class FilesContainerComponent implements OnInit{
       return 0;
   }
 
-  
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent){
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.options-btn') && !target.closest('.options-menu'))
+      this.openFileId = null;
+  }
 
   onClickedFile(id: number){console.log("Archivo clickeado:", id)}
 }

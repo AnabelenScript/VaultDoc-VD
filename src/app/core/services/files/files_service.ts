@@ -32,7 +32,7 @@ export class FileServices{
     }
 
     downloadFile(file_id: number, user_id: number) {
-        this.__http.get(`${this.__apiUrl}/download/${file_id}/${user_id}`, {
+        this.__http.get(`${this.__apiUrl}download/${file_id}/${user_id}`, {
             responseType: 'blob',
         }).subscribe((blob: Blob) => {
             const createdURL = window.URL.createObjectURL(blob);
