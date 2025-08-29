@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FileCreated, FileData, FileDataReceive, FileUpdated } from "./files_model";
+import { FileCreated, FileDataReceive, FileUpdated } from "./files_model";
+import { blob } from "node:stream/consumers";
 
 @Injectable({ providedIn: "root" })
 export class FileServices{
@@ -30,8 +31,18 @@ export class FileServices{
         return this.__http.get<FileDataReceive>(this.__apiUrl + "folder/" + folder_id);
     }
 
-    downloadFile(file_id: number, user_id: number): Observable<null>{
-        return this.__http.get<null>(this.__apiUrl + "download/" + file_id + "/" + user_id);
+    downloadFile(file_id: number, user_id: number) {
+        this.__http.get(`${this.__apiUrl}/download/${file_id}/${user_id}`, {
+            responseType: 'blob',
+        }).subscribe((blob: Blob) => {
+            const createdURL = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = `archivo_${file_id}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(createdURL);
+        });
     }
 
     updateFile(

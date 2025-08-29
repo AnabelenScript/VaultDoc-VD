@@ -15,12 +15,7 @@ export class FileOptionsComponent {
 
   downloadFile(idUser: number | null, idFile: number | null){
     if (idUser && idFile) {
-      this.fileService.downloadFile(idFile, idUser).subscribe(
-        (response) => {
-          console.log("Respuesta del servidor:", response);
-        },
-        (error) => console.log("Error:", error)
-      )
+      this.fileService.downloadFile(idFile, idUser);
     }
   }
 

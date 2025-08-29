@@ -146,5 +146,7 @@ export class FilesContainerComponent implements OnInit{
       return 0;
   }
 
+  
+
   onClickedFile(id: number){console.log("Archivo clickeado:", id)}
 }
