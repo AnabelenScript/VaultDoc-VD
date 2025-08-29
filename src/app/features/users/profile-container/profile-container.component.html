@@ -1,0 +1,74 @@
+<div class="profile-container">
+  <div class="content-section">
+    <div class="section-header" (click)="toggleGenerateOptions()">
+      <i class="toggle-icon" [class.rotated]="!showGenerateOptions">▼</i>
+      <h3>Datos de trabajo</h3>
+    </div>
+    <ng-container *ngIf="showGenerateOptions">
+      <div class="datosTrabajoContainer">
+        <div class="datosTrabajo1">
+          <div class="data1">
+            <div class="inputform">
+              <label>Departamento al que pertenece</label>
+              <input type="text" [(ngModel)]="profileData.departamento" disabled>
+            </div>
+            <div class="inputform">
+              <label>Rol</label>
+              <input type="text" [(ngModel)]="profileData.rol_nombre" disabled>
+            </div>
+          </div>
+          <div class="inputform">
+            <label>Jefe inmediato</label>
+            <input type="text" value="No disponible" disabled>
+          </div>
+        </div>
+        <div class="perfilphoto">
+          <img src="assets/user.png" alt="" class="userphoto">
+        </div>
+      </div>
+    </ng-container>
+    <div class="section-header" (click)="toggleRecentFiles()">
+  <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
+  <h3>Datos personales</h3>
+</div>
+
+<ng-container *ngIf="showRecentFiles">
+  <div class="datosPersonalesContainer">
+    <div class="data1">
+      <div class="inputform">
+        <label>Nombre(s)</label>
+        <input type="text" [(ngModel)]="profileData.nombre" [disabled]="!editMode">
+      </div>
+      <div class="inputform">
+        <label>Apellido(s)</label>
+        <input type="text" [(ngModel)]="profileData.apellidos" [disabled]="!editMode">
+      </div>
+    </div>
+
+    <div class="data1">
+      <div class="inputform">
+        <label>Correo electrónico</label>
+        <input type="email" [(ngModel)]="profileData.email" [disabled]="!editMode">
+      </div>
+      <div class="inputform">
+        <label>Contraseña</label>
+        <div style="position: relative;">
+          <input [type]="editMode ? 'text' : 'password'" [(ngModel)]="profileData.password" [disabled]="!editMode"/>
+
+        </div>
+      </div>
+      <div class="editModebuttons">
+        <ng-container *ngIf="!editMode" class="noeditmode">
+          <button class="editarPerfil" (click)="toggleEdit()">Editar perfil</button>
+        </ng-container>
+        <ng-container *ngIf="editMode" >
+            <button class="cancelEdit" (click)="cancelEdit()">Cancelar</button>
+          <button class="guardarCambiosPerfil" (click)="saveChanges()">Guardar cambios</button>
+          
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>
+  </div>
+</div>

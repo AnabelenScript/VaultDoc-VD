@@ -36,10 +36,22 @@ export class LoginComponent {
   const { email, password } = this.loginForm.value;
 
   this.authService.login(email, password).subscribe({
-    next: () => {
-      this.alertService.success('Login exitoso. Redirigiendo...');
-      setTimeout(() => this.router.navigate(['/dashboard']), 1500);
-    },
+   next: () => {
+  const userData = localStorage.getItem('user_data');
+  const user = userData ? JSON.parse(userData) : null;
+  const roleId = user?.roleId;
+
+  this.alertService.success('Login exitoso. Redirigiendo...');
+
+  setTimeout(() => {
+    if (roleId === 3) {
+      this.router.navigate(['/persons']);
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
+  }, 1500);
+},
+
     error: (err) => {
       this.alertService.error('Credenciales inválidas o error de servidor.');
       console.error('Login error:', err);

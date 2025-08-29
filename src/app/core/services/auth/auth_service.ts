@@ -22,6 +22,7 @@ export class AuthService {
         if (this.isBrowser()) {
           localStorage.setItem('auth_token', response.token);
           localStorage.setItem('user_data', JSON.stringify(response.user));
+          console.log(response.user)
         }
         this.isLoggedInSubject.next(true);
       })

@@ -1,18 +1,14 @@
-<nav class="navbar" 
-     [class.expanded]="isExpanded"
-     (mouseenter)="onMouseEnter()"
-     (mouseleave)="onMouseLeave()">
+<nav class="navbar" [class.expanded]="isExpanded" (mouseenter)="onMouseEnter()"(mouseleave)="onMouseLeave()">
   <div class="profile-section">
-    <div class="profile-image" routerLink="profile">
-      <i class="fa-solid fa-circle-user"></i>
+    <div   class="profile-image" 
+    routerLink="/profile"
+    [class.profile-active]="activeRoute === 'profile'">>
+    <i class="fa-solid fa-circle-user"></i>
     </div>
   </div>
 
   <div class="menu-section">
-    <div *ngFor="let item of menuItems" 
-         class="menu-item"
-         [class.active]="activeRoute === item.id"
-         (click)="navigateTo(item)">
+    <div *ngFor="let item of menuItems" class="menu-item"[class.active]="activeRoute === item.id"(click)="navigateTo(item)">
      <div class="menu-icon">
         <i *ngIf="item.icon" [ngClass]="item.icon" class="icon-placeholder"></i>
         <div *ngIf="item.svg" [innerHTML]="getSanitizedSvg(item.id)" class="svg-placeholder"></div>
@@ -25,10 +21,7 @@
   </div>
 
   <div class="logo-section">
-  <img
-    [src]="isExpanded ? logoExpanded : logoCollapsed"
-    alt="Logo"
-    class="logo-image"
+  <img [src]="isExpanded ? logoExpanded : logoCollapsed" alt="Logo" class="logo-image"
   />
 </div>
 </nav>

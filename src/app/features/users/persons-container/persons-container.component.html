@@ -1,0 +1,73 @@
+<div class="persons-container">
+      <div class="convert-header">
+    <div class="search-section">
+      <div class="search-bar">
+        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
+        <input 
+          type="text" 
+          placeholder="Buscar" 
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+          class="search-input">
+        <button class="filter-button" type="button"></button>
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <div class="archive-count">
+        <span class="archive-label">Personas:</span>
+        <span class="archive-number">{{ archiveCount }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <button routerLink="/historial">Historial de acciones</button>
+    <button (click)="toggleEditModal()">Agregar jefe de departamento</button></div>
+    <div class="content-section">
+    <div class="section-header" (click)="toggleRecentFiles()">
+      <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
+      <h3>Dirección general</h3>
+    </div>
+       <div  class="files-table-container" *ngIf="showRecentFiles">
+        <div class="userinfo">
+          <h4>Alejandro López Martínez</h4>
+          <div class="user-img">
+          </div>
+        </div>
+        <div class="userinfo">
+          <h4>Alejandro López Martínez</h4>
+          <div class="user-img">
+          </div>
+        </div>
+        <div class="userinfo">
+          <h4>Alejandro López Martínez</h4>
+          <div class="user-img">
+          </div>
+        </div>
+  </div>
+</div>
+
+<div class="AddModal" *ngIf="showAddModal">
+  <div class="modalbackground"></div>
+  <div class="Addcontainer">
+    <h4>Agregar jefe</h4>
+    <div class="inputform">
+        <label for="">Nombre del departamento al que pertenece</label>
+        <input type="text">
+    </div>
+    <div class="datosPersonales">
+      <div class="inputform">
+        <label for="">Correo electronico</label>
+        <input type="text">
+      </div>
+      <div class="inputform">
+        <label for="">Password</label>
+        <input type="text">
+      </div>
+    </div>
+    <div class="Optionsbuttons">
+      <button class="cancelButton" (click)="toggleEditModal()">Cancelar</button>
+      <button class="Addbutton">Guardar datos</button>
+    </div>
+  </div>
+</div>
