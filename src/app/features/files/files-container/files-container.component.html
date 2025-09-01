@@ -69,19 +69,22 @@
       </div>
     </div>
       <div class="modal" *ngIf="showUploadModal">
-        <div class="modal-content">
+        <div class="modal-content" (keydown)="selectButton($event)">
           <h3>Ingrese el folio del archivo</h3>
           <input 
-            type="text" 
+            type="text"
+            inputmode="numeric"
+            (keypress)="validateNumber($event)"
             [(ngModel)]="newFolio" 
             maxlength="3" 
             pattern="[0-9]{3}" 
             placeholder="Solo se admite 3 dígitos" 
             #folioInput
-            class="modal-input">
+            class="modal-input"
+          >
           <div class="modal-actions">
-            <button (click)="checkNewFolio()" class="create-folder-btn">Subir</button>
-            <button (click)="cancelUpload()" class="create-folder-btn">Cancelar</button>
+            <button (click)="cancelUpload()" class="create-folder-btn" #cancelCreateFile>Cancelar</button>
+            <button (click)="checkNewFolio()" class="create-folder-btn" #confirmCreateFile>Subir</button>
           </div>
         </div>
       </div>
