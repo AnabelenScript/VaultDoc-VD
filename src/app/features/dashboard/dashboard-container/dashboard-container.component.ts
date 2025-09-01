@@ -70,19 +70,23 @@ export class DashboardContainerComponent implements OnInit {
   ngOnInit(): void {
   this.id_rol = this.getIDRol();
 
-  const string_user = localStorage.getItem('user_data');
+const string_user = localStorage.getItem('user_data');
   if (string_user) {
-    const user = JSON.parse(string_user);
-
-    if (user?.departament) {
-      this.folderService.getFolders(user.departament).subscribe({
-        next: (response) => {
-          this.recentFolders = response.folders;
-        },
-        error: (err) => {
-          console.error('Error al obtener carpetas:', err);
-        }
-      });
+    try {
+      const user = JSON.parse(string_user);
+      if (user?.department && user.department !== "General") {
+        this.folderService.getFolders(user.department).subscribe({
+          next: (response) => {
+            console.log("Response received:", response);
+            this.recentFolders = response.folders;
+          },
+          error: (err) => {
+            console.error('Error al obtener carpetas:', err);
+          }
+        });
+      }
+    } catch (e) {
+      console.error('Error al parsear user_data:', e);
     }
   }
 }

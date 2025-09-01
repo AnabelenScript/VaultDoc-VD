@@ -14,6 +14,7 @@ import { FoldersPageComponent } from './features/files/views/folders-page/folder
 import { FilesPageComponent } from './features/files/views/files-page/files-page.component';
 import { PersonsPageComponent } from './features/users/views/persons-page/persons-page.component';
 import { HistorialPageComponent } from './features/historial/views/historial-page/historial-page.component';
+import { LoginGuard } from './core/services/auth/login_guard';
 
 const routes: Routes = [
   {
@@ -66,6 +67,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
+    canMatch: [LoginGuard]
   },
 ];
 @NgModule({
