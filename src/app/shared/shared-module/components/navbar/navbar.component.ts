@@ -22,23 +22,32 @@ export class NavbarComponent implements OnChanges {
   menuItems = [
     { id: 'dashboard', label: 'Dashboard', route: '/dashboard', icon: 'bx bxs-dashboard' },
     { id: 'archivos', label: 'Archivos', route: '/folders', icon: 'bx bxs-folder'},
-    { id: 'convertir', label: 'Convertir', route: '/convert', svg: 'assets/convert.svg' },
+    //{ id: 'convertir', label: 'Convertir', route: '/convert', svg: 'assets/convert.svg' },
     //{ id: 'crear-doc', label: 'Crear doc', route: '/generate', icon: 'fa-solid fa-file-circle-plus' },
     { id: 'anadir', label: 'Añadir', route: '/upload', icon: 'fa-solid fa-upload' },
-    { id: 'papelera', label: 'Papelera', route: '/bin', svg: 'assets/bin.svg' },
+    //{ id: 'papelera', label: 'Papelera', route: '/bin', svg: 'assets/bin.svg' },
     { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out'}
   ];
 
   constructor(private router: Router, private sanitizer: DomSanitizer, private http: HttpClient) {
   const userData = localStorage.getItem('user_data');
-  const user = userData ? JSON.parse(userData) : null;
-  const roleId = user?.roleId;
-  if (roleId === 3) {
-    this.menuItems = [
-      { id: 'personas', label: 'Personas', route: '/persons', icon: 'fa-solid fa-users' },
-      { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out' }
-    ];
-  }
+const user = userData ? JSON.parse(userData) : null;
+const roleId = user?.roleId;
+
+if (roleId === 3) {
+  this.menuItems = [
+    { id: 'personas', label: 'Personas', route: '/persons', icon: 'fa-solid fa-users' },
+    { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out' }
+  ];
+} else if (roleId === 2) {
+  this.menuItems = [
+    { id: 'dashboard', label: 'Dashboard', route: '/dashboard', icon: 'bx bxs-dashboard' },
+    { id: 'archivos', label: 'Archivos', route: '/folders', icon: 'bx bxs-folder' },
+    { id: 'anadir', label: 'Añadir', route: '/upload', icon: 'fa-solid fa-upload' },
+    { id: 'personas', label: 'Personas', route: '/persons', icon: 'fa-solid fa-users' },
+    { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out' }
+  ];
+}
 
   this.router.events.subscribe(event => {
     if (event instanceof NavigationEnd) {
@@ -47,7 +56,7 @@ export class NavbarComponent implements OnChanges {
   });
 
   this.detectActiveRoute();
-  this.loadAllSVGs();
+  //this.loadAllSVGs();
 }
 
 
@@ -99,7 +108,7 @@ private detectActiveRoute() {
 
 
 
-  private loadAllSVGs() {
+  /*private loadAllSVGs() {
     this.menuItems.forEach(item => {
       if (item.svg) {
         this.http.get(item.svg, { responseType: 'text' }).subscribe(svg => {
@@ -107,9 +116,9 @@ private detectActiveRoute() {
         });
       }
     });
-  }
+ }
 
   getSanitizedSvg(id: string): SafeHtml | null {
     return this.svgCache[id] || null;
-  }
+  }*/
 }

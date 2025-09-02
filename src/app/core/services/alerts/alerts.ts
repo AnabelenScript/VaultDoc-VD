@@ -49,7 +49,15 @@ export class AlertService {
     Swal.fire({
       icon: 'warning',
       title,
-      text: message
+      text: message,
+    background: '#fff',
+    color: '#333',
+    customClass: {
+      popup: 'successful-popup',
+      title: 'successful-titulo',
+      confirmButton: 'successful-confirmar',
+      htmlContainer: 'successful-contenido'
+    }
     });
   }
 
@@ -57,7 +65,16 @@ export class AlertService {
     Swal.fire({
       icon: 'info',
       title,
-      text: message
+      text: message,
+      showConfirmButton: false,
+    background: '#fff',
+    color: '#333',
+    customClass: {
+      popup: 'successful-popup',
+      title: 'successful-titulo',
+      confirmButton: 'successful-confirmar',
+      htmlContainer: 'successful-contenido'
+    }
     });
   }
 }
