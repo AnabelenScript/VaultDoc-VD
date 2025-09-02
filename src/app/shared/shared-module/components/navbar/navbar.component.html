@@ -9,7 +9,7 @@
     <div *ngFor="let item of menuItems" class="menu-item"[class.active]="activeRoute === item.id"(click)="navigateTo(item)">
      <div class="menu-icon">
         <i *ngIf="item.icon" [ngClass]="item.icon" class="icon-placeholder"></i>
-        <div *ngIf="item.svg" [innerHTML]="getSanitizedSvg(item.id)" class="svg-placeholder"></div>
+       <!-- <div *ngIf="item.svg" [innerHTML]="getSanitizedSvg(item.id)" class="svg-placeholder"></div> -->
     </div>
       
       <span class="menu-label" [class.show]="isExpanded">

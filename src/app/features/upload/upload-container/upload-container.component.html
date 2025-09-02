@@ -28,27 +28,27 @@
       <div class="conversion-controls">
         <div class="dropdown-row">
           <div class="dropdown-group">
-            <label>Selecciona la carpeta donde se subirá el archivo</label>
-            <select [(ngModel)]="inputType">
-              <option value="Finanzas">Finanzas</option>
-              <option value="Administración">Administración</option>
-              <option value="Gerencia">Gerencia</option>
-            </select>
-          </div>
-          <div class="dropdown-group">
-            <label>Seleccione quienes tendrán acceso al documento</label>
-            <select [(ngModel)]="outputType">
-              <option value="user">Usuario especifico</option>
-              <option value="all">Todos</option>
-            </select>
-          </div>
-        </div>
-         <button class="selection-button">
-            Selecciona las imagenes que deseas agregar <br> <i class='bx bxs-plus-square'></i>
-        </button>
-        <div class="generate-button-container">
-            <button class="generate-button">Subir archivo</button>
-        </div>
+  <label>Selecciona la carpeta donde se subirá el archivo</label>
+  <select [(ngModel)]="selectedFolderId">
+    <option *ngFor="let folder of folders" [value]="folder.id">
+      {{ folder.name }}
+    </option>
+  </select>
+</div>
+<div class="dropdown-group">
+  <label>Ingrese el folio del archivo</label>
+  <input type="text" [(ngModel)]="folio">
+</div>
+
+<button class="selection-button" (click)="triggerFileInput(fileInput)">
+  {{ selectedFile?.name || 'Selecciona las imágenes que deseas agregar' }}<br> <i class='bx bxs-plus-square'></i>
+</button>
+<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"/>
+
+<div class="generate-button-container">
+  <button class="generate-button" (click)="upload()">Subir archivo</button>
+</div>
+</div>
       </div>
        </ng-container>
 
