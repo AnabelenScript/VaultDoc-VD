@@ -175,13 +175,14 @@
   color: #333;
 }
 
-.dropdown-group select {
+.dropdown-group select, input {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
+
 
 .button-row {
   display: flex;

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserData } from '../../../core/services/auth/auth_model';
+import { FolderServices } from '../../../core/services/folders/folders_service';
+import { FolderData } from '../../../core/services/folders/folders_model';
+
 
 @Component({
   selector: 'app-dashboard-container',
@@ -9,12 +12,10 @@ import { UserData } from '../../../core/services/auth/auth_model';
 export class DashboardContainerComponent implements OnInit {
   id_rol: number = 1
 
-  recentFolders = [
-    { name: 'Acuerdos', icon: 'folder' },
-    { name: 'Jurídicos', icon: 'folder' },
-    { name: 'Administrativo', icon: 'folder' },
-    { name: 'Confidencial', icon: 'folder' }
-  ];
+  constructor(private folderService: FolderServices) {}
+
+  recentFolders: FolderData[] = [];
+
 
   recentFiles = [
     { 
@@ -67,8 +68,29 @@ export class DashboardContainerComponent implements OnInit {
   showRecentFiles = true;
 
   ngOnInit(): void {
-      this.id_rol = this.getIDRol()
+  this.id_rol = this.getIDRol();
+
+const string_user = localStorage.getItem('user_data');
+  if (string_user) {
+    try {
+      const user = JSON.parse(string_user);
+      if (user?.department && user.department !== "General") {
+        this.folderService.getFolders(user.department).subscribe({
+          next: (response) => {
+            console.log("Response received:", response);
+            this.recentFolders = response.folders;
+          },
+          error: (err) => {
+            console.error('Error al obtener carpetas:', err);
+          }
+        });
+      }
+    } catch (e) {
+      console.error('Error al parsear user_data:', e);
+    }
   }
+}
+
 
   onSearch() {
     console.log('Buscando:', this.searchTerm);
