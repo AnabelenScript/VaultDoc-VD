@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FolderData } from '../../../core/services/folders/folders_model';
 import { FolderServices } from '../../../core/services/folders/folders_service';
 import { Router } from '@angular/router';
@@ -10,6 +10,10 @@ import { response } from 'express';
   styleUrl: './folders-container.component.css'
 })
 export class FoldersContainerComponent implements OnInit {
+  @ViewChild('inputFoldername') inputFolderName!: ElementRef;
+  @ViewChild('createFolderButton') createFolderButton!: ElementRef;
+  @ViewChild('cancelFolderButton') cancelFolderButton!: ElementRef;
+
   folders: FolderData[] = []
 
   newFolder: FolderData = {
@@ -76,17 +80,7 @@ export class FoldersContainerComponent implements OnInit {
   constructor(private folderServices: FolderServices, private router: Router) {  }
 
   ngOnInit(): void {
-    if (this.getDepartament() !== "General"){
-      this.folderServices.getFolders(this.getDepartament()).subscribe(
-        (response) => {
-          console.log("Response received:", response);
-          this.folders = response.folders;
-        },
-        (error) => {
-          console.log("Error al obtener folders:", error);
-        }
-      );
-    }
+    this.getFoldersInfo();
   }
 
   onSearch() {
@@ -162,9 +156,13 @@ export class FoldersContainerComponent implements OnInit {
       this.newFolder.departamento = this.getDepartament();
 
       this.folderServices.createFolder(this.newFolder).subscribe(
-        (response) => console.log("Respuesta del servidor:", response),
+        (response) => {
+          console.log("Respuesta del servidor:", response);
+          this.getFoldersInfo();
+        },
         (error) => console.log("Error:", error)
       );
+      this.modalNewFolder = false;
       this.newFolder.name = "";
       this.newFolder.departamento = "";
       this.newFolder.id = 0;
@@ -176,5 +174,50 @@ export class FoldersContainerComponent implements OnInit {
       return this.folders.length;
     else
       return 0;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent){
+    const target = event.target as HTMLElement;
+
+    if (this.modalNewFolder) {
+      const modalContent = target.closest('.modal-content');
+      const modalOverlay = target.closest('.modal');
+
+      if (modalOverlay && !modalContent)
+        this.cancelCreationNewFolder();
+    }
+  }
+
+  selectButton(event: KeyboardEvent){
+    const key = event.key;
+
+    if (key === "ArrowUp"){
+      this.inputFolderName.nativeElement.focus();
+      this.inputFolderName.nativeElement.select();
+      event.preventDefault();
+    }
+    else if (key === "ArrowLeft"){
+      this.cancelFolderButton.nativeElement.focus();
+      event.preventDefault();
+    }
+    else if (key === "ArrowDown" || key === "ArrowRight"){
+      this.createFolderButton.nativeElement.focus();
+      event.preventDefault();
+    }
+  }
+
+  getFoldersInfo(){
+    if (this.getDepartament() !== "General"){
+      this.folderServices.getFolders(this.getDepartament()).subscribe(
+        (response) => {
+          console.log("Response received:", response);
+          this.folders = response.folders;
+        },
+        (error) => {
+          console.log("Error al obtener folders:", error);
+        }
+      );
+    }
   }
 }

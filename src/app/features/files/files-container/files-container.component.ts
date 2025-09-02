@@ -36,15 +36,7 @@ export class FilesContainerComponent implements OnInit{
       this.idFolder = Number(id);
       this.folderName = nameFolder
       console.log("ID de carpeta:", this.idFolder, " | Nombre:", this.folderName);
-      this.fileService.getFilesByFolder(this.idFolder).subscribe(
-        (response) => {
-          console.log("Respuesta del servidor:", response)
-          this.files = response.data
-        },
-        (error) => {
-          console.log("Error:", error);
-        }
-      );
+      this.getFilesInfo();
     }
   }
 
@@ -144,6 +136,7 @@ export class FilesContainerComponent implements OnInit{
       this.fileService.uploadFile(file, this.newFolio, this.idFolder, this.getIDUser()).subscribe(
         (response) => {
           console.log("Respuesta del servidor:", response);
+          this.getFilesInfo();
         },
         (error) => {
           console.log("Error:", error);
@@ -161,11 +154,16 @@ export class FilesContainerComponent implements OnInit{
     if (key === "ArrowUp"){
       this.folioInput.nativeElement.focus();
       this.folioInput.nativeElement.select();
+      event.preventDefault();
     }
-    else if (key === "ArrowLeft")
+    else if (key === "ArrowLeft"){
       this.cancelFileButton.nativeElement.focus();
-    else if (key === "ArrowDown" || key === "ArrowRight")
+      event.preventDefault();
+    }
+    else if (key === "ArrowDown" || key === "ArrowRight"){
       this.createFileButton.nativeElement.focus();
+      event.preventDefault();
+    }
   }
 
   countFiles(): number{
@@ -181,6 +179,28 @@ export class FilesContainerComponent implements OnInit{
 
     if (!target.closest('.options-btn') && !target.closest('.options-menu'))
       this.openFileId = null;
+
+    if (this.showUploadModal) {
+      const modalContent = target.closest('.modal-content');
+      const modalOverlay = target.closest('.modal');
+
+      if (modalOverlay && !modalContent)
+        this.cancelUpload();
+    }
+  }
+
+  getFilesInfo(){
+    if (this.idFolder) {
+    this.fileService.getFilesByFolder(this.idFolder).subscribe(
+        (response) => {
+          console.log("Respuesta del servidor:", response)
+          this.files = response.data
+        },
+        (error) => {
+          console.log("Error:", error);
+        }
+      );
+    }
   }
 
   onClickedFile(id: number){console.log("Archivo clickeado:", id)}

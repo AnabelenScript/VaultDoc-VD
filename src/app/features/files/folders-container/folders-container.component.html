@@ -63,18 +63,19 @@
     </div>
   </div>
   <div class="modal" *ngIf="modalNewFolder">
-    <div class="modal-content">
+    <div class="modal-content" (keydown)="selectButton($event)">
       <h3>Ingrese el nombre de la carpeta</h3>
           <input 
             type="text" 
             [(ngModel)]="newFolder.name" 
-            maxlength="30" 
+            maxlength="100" 
             autofocus
-            class="modal-input">
-            
+            class="modal-input"
+            #inputFoldername
+          >  
           <div class="modal-actions">
-            <button (click)="createFolder()" class="create-folder-btn">Subir</button>
-            <button (click)="cancelCreationNewFolder()" class="create-folder-btn">Cancelar</button>
+            <button (click)="cancelCreationNewFolder()" class="create-folder-btn" #cancelFolderButton>Cancelar</button>
+            <button (click)="createFolder()" class="create-folder-btn" #createFolderButton>Crear</button>
           </div>
     </div>
   </div>
