@@ -22,15 +22,15 @@ export class ProfileService {
   }
 
   getUserById(id: string): Observable<any> {
-    return this.http.get(this.apiUrl + id);
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   updateUserById(id: string, data: any): Observable<any> {
-    return this.http.put(this.apiUrl + id, data);
+    return this.http.put(`${this.apiUrl}/${id}`, data);
   }
 
   deleteUserById(id: string): Observable<any> {
-    return this.http.delete(this.apiUrl + id);
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   postUser(data: any): Observable<any> {

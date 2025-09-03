@@ -70,8 +70,8 @@ export class PersonsContainerComponent implements OnInit {
 
     // Organizar usuarios por departamento
     users.forEach(user => {
-      if (user.department && this.usersByDepartment[user.department]) {
-        this.usersByDepartment[user.department].push(user);
+      if (user.departamento && this.usersByDepartment[user.departamento]) {
+        this.usersByDepartment[user.departamento].push(user);
       }
     });
   }

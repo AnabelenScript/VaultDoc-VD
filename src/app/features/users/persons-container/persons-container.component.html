@@ -37,7 +37,7 @@
       <!-- Si hay usuarios en el departamento -->
       <div *ngIf="hasUsersInDepartment(department)">
         <div class="userinfo" *ngFor="let user of getUsersForDepartment(department)">
-          <h4>{{ user.name || user.email }}</h4>
+            <h4>{{ (user.nombre && user.apellidos) ? (user.nombre + ' ' + user.apellidos) : user.email }}</h4>
           <div class="user-actions">
             <div class="user-img"></div>
             <button class="delete-btn" (click)="openDeleteModal(user)" title="Eliminar usuario">
