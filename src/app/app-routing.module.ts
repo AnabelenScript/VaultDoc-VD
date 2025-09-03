@@ -15,6 +15,7 @@ import { FilesPageComponent } from './features/files/views/files-page/files-page
 import { PersonsPageComponent } from './features/users/views/persons-page/persons-page.component';
 import { HistorialPageComponent } from './features/historial/views/historial-page/historial-page.component';
 import { LoginGuard } from './core/services/auth/login_guard';
+import { SearchPageComponent } from './features/files/views/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'files/:id_folder/:folder_name',
         component: FilesPageComponent
+      },
+      {
+        path: 'search/:parameter_search',
+        component: SearchPageComponent
       },
       {
         path: 'persons',

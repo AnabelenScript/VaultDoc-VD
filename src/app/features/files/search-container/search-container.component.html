@@ -1,14 +1,17 @@
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <app-search-bar></app-search-bar>
+    <div class="search-section">
+      <app-search-bar></app-search-bar>
+    </div>
     <div class="actions-section">
       <div class="archive-count">
-        <span class="archive-label">Archivos:</span>
-        <span class="archive-number">{{ archiveCount }}</span>
+        <span class="archive-label">Carpetas:</span>
+        <span class="archive-number">{{ countFolders() }}</span>
       </div>
-      <button class="create-folder-btn" (click)="createNewFolder()" *ngIf="id_rol == 2">
-        Crear carpeta
-      </button>
+      <div class="archive-count">
+        <span class="archive-label">Archivos:</span>
+        <span class="archive-number">{{ countFiles() }}</span>
+      </div>
     </div>
   </div>
   <div class="content-section">
@@ -19,7 +22,7 @@
     
     <div class="folders-grid" *ngIf="showRecentFolders">
       <div 
-        *ngFor="let folder of recentFolders" 
+        *ngFor="let folder of foundFolders" 
         class="folder-item"
         (click)="onFolderClick(folder)">
         <i class="folder-icon"><i class='bx bxs-folder'></i></i>
@@ -45,19 +48,22 @@
         </thead>
         <tbody>
           <tr 
-            *ngFor="let file of recentFiles" 
+            *ngFor="let file of foundFiles" 
             class="file-row"
             (click)="onFileClick(file)">
-            <td class="file-name">{{ file.name }}</td>
-            <td class="file-modified">{{ file.lastModified }}</td>
-            <td class="file-created">{{ file.creationDate }}</td>
+            <td class="file-name">{{ file.nombre }}</td>
+            <td class="file-modified">{{ "" }}</td>
+            <td class="file-created">{{ file.fecha }}</td>
             <td class="file-type">
-              <span class="type-badge" [class]="'type-' + file.type.toLowerCase()">
-                {{ file.type }}
+              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                {{ extensionWhitoutPoints(file.extension) }}
               </span>
             </td>
-            <td>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+            <td class="file-options">
+              <div class="options-wraper">
+                <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
+              </div>
             </td>
           </tr>
         </tbody>

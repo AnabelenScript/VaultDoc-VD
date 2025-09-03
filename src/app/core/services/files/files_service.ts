@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FileCreated, FileDataReceive, FileUpdated } from "./files_model";
+import { FileCreated, FileData, FileDataReceive, FileUpdated } from "./files_model";
 import { blob } from "node:stream/consumers";
 
 @Injectable({ providedIn: "root" })
@@ -29,6 +29,10 @@ export class FileServices{
 
     getFilesByFolder(folder_id: number): Observable<FileDataReceive>{
         return this.__http.get<FileDataReceive>(this.__apiUrl + "folder/" + folder_id);
+    }
+
+    searchFiles(name: string): Observable<{message: string, data: FileData[]}>{
+        return this.__http.get<{message: string, data: FileData[]}>(`${this.__apiUrl}search/${name}`)
     }
 
     downloadFile(file_id: number, user_id: number, name: string) {

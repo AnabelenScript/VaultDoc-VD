@@ -2,19 +2,7 @@
 
   <div class="dashboard-header">
     
-    <div class="search-section">
-      <div class="search-bar">
-        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
-        <input 
-          type="text" 
-          placeholder="Buscar" 
-          [(ngModel)]="searchTerm"
-          (keyup.enter)="onSearch()"
-          class="search-input">
-        <button class="filter-button" type="button">
-        </button>
-      </div>
-    </div>
+    <app-search-bar></app-search-bar>
 
     <div class="actions-section">
       <div class="archive-count">
