@@ -115,4 +115,20 @@ export class UploadContainerComponent implements OnInit {
   loadMoreFiles(): void {
     console.log('Cargar más archivos');
   }
+
+  checkNewFolio(){
+    const regex = /^[0-9]{3}$/;
+    if (!regex.test(this.folio)) {
+      console.log("El formato del folio no es el correcto");
+      return;
+      // Lógica para el alert del error
+    }
+    this.upload()
+  }
+
+  validateNumber(event: KeyboardEvent){
+    const charCode = event.charCode;
+    if (charCode < 48 || charCode > 57)
+      event.preventDefault();
+  }
 }
