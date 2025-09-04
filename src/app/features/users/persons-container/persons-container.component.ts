@@ -1,4 +1,3 @@
-// features/users/persons-container/persons-container.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../core/services/user/user_service';
 
@@ -14,7 +13,6 @@ export class PersonsContainerComponent implements OnInit {
   showDeleteModal = false;
   userToDelete: any = null;
 
-  // Departamentos disponibles
   departments = [
     "Dirección General", "Área Técnica", "Comisaria", "Coordinación Juridica",
     "Gerencia Administrativa", "Gerencia Operativa", "Departamento de Finanzas",
@@ -24,13 +22,10 @@ export class PersonsContainerComponent implements OnInit {
     "Departamento de Seguridad e Higiene"
   ];
 
-  // Estado de visualización de cada departamento
   departmentVisibility: { [key: string]: boolean } = {};
-
-  // Usuarios por departamento
   usersByDepartment: { [key: string]: any[] } = {};
+  currentUser: any = null;
 
-  // Datos del formulario
   newUser = {
     email: '',
     password: '',
@@ -40,15 +35,29 @@ export class PersonsContainerComponent implements OnInit {
   };
 
   constructor(private profileService: ProfileService) {
-    // Inicializar visibilidad de departamentos
     this.departments.forEach(dept => {
       this.departmentVisibility[dept] = true;
     });
   }
 
   ngOnInit() {
-    this.loadAllUsers();
+  const storedUser = localStorage.getItem('user_data');
+  if (storedUser) {
+    this.currentUser = JSON.parse(storedUser);
   }
+
+  if (this.currentUser?.roleId === 3) {
+    this.departments.forEach(dept => {
+      this.departmentVisibility[dept] = true;
+    });
+    this.loadAllUsers();
+  } else if (this.currentUser?.roleId === 2) {
+    this.departments = [this.currentUser.department];
+    this.departmentVisibility[this.currentUser.department] = true;
+    this.loadUsersByDepartment(this.currentUser.department);
+  }
+}
+
 
   loadAllUsers() {
     this.profileService.getAllUsers().subscribe({
@@ -62,26 +71,40 @@ export class PersonsContainerComponent implements OnInit {
     });
   }
 
+  loadUsersByDepartment(department: string) {
+    this.profileService.getUserByDepartment(department).subscribe({
+      next: (users) => {
+        this.organizeUsersByDepartment(users);
+        this.archiveCount = users.length;
+      },
+      error: (error) => {
+        console.error('Error loading department users:', error);
+      }
+    });
+  }
+
   organizeUsersByDepartment(users: any[]) {
-    // Inicializar todos los departamentos como arrays vacíos
     this.departments.forEach(dept => {
       this.usersByDepartment[dept] = [];
     });
 
-    // Organizar usuarios por departamento
     users.forEach(user => {
-      if (user.departamento && this.usersByDepartment[user.departamento]) {
-        this.usersByDepartment[user.departamento].push(user);
-      }
+      const dept = user.departamento;
+      if (!dept || !this.usersByDepartment[dept]) return;
+
+      this.usersByDepartment[dept].push(user);
     });
   }
 
   onSearch() {
     if (this.searchTerm.trim()) {
-      // Implementar búsqueda si es necesario
       console.log('Buscando:', this.searchTerm);
     } else {
-      this.loadAllUsers();
+      if (this.currentUser?.roleId === 3) {
+        this.loadAllUsers();
+      } else if (this.currentUser?.roleId === 2) {
+        this.loadUsersByDepartment(this.currentUser.department);
+      }
     }
   }
 
@@ -91,9 +114,10 @@ export class PersonsContainerComponent implements OnInit {
 
   toggleAddModal() {
     this.showAddModal = !this.showAddModal;
-    if (!this.showAddModal) {
-      this.resetForm();
+    if (this.showAddModal && this.currentUser?.roleId === 2) {
+      this.newUser.department = this.currentUser.department;
     }
+    if (!this.showAddModal) this.resetForm();
   }
 
   resetForm() {
@@ -108,25 +132,30 @@ export class PersonsContainerComponent implements OnInit {
 
   addUser() {
     if (this.validateForm()) {
-      // Preparar datos para enviar al backend
+      const assignedRoleId = this.currentUser?.roleId === 2 ? 1 : 2;
+
       const userData = {
         email: this.newUser.email,
         password: this.newUser.password,
-        departamento: this.newUser.department, // Cambiar a 'departamento' para el backend
+        departamento: this.newUser.department,
         nombre: this.newUser.nombre,
         apellidos: this.newUser.apellidos,
-        id_rol: 2 // Asignar rol de jefe (ajusta según tu sistema de roles)
+        roleId: assignedRoleId
       };
 
       this.profileService.postUser(userData).subscribe({
         next: (response) => {
           console.log('Usuario agregado exitosamente:', response);
           this.toggleAddModal();
-          this.loadAllUsers(); // Recargar usuarios
+
+          if (this.currentUser?.roleId === 3) {
+            this.loadAllUsers();
+          } else if (this.currentUser?.roleId === 2) {
+            this.loadUsersByDepartment(this.currentUser.department);
+          }
         },
         error: (error) => {
           console.error('Error al agregar usuario:', error);
-          // Mostrar mensaje de error al usuario
           alert('Error al agregar usuario. Por favor, verifica los datos e intenta nuevamente.');
         }
       });
@@ -134,11 +163,11 @@ export class PersonsContainerComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    return !!(this.newUser.email && 
-             this.newUser.password && 
-             this.newUser.department && 
-             this.newUser.nombre &&
-             this.newUser.apellidos);
+    return !!(this.newUser.email &&
+              this.newUser.password &&
+              this.newUser.department &&
+              this.newUser.nombre &&
+              this.newUser.apellidos);
   }
 
   openDeleteModal(user: any) {
@@ -157,7 +186,12 @@ export class PersonsContainerComponent implements OnInit {
         next: (response) => {
           console.log('Usuario eliminado exitosamente:', response);
           this.closeDeleteModal();
-          this.loadAllUsers(); // Recargar usuarios
+
+          if (this.currentUser?.roleId === 3) {
+            this.loadAllUsers();
+          } else if (this.currentUser?.roleId === 2) {
+            this.loadUsersByDepartment(this.currentUser.department);
+          }
         },
         error: (error) => {
           console.error('Error al eliminar usuario:', error);
