@@ -3,6 +3,7 @@ import { FolderData } from '../../../core/services/folders/folders_model';
 import { FolderServices } from '../../../core/services/folders/folders_service';
 import { Router } from '@angular/router';
 import { response } from 'express';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
 
 @Component({
   selector: 'app-folders-container',
@@ -24,60 +25,18 @@ export class FoldersContainerComponent implements OnInit {
     created_at: "",
     updated_at: ""
   }
-  // Datos mock para las carpetas recientes
-  recentFolders = [
-    { name: 'Acuerdos', icon: 'folder' },
-    { name: 'Jurídicos', icon: 'folder' },
-    { name: 'Administrativo', icon: 'folder' },
-    { name: 'Confidencial', icon: 'folder' }
-  ];
-
-  // Datos mock para archivos recientes
-  recentFiles = [
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-    }
-  ];
-
+  
   searchTerm = '';
   showFolders = true;
   showRecentFiles = true;
 
   modalNewFolder = false;
 
-  constructor(private folderServices: FolderServices, private router: Router) {  }
+  constructor(
+    private folderServices: FolderServices, 
+    private router: Router,
+    private recentElementService: RecentElementsServices,
+  ) {  }
 
   ngOnInit(): void {
     this.getFoldersInfo();
@@ -112,7 +71,7 @@ export class FoldersContainerComponent implements OnInit {
 
   onFolderClick(folder_id: number, folder_name: string) {
     // Lógica para abrir carpeta
-    this.router.navigate(['/files/' + folder_id + "/" + folder_name])
+    this.router.navigate(['/files/' + folder_id + "/" + folder_name]);
   }
 
   loadMoreFiles() {
@@ -219,5 +178,9 @@ export class FoldersContainerComponent implements OnInit {
         }
       );
     }
+  }
+
+  addRecentFolder(folder: FolderData){
+    this.recentElementService.setRecentFolder(folder);
   }
 }

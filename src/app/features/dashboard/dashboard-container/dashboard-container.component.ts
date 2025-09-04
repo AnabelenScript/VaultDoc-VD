@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserData } from '../../../core/services/auth/auth_model';
 import { FolderServices } from '../../../core/services/folders/folders_service';
 import { FolderData } from '../../../core/services/folders/folders_model';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
+import { FileData } from '../../../core/services/files/files_model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,85 +15,63 @@ import { FolderData } from '../../../core/services/folders/folders_model';
 export class DashboardContainerComponent implements OnInit {
   id_rol: number = 1
 
-  constructor(private folderService: FolderServices) {}
+  constructor(
+    private folderService: FolderServices, 
+    private recentElementServices: RecentElementsServices,
+    private router: Router,
+  ) {}
 
   recentFolders: FolderData[] = [];
-
-
-  recentFiles = [
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PNG' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PNG' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PDF' 
-    },
-    { 
-      name: 'Constancia_DG_2025', 
-      lastModified: '30 de Jun', 
-      creationDate: '24 de Jun', 
-      type: 'PNG' 
-    }
-  ];
+  recentFiles: FileData[] = [];
 
   archiveCount = 178;
   searchTerm = '';
   showRecentFolders = true;
   showRecentFiles = true;
 
+  showFiles: boolean = false;
+  openFileId: number | null = null;
+
   ngOnInit(): void {
   this.id_rol = this.getIDRol();
 
-const string_user = localStorage.getItem('user_data');
-  if (string_user) {
-    try {
-      const user = JSON.parse(string_user);
-      if (user?.department && user.department !== "General") {
-        this.folderService.getFolders(user.department).subscribe({
-          next: (response) => {
-            console.log("Response received:", response);
-            this.recentFolders = response.folders;
-          },
-          error: (err) => {
-            console.error('Error al obtener carpetas:', err);
-          }
-        });
+  const string_user = localStorage.getItem('user_data');
+    if (string_user) {
+      try {
+        const user = JSON.parse(string_user);
+        if (user?.department && user.department !== "General") {
+          this.recentFolders = this.recentElementServices.getRecentFolders();
+          this.recentFiles = this.recentElementServices.getRecentFiles();
+        }
+      } catch (e) {
+        console.error('Error al parsear user_data:', e);
       }
-    } catch (e) {
-      console.error('Error al parsear user_data:', e);
     }
   }
-}
 
+  extensionWhitoutPoints(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[1]
+  }
+
+  filenameWhitoutExtensions(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[0]
+  }
+
+  toggleFiles() {
+    this.showFiles = !this.showFiles;
+    this.showFiles = !this.showFiles;
+    this.showFiles = !this.showFiles;
+  }
+
+  toggleOptions(fileId: number) {
+    if (this.openFileId === fileId) {
+      this.openFileId = null;
+    } else {
+      this.openFileId = fileId;
+    }
+  }
 
   onSearch() {
     console.log('Buscando:', this.searchTerm);
@@ -109,8 +90,9 @@ const string_user = localStorage.getItem('user_data');
     console.log('Crear nueva carpeta');
   }
 
-  onFolderClick(folder: any) {
+  onFolderClick(folder: FolderData) {
     console.log('Carpeta seleccionada:', folder.name);
+    this.router.navigate(['/files/' + folder.id + "/" + folder.name]);
   }
 
   onFileClick(file: any) {
@@ -129,6 +111,16 @@ const string_user = localStorage.getItem('user_data');
       return user.roleId
     } else {
       return 1
+    }
+  }
+
+  getIDUser(): number {
+    let string_user: string | null = localStorage.getItem('user_data');
+    if (string_user != null){
+      const user = JSON.parse(string_user);
+      return user.userId;
+    } else {
+      return 0;
     }
   }
 }

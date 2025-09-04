@@ -17,26 +17,28 @@
   <div class="content-section">
     <div class="section-header" (click)="toggleRecentFolders()">
       <i class="toggle-icon" [class.rotated]="!showRecentFolders">▼</i>
-      <h3>Carpetas recientes</h3>
+      <h3>Carpetas encontradas</h3>
     </div>
     
-    <div class="folders-grid" *ngIf="showRecentFolders">
+    <div class="folders-grid" *ngIf="showRecentFolders && foundFolders">
       <div 
         *ngFor="let folder of foundFolders" 
         class="folder-item"
-        (click)="onFolderClick(folder)">
+        (click)="onFolderClick(folder); addRecentFolder(folder)"
+      >
         <i class="folder-icon"><i class='bx bxs-folder'></i></i>
         <span class="folder-name">{{ folder.name }}</span>
       </div>
     </div>
+    <h3 *ngIf="!foundFolders">No se encontraron carpetas</h3>
   </div>
   <div class="content-section">
     <div class="section-header" (click)="toggleRecentFiles()">
       <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
-      <h3>Archivos recientes</h3>
+      <h3>Archivos encontrados</h3>
     </div>
     
-    <div class="files-table-container" *ngIf="showRecentFiles">
+    <div class="files-table-container" *ngIf="showRecentFiles && foundFiles">
       <table class="files-table">
         <thead>
           <tr>
@@ -50,7 +52,7 @@
           <tr 
             *ngFor="let file of foundFiles" 
             class="file-row"
-            (click)="onFileClick(file)">
+            (click)="onFileClick(file); addRecentFile(file)">
             <td class="file-name">{{ file.nombre }}</td>
             <td class="file-modified">{{ "" }}</td>
             <td class="file-created">{{ file.fecha }}</td>
@@ -68,6 +70,7 @@
           </tr>
         </tbody>
       </table>
+      <h3 *ngIf="!foundFiles">No se encontraron archivos</h3>
       <div class="load-more-container">
         <button class="load-more-btn" (click)="loadMoreFiles()">
           <i class="load-more-icon">▼</i>

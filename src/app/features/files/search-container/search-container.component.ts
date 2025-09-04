@@ -3,7 +3,8 @@ import { FolderServices } from '../../../core/services/folders/folders_service';
 import { FolderData } from '../../../core/services/folders/folders_model';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
 
 @Component({
   selector: 'app-search-container',
@@ -19,57 +20,14 @@ export class SearchContainerComponent {
     private folderService: FolderServices, 
     private fileService: FileServices,
     private route: ActivatedRoute,
+    private router: Router,
+    private recentElementService: RecentElementsServices,
   ) {}
   
   recentFolders: FolderData[] = [];
   
   foundFolders: FolderData[] = [];
   foundFiles: FileData[] = [];
-  
-    recentFiles = [
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PDF' 
-      },
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PDF' 
-      },
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PNG' 
-      },
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PDF' 
-      },
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PNG' 
-      },
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PDF' 
-      },
-      { 
-        name: 'Constancia_DG_2025', 
-        lastModified: '30 de Jun', 
-        creationDate: '24 de Jun', 
-        type: 'PNG' 
-      }
-    ];
   
     archiveCount = 178;
     searchTerm = '';
@@ -106,8 +64,9 @@ export class SearchContainerComponent {
       console.log('Crear nueva carpeta');
     }
   
-    onFolderClick(folder: any) {
+    onFolderClick(folder: FolderData) {
       console.log('Carpeta seleccionada:', folder.name);
+      this.router.navigate(['/files/' + folder.id + "/" + folder.name]);
     }
   
     onFileClick(file: any) {
@@ -221,5 +180,13 @@ export class SearchContainerComponent {
       return this.foundFiles.length;
     else
       return 0;
+  }
+
+  addRecentFile(file: FileData){
+    this.recentElementService.setRecentFile(file);
+  }
+
+  addRecentFolder(folder: FolderData){
+    this.recentElementService.setRecentFolder(folder);
   }
 }

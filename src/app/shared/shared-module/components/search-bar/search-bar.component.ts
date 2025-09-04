@@ -13,8 +13,13 @@ export class SearchBarComponent {
 
   onSearch(){
     console.log("Ejecutando búsqueda");
-    if (this.searchTerm !== "")
-      this.router.navigate(['search/' + this.searchTerm]);
+    if (this.searchTerm !== ""){
+      if (this.router.url.includes("search")){
+        this.router.navigate(['search/' + this.searchTerm]);
+        setTimeout(() => {location.reload()}, 100);
+      } else
+        this.router.navigate(['search/' + this.searchTerm]);
+    }
   }
 
   onCancel(){

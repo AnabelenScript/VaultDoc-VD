@@ -19,7 +19,7 @@
       <i [ngClass]="'bx bxs-folder'" class="icon-placeholder"></i>
     </div>
     
-    <div class="files-table-container" *ngIf="showFiles">
+    <div class="files-table-container" *ngIf="showFiles && files">
       <table class="files-table">
         <thead>
           <tr>
@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let file of files" class="file-row" (click)="onClickedFile(file.id)">
+          <tr *ngFor="let file of files" class="file-row" (click)="onClickedFile(file.id); addRecentFile(file)">
             <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
             <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
             <td class="file-created">{{ "02/12/2005 12:23" }}</td>
@@ -49,7 +49,7 @@
           </tr>
         </tbody>
       </table>
-      
+      <h3 *ngIf="!files">No se hayaron archivos</h3>      
       <div class="load-more-container">
         <button class="load-more-btn" (click)="loadMoreFiles()">
           <i class="load-more-icon">▼</i>
