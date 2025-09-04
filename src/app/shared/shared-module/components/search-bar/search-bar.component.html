@@ -1,0 +1,15 @@
+<div class="search-section">
+    <div class="search-bar">
+        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
+        <input 
+          type="text" 
+          placeholder="Buscar" 
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+          class="search-input"
+        >
+        <button (click)="onCancel()" class="cancel-button" *ngIf="searchTerm !== ''"><i class="fa-solid fa-xmark cancel-icon"></i></button>
+        <!-- <button class="filter-button" type="button">
+        </button>-->
+    </div>
+</div>

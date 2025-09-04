@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, 
 import { ActivatedRoute } from '@angular/router';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
 
 @Component({
   selector: 'app-files-container',
@@ -27,7 +28,11 @@ export class FilesContainerComponent implements OnInit{
 
   openFileId: number | null = null;
 
-  constructor(private route: ActivatedRoute, private fileService: FileServices){  }
+  constructor(
+    private route: ActivatedRoute, 
+    private fileService: FileServices,
+    private recentElementService: RecentElementsServices,
+  ){  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id_folder');
@@ -204,4 +209,8 @@ export class FilesContainerComponent implements OnInit{
   }
 
   onClickedFile(id: number){console.log("Archivo clickeado:", id)}
+
+  addRecentFile(file: FileData){
+    this.recentElementService.setRecentFile(file);
+  }
 }

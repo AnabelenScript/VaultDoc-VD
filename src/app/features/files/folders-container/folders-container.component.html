@@ -2,19 +2,7 @@
 
   <div class="dashboard-header">
     
-    <div class="search-section">
-      <div class="search-bar">
-        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
-        <input 
-          type="text" 
-          placeholder="Buscar" 
-          [(ngModel)]="searchTerm"
-          (keyup.enter)="onSearch()"
-          class="search-input">
-        <button class="filter-button" type="button">
-        </button>
-      </div>
-    </div>
+    <app-search-bar></app-search-bar>
 
     <div class="actions-section">
       <div class="archive-count">
@@ -35,7 +23,7 @@
       <i [ngClass]="'bx bxs-folder'" class="icon-placeholder"></i>
     </div>
     
-    <div class="files-table-container" *ngIf="showFolders">
+    <div class="files-table-container" *ngIf="showFolders && folders">
       <table class="files-table">
         <thead>
           <tr>
@@ -48,13 +36,14 @@
           <tr 
             *ngFor="let folder of folders" 
             class="file-row"
-            (click)="onFolderClick(folder.id, folder.name)">
+            (click)="onFolderClick(folder.id, folder.name); addRecentFolder(folder)">
             <td class="file-name">{{ folder.name }}</td>
             <td class="file-modified">{{ folder.updated_at }}</td>
             <td class="file-created">{{ folder.created_at }}</td>
           </tr>
         </tbody>
       </table>
+      <h3 *ngIf="!folders">No se hayaron carpetas</h3>
       <div class="load-more-container">
         <button class="load-more-btn" (click)="loadMoreFiles()">
           <i class="load-more-icon">▼</i>
