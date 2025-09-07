@@ -289,8 +289,8 @@
 }
 
 .DeleteContainer {
-    width: 40%;
-  height: 45%;
+    width: fit-content;
+   height: fit-content;
   justify-content: center;
 }
 
@@ -409,22 +409,17 @@
   background-color: #cccccc;
 }
 
-/* Responsive */
 @media (max-width: 1268px) {
   .Addcontainer {
-    width: 60%;
+    width: 50%;
     height: auto;
     max-height: 80vh;
     overflow-y: auto;
   }
   
-  .DeleteContainer {
-    width: 70%;
-    height: auto;
-  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .Addcontainer {
     width: 85%;
     height: auto;
@@ -434,7 +429,6 @@
   
   .DeleteContainer {
     width: 85%;
-    height: auto;
   }
   .Optionsbuttons{
   width: 100%;
