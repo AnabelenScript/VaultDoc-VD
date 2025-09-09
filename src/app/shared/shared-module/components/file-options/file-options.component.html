@@ -1,4 +1,13 @@
 <div class="options-menu" (click)="$event.stopPropagation()">
     <button (click)="downloadFile()"><i class="fa-solid fa-download"></i></button>
     <button (click)="deleteFile(idUser, idFile)"><i class='bx  bx-trash'  ></i> </button>
+    <button *ngIf="getIDRol() === 2" (click)="showModal()"><i class="fa-solid fa-share-nodes"></i></button>
+    <div class="modal" *ngIf="showShareModal">
+        <div class="modal-content">
+          <div class="modal-actions">
+            <button class="create-folder-btn" #cancelCreateFile>Cancelar</button>
+            <button class="create-folder-btn" #confirmCreateFile>Confirmar</button>
+          </div>
+        </div>
+      </div>
 </div>
