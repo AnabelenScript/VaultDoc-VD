@@ -43,7 +43,7 @@
             <td class="file-options">
               <div class="options-wraper">
                 <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
+                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre" (modalClosed)="onChildModalClose()"></app-file-options>
               </div>
             </td>
           </tr>

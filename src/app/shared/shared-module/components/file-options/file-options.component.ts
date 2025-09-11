@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { FileServices } from '../../../../core/services/files/files_service';
 import { error } from 'console';
 import { PermissionService } from '../../../../core/services/permissions/permissions_services';
@@ -13,6 +13,7 @@ export class FileOptionsComponent {
   @Input() idUser: number | null = 0;
   @Input() idFile: number | null = 0;
   @Input() filename: string | null = "";
+  @Output() modalClosed = new EventEmitter();
   showShareModal: boolean = false;
   userToGivePermission: number = 0;
 
@@ -52,11 +53,13 @@ export class FileOptionsComponent {
 
   showModal(){
     this.showShareModal = !this.showShareModal;
+    this.getChangePermissions()
   }
 
   closeModal(){
     console.log("Cerrando modal")
     this.showShareModal = false;
+    this.modalClosed.emit("");
   }
 
   getViewPermissions(){
@@ -105,14 +108,15 @@ export class FileOptionsComponent {
     }
   }
 
-  giveChangePermission(){
+  giveChangePermission(id_user: number){
     if (this.idFile && this.idUser) {
       this.permissionService.grantChangePermission(
         this.idUser,
-        {id_file: this.idFile, id_user: this.userToGivePermission}
+        {id_file: this.idFile, id_user: id_user}
       ).subscribe(
         (response) => {
           console.log("Respuesta del servidor:", response);
+          this.getChangePermissions();
         },
         (error) => {
           console.log("Error al otorgar permiso para modificar:", error);
@@ -134,11 +138,12 @@ export class FileOptionsComponent {
     }
   }
 
-  revokeChangePermission(){
+  revokeChangePermission(id_user: number){
     if (this.idFile) {
-      this.permissionService.revokeChangePermission({id_file: this.idFile, id_user: this.userToGivePermission}).subscribe(
+      this.permissionService.revokeChangePermission({id_file: this.idFile, id_user: id_user}).subscribe(
         (response) => {
           console.log("Respuesta del servidor:", response);
+          this.getChangePermissions();
         },
         (error) => {
           console.log("Error al quitar permiso de modificación:", error);
@@ -146,4 +151,15 @@ export class FileOptionsComponent {
       );
     }
   }
+
+  @HostListener('document:click', ['$event'])
+    onClickOutside(event: MouseEvent){
+      if (this.showShareModal){
+        const target = event.target as HTMLElement;
+
+        if (target.classList.contains("modal")){
+          this.closeModal()
+        }
+      }
+    }
 }

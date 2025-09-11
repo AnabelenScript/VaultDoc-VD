@@ -213,4 +213,8 @@ export class FilesContainerComponent implements OnInit{
   addRecentFile(file: FileData){
     this.recentElementService.setRecentFile(file);
   }
+
+  onChildModalClose(){
+    this.openFileId = null;
+  }
 }
