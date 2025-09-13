@@ -16,3 +16,10 @@ export interface MessagePermissionGranted {
     id_file: number,
     id_user: number,
 }
+
+export interface MessageCheckPermission {
+    message: string,
+    file_id: number,
+    user_id: number,
+    permissions: PermissionModel,
+}

@@ -53,7 +53,7 @@
         <tbody>
           <ng-content *ngFor="let file of foundFiles">
             <tr 
-              *ngIf="file.departamento == getDepartament()"
+              *ngIf="file.departamento == getDepartament() && hasPermissionInThisfile(file.id)"
               class="file-row"
               (click)="onFileClick(file); addRecentFile(file)">
               <td class="file-name">{{ file.nombre }}</td>
@@ -64,13 +64,12 @@
                   {{ extensionWhitoutPoints(file.extension) }}
                 </span>
               </td>
-              <!--
               <td class="file-options">
                 <div class="options-wraper">
                   <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                   <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
                 </div>
-              </td>-->
+              </td>
             </tr>
           </ng-content>
         </tbody>

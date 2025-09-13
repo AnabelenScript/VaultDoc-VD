@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { MessagePermissionGranted, PermissionModel, UsersPermissions } from "./permissions_model";
+import { MessageCheckPermission, MessagePermissionGranted, PermissionModel, UsersPermissions } from "./permissions_model";
 
 @Injectable({ providedIn: "root" })
 export class PermissionService{
@@ -18,6 +18,10 @@ export class PermissionService{
 
     getChangePermissionsOfAFolder(folderId: number, userId: number): Observable<{message: string, permissions: number[]}>{
         return this.__http.get<{message: string, permissions: number[]}>(`${this.__apiUrl}change/${folderId}/${userId}`);
+    }
+
+    checkPermissionsOfAFile(fileId: number, userId: number): Observable<MessageCheckPermission>{
+        return this.__http.get<MessageCheckPermission>(`${this.__apiUrl}${fileId}/${userId}`);
     }
 
     grantViewPermission(user_id: number, permission: PermissionModel): Observable<MessagePermissionGranted>{
