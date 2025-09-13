@@ -5,6 +5,8 @@ import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
+import { PermissionService } from '../../../core/services/permissions/permissions_services';
+import { MessageCheckPermission } from '../../../core/services/permissions/permissions_model';
 
 @Component({
   selector: 'app-search-container',
@@ -22,12 +24,14 @@ export class SearchContainerComponent {
     private route: ActivatedRoute,
     private router: Router,
     private recentElementService: RecentElementsServices,
+    private permissionService: PermissionService,
   ) {}
   
   recentFolders: FolderData[] = [];
   
   foundFolders: FolderData[] = [];
   foundFiles: FileData[] = [];
+  filesPermissions: number[] = [];
   
     archiveCount = 178;
     searchTerm = '';
@@ -118,6 +122,7 @@ export class SearchContainerComponent {
           (response) => {
             console.log("Respuesta del servidor:", response);
             this.foundFiles = response.data;
+            this.getPermissionOfFiles();
           },
           (error) => {
             console.log("Error al buscar archivos:", error)
@@ -188,5 +193,43 @@ export class SearchContainerComponent {
 
   addRecentFolder(folder: FolderData){
     this.recentElementService.setRecentFolder(folder);
+  }
+
+  getPermissionOfFiles(){
+    if (this.foundFiles){
+      for (let i = 0; i < this.foundFiles.length; i++){
+        this.permissionService.checkPermissionsOfAFile(this.foundFiles[i].id, this.getIDUser()).subscribe(
+          (response) => {
+            console.log("Respuesta del servidor:", response);
+            this.filesPermissions.push(response.file_id);
+            console.log(this.foundFiles);
+            console.log(this.filesPermissions)
+          },
+          (error) => {
+            console.log("Error al obtener permisos de un archivo:", error);
+          }
+        );
+      }
+    }
+    
+  }
+
+  hasPermissionInThisfile(idFile: number): boolean{
+    if (this.getIDRol() == 2)
+      return true;
+    else if (this.filesPermissions) {
+      let flag = false;
+      for(let i = 0; i < this.filesPermissions.length; i++){
+        if(idFile == this.filesPermissions[i]){
+          flag = true;
+          i = this.filesPermissions.length + 10;
+        }
+      }
+      console.log("Permiso para ver el archivo", idFile, ":", flag);
+      return flag;
+    }
+    else {
+      return false;
+    }
   }
 }
