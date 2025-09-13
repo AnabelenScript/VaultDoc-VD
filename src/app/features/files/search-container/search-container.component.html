@@ -21,14 +21,16 @@
     </div>
     
     <div class="folders-grid" *ngIf="showRecentFolders && foundFolders">
-      <div 
-        *ngFor="let folder of foundFolders" 
-        class="folder-item"
-        (click)="onFolderClick(folder); addRecentFolder(folder)"
-      >
-        <i class="folder-icon"><i class='bx bxs-folder'></i></i>
-        <span class="folder-name">{{ folder.name }}</span>
+      <ng-container *ngFor="let folder of foundFolders">
+        <div 
+          *ngIf="folder.departamento === getDepartament()"
+          class="folder-item"
+          (click)="onFolderClick(folder); addRecentFolder(folder)"
+        >
+          <i class="folder-icon"><i class='bx bxs-folder'></i></i>
+          <span class="folder-name">{{ folder.name }}</span>
       </div>
+      </ng-container>
     </div>
     <h3 *ngIf="!foundFolders">No se encontraron carpetas</h3>
   </div>
@@ -49,25 +51,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr 
-            *ngFor="let file of foundFiles" 
-            class="file-row"
-            (click)="onFileClick(file); addRecentFile(file)">
-            <td class="file-name">{{ file.nombre }}</td>
-            <td class="file-modified">{{ "" }}</td>
-            <td class="file-created">{{ file.fecha }}</td>
-            <td class="file-type">
-              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
-                {{ extensionWhitoutPoints(file.extension) }}
-              </span>
-            </td>
-            <td class="file-options">
-              <div class="options-wraper">
-                <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
-              </div>
-            </td>
-          </tr>
+          <ng-content *ngFor="let file of foundFiles">
+            <tr 
+              *ngIf="file.departamento == getDepartament()"
+              class="file-row"
+              (click)="onFileClick(file); addRecentFile(file)">
+              <td class="file-name">{{ file.nombre }}</td>
+              <td class="file-modified">{{ "" }}</td>
+              <td class="file-created">{{ file.fecha }}</td>
+              <td class="file-type">
+                <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                  {{ extensionWhitoutPoints(file.extension) }}
+                </span>
+              </td>
+              <!--
+              <td class="file-options">
+                <div class="options-wraper">
+                  <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                  <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
+                </div>
+              </td>-->
+            </tr>
+          </ng-content>
         </tbody>
       </table>
       <h3 *ngIf="!foundFiles">No se encontraron archivos</h3>

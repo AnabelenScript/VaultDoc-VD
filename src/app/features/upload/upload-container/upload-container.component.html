@@ -26,7 +26,7 @@
 </div>
 <div class="dropdown-group">
   <label>Ingrese el folio del archivo</label>
-  <input type="text" [(ngModel)]="folio">
+  <input type="text" [(ngModel)]="folio"  (keypress)="validateNumber($event)" maxlength="3">
 </div>
 
 <button class="selection-button" (click)="triggerFileInput(fileInput)">
@@ -35,7 +35,7 @@
 <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"/>
 
 <div class="generate-button-container">
-  <button class="generate-button" (click)="upload()">Subir archivo</button>
+  <button class="generate-button" (click)="checkNewFolio()">Subir archivo</button>
 </div>
 </div>
       </div>
