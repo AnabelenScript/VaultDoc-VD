@@ -16,6 +16,10 @@ export class PermissionService{
         return this.__http.get<UsersPermissions>(`${this.__apiUrl}change/g/${file_id}`);
     }
 
+    getChangePermissionsOfAFolder(folderId: number, userId: number): Observable<{message: string, permissions: number[]}>{
+        return this.__http.get<{message: string, permissions: number[]}>(`${this.__apiUrl}change/${folderId}/${userId}`);
+    }
+
     grantViewPermission(user_id: number, permission: PermissionModel): Observable<MessagePermissionGranted>{
         return this.__http.post<MessagePermissionGranted>(`${this.__apiUrl}view/${user_id}`, permission);
     }
