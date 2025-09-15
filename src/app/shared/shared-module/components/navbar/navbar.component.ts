@@ -44,7 +44,7 @@ if (roleId === 3) {
     { id: 'dashboard', label: 'Dashboard', route: '/dashboard', icon: 'bx bxs-dashboard' },
     { id: 'archivos', label: 'Archivos', route: '/folders', icon: 'bx bxs-folder' },
     { id: 'anadir', label: 'Añadir', route: '/upload', icon: 'fa-solid fa-upload' },
-    { id: 'personas', label: 'Personas', route: '/persons', icon: 'fa-solid fa-users' },
+    /*{ id: 'personas', label: 'Personas', route: '/persons', icon: 'fa-solid fa-users' },*/
     { id: 'logout', label: 'logout', route: '/login', icon: 'bx bxs-log-out' }
   ];
 }
