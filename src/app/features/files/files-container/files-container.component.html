@@ -2,19 +2,7 @@
 
   <div class="dashboard-header">
     
-    <div class="search-section">
-      <div class="search-bar">
-        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
-        <input 
-          type="text" 
-          placeholder="Buscar" 
-          [(ngModel)]="searchTerm"
-          (keyup.enter)="onSearch()"
-          class="search-input">
-        <button class="filter-button" type="button">
-        </button>
-      </div>
-    </div>
+    <app-search-bar></app-search-bar>
 
     <div class="actions-section">
       <div class="archive-count">
@@ -31,7 +19,7 @@
       <i [ngClass]="'bx bxs-folder'" class="icon-placeholder"></i>
     </div>
     
-    <div class="files-table-container" *ngIf="showFiles">
+    <div class="files-table-container" *ngIf="showFiles && files">
       <table class="files-table">
         <thead>
           <tr>
@@ -43,25 +31,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let file of files" class="file-row" (click)="onClickedFile(file.id)">
-            <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
-            <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
-            <td class="file-created">{{ "02/12/2005 12:23" }}</td>
-            <td class="file-type">
-              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
-                {{ extensionWhitoutPoints(file.extension) }}
-              </span>
-            </td>
-            <td class="file-options">
-              <div class="options-wraper">
-                <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
-              </div>
-            </td>
-          </tr>
+          <ng-content *ngFor="let file of files">
+            <tr *ngIf="hasPermissionInThisfile(file.id)" class="file-row" (click)="onClickedFile(file.id); addRecentFile(file)">
+              <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
+              <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
+              <td class="file-created">{{ "02/12/2005 12:23" }}</td>
+              <td class="file-type">
+                <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                  {{ extensionWhitoutPoints(file.extension) }}
+                </span>
+              </td>
+              <td class="file-options">
+                <div class="options-wraper">
+                  <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                  <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre" (modalClosed)="onChildModalClose()"></app-file-options>
+                </div>
+              </td>
+            </tr>
+          </ng-content>
         </tbody>
       </table>
-      
+      <h3 *ngIf="!files">No se hayaron archivos</h3>      
       <div class="load-more-container">
         <button class="load-more-btn" (click)="loadMoreFiles()">
           <i class="load-more-icon">▼</i>

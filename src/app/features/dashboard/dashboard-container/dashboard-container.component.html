@@ -1,18 +1,6 @@
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <div class="search-section">
-      <div class="search-bar">
-        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
-        <input 
-          type="text" 
-          placeholder="Buscar" 
-          [(ngModel)]="searchTerm"
-          (keyup.enter)="onSearch()"
-          class="search-input">
-        <button class="filter-button" type="button">
-        </button>
-      </div>
-    </div>
+    <app-search-bar></app-search-bar>
     <div class="actions-section">
       <div class="archive-count">
         <span class="archive-label">Archivos:</span>
@@ -29,7 +17,7 @@
       <h3>Carpetas recientes</h3>
     </div>
     
-    <div class="folders-grid" *ngIf="showRecentFolders">
+    <div class="folders-grid" *ngIf="showRecentFolders && recentFolders">
       <div 
         *ngFor="let folder of recentFolders" 
         class="folder-item"
@@ -38,6 +26,7 @@
         <span class="folder-name">{{ folder.name }}</span>
       </div>
     </div>
+    <h3 *ngIf="!recentFolders">No se hayaron carpetas</h3>
   </div>
   <div class="content-section">
     <div class="section-header" (click)="toggleRecentFiles()">
@@ -45,7 +34,7 @@
       <h3>Archivos recientes</h3>
     </div>
     
-    <div class="files-table-container" *ngIf="showRecentFiles">
+    <div class="files-table-container" *ngIf="showRecentFiles && recentFiles">
       <table class="files-table">
         <thead>
           <tr>
@@ -60,20 +49,24 @@
             *ngFor="let file of recentFiles" 
             class="file-row"
             (click)="onFileClick(file)">
-            <td class="file-name">{{ file.name }}</td>
-            <td class="file-modified">{{ file.lastModified }}</td>
-            <td class="file-created">{{ file.creationDate }}</td>
+            <td class="file-name">{{ file.nombre }}</td>
+            <td class="file-modified">{{ "" }}</td>
+            <td class="file-created">{{ file.fecha }}</td>
             <td class="file-type">
-              <span class="type-badge" [class]="'type-' + file.type.toLowerCase()">
-                {{ file.type }}
+              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                {{ extensionWhitoutPoints(file.extension) }}
               </span>
             </td>
-            <td>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+            <td class="file-options">
+              <div class="options-wraper">
+                <button (click)="toggleOptions(file.id); $event.stopPropagation()" [class.activate]="openFileId === file.id" class="options-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                <app-file-options *ngIf="openFileId === file.id" [idUser]="getIDUser()" [idFile]="file.id" [filename]="file.nombre"></app-file-options>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <h3 *ngIf="!recentFiles">No se hayaron archivos</h3>
       <div class="load-more-container">
         <button class="load-more-btn" (click)="loadMoreFiles()">
           <i class="load-more-icon">▼</i>

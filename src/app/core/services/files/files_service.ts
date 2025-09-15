@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FileCreated, FileDataReceive, FileUpdated } from "./files_model";
+import { FileCreated, FileData, FileDataReceive, FileUpdated } from "./files_model";
 import { blob } from "node:stream/consumers";
 
 @Injectable({ providedIn: "root" })
@@ -72,15 +72,49 @@ export class FileServices {
     return this.__http.delete<{ message: string; id: number }>(this.__apiUrl + id_file + "/" + id_user);
   }
 
-  saveHistory(record: {
-    movimiento: string;
-    departamento: string;
-    id_folder: number;
-    id_file: number;
-    id_user: number;
-    fecha_registro: string;
-  }): Observable<any> {
-    const historyUrl = 'http://localhost:8081/historial';
-    return this.__http.post(historyUrl, record);
-  }
+    searchFiles(name: string): Observable<{message: string, data: FileData[]}>{
+        return this.__http.get<{message: string, data: FileData[]}>(`${this.__apiUrl}search/${name}`)
+    }
+
+    downloadFile(file_id: number, user_id: number, name: string) {
+        this.__http.get(`${this.__apiUrl}download/${file_id}/${user_id}`, {
+            responseType: 'blob',
+        }).subscribe((blob: Blob) => {
+            const createdURL = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = createdURL;
+            a.download = name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(createdURL);
+        });
+    }
+
+    updateFile(
+        id_file: number,
+        id_user: number,
+        file: File | null,
+        folio: string,
+        id_folder: number,
+        id_uploader: number,
+    ): Observable<FileUpdated>{
+        const formData = new FormData();
+        let requestJson;
+        if (file)
+            formData.append("file", file);
+        if (folio || id_folder || id_uploader) {
+            requestJson = {
+                folio: folio,
+                id_folder: id_folder,
+                id_uploader: id_uploader
+            }
+        }
+        formData.append("json", JSON.stringify(requestJson))
+        return this.__http.put<FileUpdated>(this.__apiUrl + id_file + "/" + id_user, formData);
+    }
+
+    deleteFile(id_file: number, id_user: number): Observable<{message: string, id: number}>{
+        return this.__http.delete<{message: string, id: number}>(this.__apiUrl + id_file + "/" + id_user);
+    }
 }

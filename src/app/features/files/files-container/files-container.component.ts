@@ -11,6 +11,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
+import { PermissionService } from '../../../core/services/permissions/permissions_services';
 
 @Component({
   selector: 'app-files-container',
@@ -27,6 +29,7 @@ export class FilesContainerComponent implements OnInit {
   idFolder: number = 0;
 
   files: FileData[] = [];
+  filesPermissions: number[] = [];
 
   searchTerm = '';
   showFiles = true;
@@ -36,7 +39,12 @@ export class FilesContainerComponent implements OnInit {
 
   openFileId: number | null = null;
 
-  constructor(private route: ActivatedRoute, private fileService: FileServices) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private fileService: FileServices,
+    private recentElementService: RecentElementsServices,
+    private permissionServices: PermissionService,
+  ){  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id_folder');
@@ -46,6 +54,7 @@ export class FilesContainerComponent implements OnInit {
       this.folderName = nameFolder;
       console.log('ID de carpeta:', this.idFolder, ' | Nombre:', this.folderName);
       this.getFilesInfo();
+      this.getPermissionsForFiles();
     }
   }
 
@@ -209,7 +218,56 @@ export class FilesContainerComponent implements OnInit {
     }
   }
 
-  onClickedFile(id: number) {
-    console.log('Archivo clickeado:', id);
+  onClickedFile(id: number){console.log("Archivo clickeado:", id)}
+
+  addRecentFile(file: FileData){
+    this.recentElementService.setRecentFile(file);
+  }
+
+  onChildModalClose(){
+    this.openFileId = null;
+  }
+
+  getIDRol(): number {
+    let string_user: string | null = localStorage.getItem('user_data')
+    if (string_user != null){
+      let user = JSON.parse(string_user)
+      return user.roleId
+    } else {
+      return 1
+    }
+  }
+
+  getPermissionsForFiles(){
+    if (this.idFolder){
+      this.permissionServices.getChangePermissionsOfAFolder(this.idFolder, this.getIDUser()).subscribe(
+        (response) => {
+          console.log("Respuesta del servidor:", response);
+          this.filesPermissions = response.permissions;
+        },
+        (error) => {
+          console.log("Error al obtener permisos de archivos:", error);
+        }
+      );
+    }
+  }
+
+  hasPermissionInThisfile(idFile: number): boolean{
+    if (this.getIDRol() == 2)
+      return true;
+    else if (this.filesPermissions) {
+      let flag = false;
+      for(let i = 0; i < this.filesPermissions.length; i++){
+        if(idFile == this.filesPermissions[i]){
+          flag = true;
+          i = this.filesPermissions.length + 10;
+        }
+      }
+      console.log("Permiso para ver el archivo", idFile, ":", flag);
+      return flag;
+    }
+    else {
+      return false;
+    }
   }
 }

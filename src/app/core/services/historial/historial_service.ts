@@ -13,7 +13,7 @@ export interface HistoryEntry {
 
 @Injectable({ providedIn: 'root' })
 export class HistorialService {
-  private apiUrl = 'http://localhost:8081/historial/';
+  private apiUrl = 'http://localhost:8081/history/';
 
   constructor(private http: HttpClient) {}
 

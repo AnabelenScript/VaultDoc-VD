@@ -6,6 +6,8 @@ import { FoldersContainerComponent } from './folders-container/folders-container
 import { FormsModule } from '@angular/forms';
 import { FilesContainerComponent } from './files-container/files-container.component';
 import { SharedModule } from "../../shared/shared-module/shared.module";
+import { SearchPageComponent } from './views/search-page/search-page.component';
+import { SearchContainerComponent } from './search-container/search-container.component';
 
 
 
@@ -14,7 +16,9 @@ import { SharedModule } from "../../shared/shared-module/shared.module";
     FilesPageComponent,
     FoldersPageComponent,
     FoldersContainerComponent,
-    FilesContainerComponent
+    FilesContainerComponent,
+    SearchPageComponent,
+    SearchContainerComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +28,7 @@ import { SharedModule } from "../../shared/shared-module/shared.module";
   exports: [
     FilesPageComponent,
     FoldersPageComponent,
+    SearchPageComponent,
   ]
 })
 export class FilesModule { }
