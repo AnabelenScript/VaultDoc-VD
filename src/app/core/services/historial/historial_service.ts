@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export interface HistoryEntry {
   Movimiento: string;
   Fecha_registro: string;
-  Id_file: { nombre: string };
+  Id_file: { nombre: string } | null;
   Id_user: { nombre: string };
   Id_folder: { nombre: string };
 }

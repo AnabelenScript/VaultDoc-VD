@@ -30,14 +30,24 @@ export class FileOptionsComponent {
     }
   }
 
-  deleteFile(idUser: number | null, idFile: number | null){
-    if (idUser && idFile){
+deleteFile(idUser: number | null, idFile: number | null) {
+    if (idUser && idFile) {
       this.fileService.deleteFile(idFile, idUser).subscribe(
         (response) => {
-          console.log("Respuesta del servidor:", response);
+          console.log("Archivo eliminado:", response);
+
+          const user = JSON.parse(localStorage.getItem('user_data') || '{}');
+          const history = {
+            movimiento: "Eliminación de archivo",
+            departamento: user.department,
+            id_folder: 0,
+            id_file: idFile!,
+            id_user: idUser!,
+            fecha_registro: new Date().toISOString()
+          };
         },
         (error) => console.log("Error:", error)
-      )
+      );
     }
   }
 
@@ -50,6 +60,7 @@ export class FileOptionsComponent {
       return 1
     }
   }
+  
 
   showModal(){
     this.showShareModal = !this.showShareModal;
@@ -61,6 +72,8 @@ export class FileOptionsComponent {
     this.showShareModal = false;
     this.modalClosed.emit("");
   }
+
+
 
   getViewPermissions(){
     if (this.idFile){

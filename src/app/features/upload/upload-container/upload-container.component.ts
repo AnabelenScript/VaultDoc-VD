@@ -3,6 +3,8 @@ import { FolderServices } from '../../../core/services/folders/folders_service';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FolderData } from '../../../core/services/folders/folders_model';
 import { AlertService } from '../../../core/services/alerts/alerts';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
+import { FileData } from '../../../core/services/files/files_model';
 
 @Component({
   selector: 'app-upload-container',
@@ -22,27 +24,21 @@ export class UploadContainerComponent implements OnInit {
   inputType = 'Finanzas';
   outputType = 'all';
 
-  recentFiles = [
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PNG' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PNG' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PNG' }
-  ];
+  recentFiles: FileData[] = [];
 
   constructor(
     private folderService: FolderServices,
     private fileService: FileServices,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private resentElementService: RecentElementsServices,
   ) {}
 
   ngOnInit(): void {
   const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
   const department = userData.department;
 
-  if (department) {
+  if  (department) { 
+    this.recentFiles = this.resentElementService.getRecentFiles()
     this.folderService.getFolders(department).subscribe(
       (response: { folders: FolderData[] }) => {
         this.folders = response.folders;
@@ -54,6 +50,15 @@ export class UploadContainerComponent implements OnInit {
   }
 }
 
+extensionWhitoutPoints(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[1]
+  }
+
+  filenameWhitoutExtensions(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[0]
+  }
 
   onFileSelected(event: Event): void {
   const input = event.target as HTMLInputElement;
