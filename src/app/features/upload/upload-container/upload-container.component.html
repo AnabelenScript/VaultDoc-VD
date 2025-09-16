@@ -19,7 +19,7 @@
           <div class="dropdown-group">
   <label>Selecciona la carpeta donde se subirá el archivo</label>
   <select [(ngModel)]="selectedFolderId">
-    <option *ngFor="let folder of folders" [value]="folder.id">
+    <option *ngFor="let folder of folders" [ngValue]="folder.id">
       {{ folder.name }}
     </option>
   </select>
