@@ -21,39 +21,24 @@
     </div>
   </div>
   <div class="historial-list">
-  <div *ngFor="let entry of historial" class="historial-card">
-    <div class="historial-row historial-table header-row">
-      <span class="label">Archivo:</span>
-      <span class="label">Acción:</span>
-      <span class="label">Fecha:</span>
-      <span class="label">Usuario:</span>
+    <div *ngFor="let entry of historial" class="historial-card">
+      <div class="historial-row">
+        <span class="label">📄 Archivo:</span>
+        <span class="value">{{ "n" }}</span>
+      </div>
+      <div class="historial-row">
+        <span class="label">🔧 Acción:</span>
+        <span class="value">{{ "n" }}</span>
+      </div>
+      <div class="historial-row">
+        <span class="label">🕒 Fecha:</span>
+        <span class="value">{{ "n"  }}</span>
+      </div>
+      <div class="historial-row">
+        <span class="label">👤 Usuario:</span>
+        <span class="value">{{ "n"  }}</span>
+      </div>
+      <div class="historial-divider"></div>
     </div>
-    <div class="historial-row historial-table">
-      <span class="value">{{ entry.Id_file.nombre }}</span>
-      <span class="value">{{ entry.Movimiento }}</span>
-      <span class="value">{{ entry.Fecha_registro }}</span>
-      <span class="value">{{ entry.Id_user.nombre }}</span>
-    </div>
-    <div class="historial-divider"></div>
   </div>
-
-  <!-- Elemento estático -->
-  <div class="historial-card static-preview">
-    <div class="historial-row historial-table header-row">
-      <span class="label">Archivo:</span>
-      <span class="label">Acción:</span>
-      <span class="label">Fecha:</span>
-      <span class="label">Usuario:</span>
-    </div>
-    <div class="historial-row historial-table">
-      <span class="value">informe_final.pdf</span>
-      <span class="value">Subida</span>
-      <span class="value">2025-09-07 14:35</span>
-      <span class="value">Anna</span>
-    </div>
-    <div class="historial-divider"></div>
-  </div>
-</div>
-
-
 </div>

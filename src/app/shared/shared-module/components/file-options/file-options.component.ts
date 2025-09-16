@@ -24,23 +24,31 @@ export class FileOptionsComponent {
 
   constructor(private fileService: FileServices, private permissionService: PermissionService){  }
 
-  downloadFile() {
-  if (this.idUser && this.idFile && this.filename) {
-    this.fileService.downloadFile(this.idFile, this.idUser, this.filename);
+  downloadFile(){
+    if (this.idUser && this.idFile && this.filename) {
+      this.fileService.downloadFile(this.idFile, this.idUser, this.filename);
+    }
+  }
 
-    const user = JSON.parse(localStorage.getItem('user_data') || '{}');
-    const history = {
-      movimiento: "Descarga de archivo",
-      departamento: user.department,
-      id_folder: 0, 
-      id_file: this.idFile!,
-      id_user: this.idUser!,
-      fecha_registro: new Date().toISOString()
-    };
-    this.fileService.saveHistory(history).subscribe(
-      () => console.log("Historial de descarga registrado"),
-      (error) => console.error("Error al registrar historial:", error)
-    );
+deleteFile(idUser: number | null, idFile: number | null) {
+    if (idUser && idFile) {
+      this.fileService.deleteFile(idFile, idUser).subscribe(
+        (response) => {
+          console.log("Archivo eliminado:", response);
+
+          const user = JSON.parse(localStorage.getItem('user_data') || '{}');
+          const history = {
+            movimiento: "Eliminación de archivo",
+            departamento: user.department,
+            id_folder: 0,
+            id_file: idFile!,
+            id_user: idUser!,
+            fecha_registro: new Date().toISOString()
+          };
+        },
+        (error) => console.log("Error:", error)
+      );
+    }
   }
 
   getIDRol(): number {
@@ -52,6 +60,7 @@ export class FileOptionsComponent {
       return 1
     }
   }
+  
 
   showModal(){
     this.showShareModal = !this.showShareModal;
@@ -63,6 +72,8 @@ export class FileOptionsComponent {
     this.showShareModal = false;
     this.modalClosed.emit("");
   }
+
+
 
   getViewPermissions(){
     if (this.idFile){
@@ -164,31 +175,4 @@ export class FileOptionsComponent {
         }
       }
     }
-}
-
-deleteFile(idUser: number | null, idFile: number | null) {
-  if (idUser && idFile) {
-    this.fileService.deleteFile(idFile, idUser).subscribe(
-      (response) => {
-        console.log("Archivo eliminado:", response);
-
-        const user = JSON.parse(localStorage.getItem('user_data') || '{}');
-        const history = {
-          movimiento: "Eliminación de archivo",
-          departamento: user.department,
-          id_folder: 0,
-          id_file: idFile!,
-          id_user: idUser!,
-          fecha_registro: new Date().toISOString()
-        };
-        this.fileService.saveHistory(history).subscribe(
-          () => console.log("Historial de eliminación registrado"),
-          (error) => console.error("Error al registrar historial:", error)
-        );
-      },
-      (error) => console.log("Error:", error)
-    );
-  }
-}
-
 }
