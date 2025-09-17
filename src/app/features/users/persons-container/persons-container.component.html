@@ -22,7 +22,6 @@
   </div>
 
   <div class="action-buttons">
-    <button routerLink="/historial">Historial de acciones</button>
     <button (click)="toggleAddModal()">Agregar jefe de departamento</button>
   </div>
 
@@ -96,7 +95,8 @@
     </div>
   </div>
 
-  <!-- Modal de confirmación para eliminar -->
+  <!-- Modal de confirmación para eliminar -->.
+
   <div class="DeleteModal" *ngIf="showDeleteModal">
     <div class="modalbackground" (click)="closeDeleteModal()"></div>
     <div class="DeleteContainer">
@@ -105,7 +105,7 @@
       <p class="warning-text">Esta acción no se puede deshacer.</p>
       
       <div class="Optionsbuttons">
-        <button class="cancelButton" (click)="closeDeleteModal()">Cancelar</button>
+        <button class="cancelDeleteButton" (click)="closeDeleteModal()">Cancelar</button>
         <button class="deleteButton" (click)="confirmDeleteUser()">Eliminar</button>
       </div>
     </div>

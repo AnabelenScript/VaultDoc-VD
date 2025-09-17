@@ -6,6 +6,11 @@
   font-family: "Poppins", sans-serif;
 }
 
+app-search-bar {
+  flex: 1;
+  min-width: 0;
+}
+
 .dashboard-header {
   display: flex;
   justify-content: space-between;
