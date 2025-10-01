@@ -9,6 +9,8 @@ export interface FileData {
 	id_folder: number
 	id_uploader: number
 	directorio: string
+	created_at: string
+	updated_at: string
 }
 
 export interface FileDataReceive {
