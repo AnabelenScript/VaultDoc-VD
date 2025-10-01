@@ -198,19 +198,22 @@ export class FilesContainerComponent implements OnInit{
     }
   }
 
-  getFilesInfo(){
-    if (this.idFolder) {
+ getFilesInfo(){
+  if (this.idFolder) {
     this.fileService.getFilesByFolder(this.idFolder).subscribe(
-        (response) => {
-          console.log("Respuesta del servidor:", response)
-          this.files = response.data
-        },
-        (error) => {
-          console.log("Error:", error);
-        }
-      );
-    }
+      (response) => {
+        console.log("Respuesta del servidor:", response);
+        console.log("Primer archivo completo:", JSON.stringify(response.data[0], null, 2));
+        console.log("created_at del primer archivo:", response.data[0]?.created_at);
+        console.log("updated_at del primer archivo:", response.data[0]?.updated_at);
+        this.files = response.data;
+      },
+      (error) => {
+        console.log("Error:", error);
+      }
+    );
   }
+}
 
   onClickedFile(id: number){console.log("Archivo clickeado:", id)}
 
