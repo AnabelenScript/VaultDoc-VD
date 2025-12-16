@@ -4,6 +4,9 @@
 }
 
 .search-bar {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
   padding-left: 20px;
   border: none;
   display: flex;

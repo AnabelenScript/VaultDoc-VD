@@ -1,5 +1,6 @@
-.upload-container{
-    padding: 50px;
+.upload-container {
+  box-sizing: border-box;
+  padding: 50px;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
   border-radius: 20px;
@@ -7,6 +8,7 @@
 }
 
 .convert-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,55 +17,6 @@
   flex-wrap: wrap;
 }
 
-
-
-.search-section {
-  flex: 1;
-  width: 100%;
-}
-
-.search-bar {
-    padding-left: 20px;
-    background-color:white;
-  border: none;
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.142),
-              inset 0 -1px 2px rgba(0, 0, 0, 0.142);
-  font-size: 14px;
-  transition: box-shadow 0.3s ease, background-color 0.3s ease;
-  outline: none;
-
-}
-
-.search-bar:focus-within {
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.364),
-              inset 0 -1px 2px rgba(0, 0, 0, 0.364);
-}
-
-.search-icon {
-  color: #666;
-  margin-right: 12px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 14px 0;
-  font-size: 14px;
-  color: #000000;
-  background-color:transparent; 
-}
-
-.search-input::placeholder {
-  color: #656565;
-  background-color: transparent;
-}
 
 .filter-button {
   background: none;
@@ -126,10 +79,9 @@
   background-color: rgba(211, 194, 180, 0.3);
 }
 
-.section-header:hover{
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
+.section-header:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
 }
-
 
 .toggle-icon {
   font-size: 12px;
@@ -139,7 +91,7 @@
 }
 
 .toggle-icon.rotated {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 
 .section-header h3 {
@@ -175,14 +127,14 @@
   color: #333;
 }
 
-.dropdown-group select, input {
+.dropdown-group select,
+input {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
-
 
 .button-row {
   display: flex;
@@ -192,7 +144,7 @@
 
 .upload-btn,
 .download-btn {
-  background-color:#009887;
+  background-color: #009887;
   color: white;
   border: none;
   border-radius: 10px;
@@ -211,7 +163,7 @@
 
 .upload-btn:hover,
 .download-btn:hover {
-  background-color:#016c60;
+  background-color: #016c60;
 }
 
 .files-table-container {
@@ -240,7 +192,7 @@
 }
 
 .file-row:hover {
-   background-color: #F2F2F2
+  background-color: #f2f2f2;
 }
 
 .file-row:last-child {
@@ -326,40 +278,65 @@
   transform: scale(1.1);
 }
 
-.generate-button-container{
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: right;
+.generate-button-container {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: right;
 }
 
-.generate-button{
-     padding: 12px 20px;
-       background-color:#009887;
+.generate-button {
+  width: 100%;
+  padding: 20px 24px;
+  background-color: #009887;
   color: white;
   border: none;
-  font-size: 14px;
-    border-radius: 10px;
-    font-weight: 600;
+  font-size: 16px;
+  border-radius: 10px;
+  font-weight: 600;
 }
 
-.generate-button:hover{
-     background-color:#016c60;
-     cursor: pointer;
+.generate-button:hover {
+  background-color: #016c60;
+  cursor: pointer;
 }
 
-.selection-button{
-    border: 1px solid #656565;
-    margin: 0;
-    background-color: transparent;
+.selection-button {
+  border: 1px solid #656565;
+  margin: 0;
+  background-color: transparent;
+  width: 100%;
+  height: 30vh;
+  border-radius: 15px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.selection-button i {
+  font-size: 35px;
+  color: #656565;
+}
+
+@media (max-width: 768px) {
+  .upload-container {
+    position: relative;
+    width: 95vw;
+    box-sizing: border-box;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .convert-header {
     width: 100%;
-    height: 30vh;
-    border-radius: 15px;
-    font-family: "Poppins", sans-serif;
-    cursor: pointer;
-}
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-.selection-button i{
-    font-size: 35px;
-    color: #656565;
+  .app-search-bar {
+    width: 100%;
+  }
 }
