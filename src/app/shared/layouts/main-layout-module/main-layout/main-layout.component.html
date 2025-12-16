@@ -5,9 +5,10 @@
 
   <div class="navbar-main-container" *ngIf="isNavbarVisible">
     <app-navbar
-  [forceExpanded]="isMobileView && isNavbarVisible"
-  (expandedChange)="onNavbarExpandedChange($event)">
-</app-navbar>
+      [forceExpanded]="isMobileView && isNavbarVisible"
+      (expandedChange)="onNavbarExpandedChange($event)">
+    </app-navbar>
+  <button class="menu-toggle-expanded" *ngIf="isNavbarVisible" (click)="closeNavbar()">×</button>
 
   </div>
 

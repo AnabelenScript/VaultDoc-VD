@@ -1,8 +1,8 @@
-.menu-toggle {
+.menu-toggle{
   position: fixed;
-  top: 20px;
+  top: 45px;
   left: 0;
-  z-index: 1101;
+  z-index: 10000;
   background: #009887;
   color: white;
   width: 50px;
@@ -11,6 +11,24 @@
   border-top-right-radius: 15px;
   padding: 10px 12px;
   font-size: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.menu-toggle-expanded {
+  position: fixed;
+  top: 45px;
+  left: 305px;
+  z-index: 10000;
+  background: white;
+  color: #656565;
+  width: auto;
+  border: none;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 4px 20px 6px 12px;
+  font-size: 36px;
+  font-weight: bolder;
   cursor: pointer;
   display: none;
 }
@@ -50,7 +68,8 @@
 }
 
 @media (max-width: 1020px) {
-  .menu-toggle {
+  .menu-toggle,
+  .menu-toggle-expanded  {
     display: block;
   }
 
@@ -61,7 +80,7 @@
     height: 100vh;
     width: 265px;
     z-index: 1102;
-    padding: 40px;
+    padding: 2.5dvh 40px;
   }
 
   .main {
