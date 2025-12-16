@@ -6,7 +6,7 @@ import { blob } from "node:stream/consumers";
 
 @Injectable({ providedIn: "root" })
 export class FileServices{
-    private __apiUrl = "http://localhost:8081/files/";
+    private __apiUrl = "http://localhost:8080/files/";
 
     constructor(private __http: HttpClient){  }
 

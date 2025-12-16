@@ -17,7 +17,7 @@ body{
 }
 
 .LogoContainer{
-    position: absolute;
+  position: absolute;
   width: 75%;
   left: -14%; 
   top: -25%;
@@ -48,18 +48,44 @@ body{
 
 @media (max-width: 1200px) {
   .LogoContainer{
-     position: absolute;
-  width: 75%;
-  left: -14%; 
-  top: -25%;
-  height: 150%;
-  border-radius: 50%;
-  background-color: #009887; 
-  z-index: 3;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
+    position: absolute;
+    width: 75%;
+    left: -14%; 
+    top: -25%;
+    height: 150%;
+    border-radius: 50%;
+    background-color: #009887; 
+    z-index: 3;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  } 
+}
+
+@media (max-width: 768px) {
+  .LogoContainer{
+    position: absolute;
+    height: 75vh;
+    width: 75vh;
+    left: 50%; 
+    transform: translateX(-50%);
+    top: auto;
+    bottom: -25%;
+    border-radius: 50%;
+    background-color: #009887; 
+    aspect-ratio: 1/1;
+    z-index: 3;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  } 
+
+  .patron1 {
+      width: 175vw;
+      height: 15vh;
+      z-index: 2;
+      position: absolute;
+      right: 0;
+      top: 0;
   }
-  
- 
 }

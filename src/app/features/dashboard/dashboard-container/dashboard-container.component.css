@@ -155,7 +155,7 @@
 }
 
 .toggle-icon.rotated {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 
 .section-header h3 {

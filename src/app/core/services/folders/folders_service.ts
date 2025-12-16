@@ -5,7 +5,7 @@ import { FolderCreatedData, FolderData, FolderResponse } from "./folders_model";
 
 @Injectable({ providedIn: "root" })
 export class FolderServices {
-    private __apiUrl = 'http://localhost:8081/folders/';
+    private __apiUrl = 'http://localhost:8080/folders/';
 
     constructor(private __http: HttpClient) { }
 
