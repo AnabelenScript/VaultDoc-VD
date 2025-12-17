@@ -148,10 +148,10 @@ export class FilesContainerComponent implements OnInit {
             id_user: user.userId,
             fecha_registro: new Date().toISOString()
           };
-          this.fileService.saveHistory(history).subscribe(
+          /*this.fileService.saveHistory(history).subscribe(
             () => console.log('Historial registrado'),
             (error) => console.error('Error al registrar historial:', error)
-          );
+          );*/
         },
         (error) => {
           console.log('Error:', error);

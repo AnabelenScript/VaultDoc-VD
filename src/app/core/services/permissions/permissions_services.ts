@@ -5,7 +5,7 @@ import { MessageCheckPermission, MessagePermissionGranted, PermissionModel, User
 
 @Injectable({ providedIn: "root" })
 export class PermissionService{
-    __apiUrl: string = "http://localhost:8080/files/permissions/"
+    __apiUrl: string = "http://localhost:8081/files/permissions/"
 
     constructor(private __http: HttpClient){  }
 
