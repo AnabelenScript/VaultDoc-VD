@@ -10,3 +10,8 @@ body {
     scrollbar-width: none;
     overflow-x: hidden;
 }
+
+* input:-webkit-autofill {
+    background: white !important;
+    box-shadow: 0 0 0px 1000px white inset !important
+}

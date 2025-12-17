@@ -166,7 +166,7 @@
 }
 
 .toggle-icon.rotated {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 
 .section-header h3 {
@@ -429,7 +429,7 @@
   
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .Addcontainer {
     width: 85%;
     height: auto;
@@ -442,5 +442,10 @@
   }
   .Optionsbuttons{
   width: 100%;
+}
+
+.convert-header {
+  flex-direction: column;
+  align-items: end;
 }
 }
