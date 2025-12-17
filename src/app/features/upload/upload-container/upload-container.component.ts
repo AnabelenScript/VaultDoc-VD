@@ -3,6 +3,8 @@ import { FolderServices } from '../../../core/services/folders/folders_service';
 import { FileServices } from '../../../core/services/files/files_service';
 import { FolderData } from '../../../core/services/folders/folders_model';
 import { AlertService } from '../../../core/services/alerts/alerts';
+import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
+import { FileData } from '../../../core/services/files/files_model';
 
 @Component({
   selector: 'app-upload-container',
@@ -10,8 +12,8 @@ import { AlertService } from '../../../core/services/alerts/alerts';
   styleUrls: ['./upload-container.component.css']
 })
 export class UploadContainerComponent implements OnInit {
-  folders: any[] = [];
-  selectedFolderId: number | null = null;
+  folders: FolderData[] = [];
+  selectedFolderId: number = 0;
   folio: string = '';
   selectedFile: File | null = null;
   archiveCount = 178;
@@ -22,27 +24,21 @@ export class UploadContainerComponent implements OnInit {
   inputType = 'Finanzas';
   outputType = 'all';
 
-  recentFiles = [
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PNG' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PNG' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PDF' },
-    { name: 'Constancia_DG_2025', lastModified: '30 de Jun', creationDate: '24 de Jun', type: 'PNG' }
-  ];
+  recentFiles: FileData[] = [];
 
   constructor(
     private folderService: FolderServices,
     private fileService: FileServices,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private resentElementService: RecentElementsServices,
   ) {}
 
   ngOnInit(): void {
   const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
   const department = userData.department;
 
-  if (department) {
+  if  (department) { 
+    this.recentFiles = this.resentElementService.getRecentFiles()
     this.folderService.getFolders(department).subscribe(
       (response: { folders: FolderData[] }) => {
         this.folders = response.folders;
@@ -54,6 +50,15 @@ export class UploadContainerComponent implements OnInit {
   }
 }
 
+extensionWhitoutPoints(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[1]
+  }
+
+  filenameWhitoutExtensions(extension: string): string{
+    let ext = extension.split(".", 2)
+    return ext[0]
+  }
 
   onFileSelected(event: Event): void {
   const input = event.target as HTMLInputElement;
@@ -67,12 +72,22 @@ export class UploadContainerComponent implements OnInit {
     fileInput.click();
   }
 
+    getIDUser(): number {
+    let string_user: string | null = localStorage.getItem('user_data');
+    if (string_user != null){
+      const user = JSON.parse(string_user);
+      return user.userId;
+    } else {
+      return 0;
+    }
+  }
+
   upload(): void {
-  const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
-  const idUploader = userData.id;
 
   if (this.selectedFile && this.selectedFolderId && this.folio) {
-    this.fileService.uploadFile(this.selectedFile, this.folio, this.selectedFolderId, idUploader).subscribe({
+    console.log(typeof this.selectedFolderId)
+
+    this.fileService.uploadFile(this.selectedFile, this.folio, this.selectedFolderId, this.getIDUser()).subscribe({
       next: (res: any) => {
         this.alertService.success('Archivo subido correctamente');
         console.log('Archivo subido:', res);

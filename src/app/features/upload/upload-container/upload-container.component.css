@@ -18,6 +18,7 @@
 }
 
 
+
 .filter-button {
   background: none;
   border: none;
@@ -285,15 +286,15 @@ input {
   justify-content: right;
 }
 
-.generate-button {
-  width: 100%;
-  padding: 20px 24px;
-  background-color: #009887;
+.generate-button{
+     padding: 12px 20px;
+    background-color:#009887;
   color: white;
   border: none;
-  font-size: 16px;
-  border-radius: 10px;
-  font-weight: 600;
+  font-size: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
 }
 
 .generate-button:hover {

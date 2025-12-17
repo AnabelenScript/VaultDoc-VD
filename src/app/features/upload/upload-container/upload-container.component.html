@@ -1,11 +1,6 @@
 <div class="upload-container">
-  <div class="convert-header">
-    <app-search-bar class="app-search-bar"></app-search-bar>
+      <div class="convert-header">
     <div class="actions-section">
-      <div class="archive-count">
-        <span class="archive-label">Archivos:</span>
-        <span class="archive-number">{{ archiveCount }}</span>
-      </div>
     </div>
   </div>
   <div class="content-section">
@@ -17,22 +12,17 @@
       <div class="conversion-controls">
         <div class="dropdown-row">
           <div class="dropdown-group">
-            <label>Selecciona la carpeta donde se subirá el archivo</label>
-            <select [(ngModel)]="selectedFolderId">
-              <option *ngFor="let folder of folders" [value]="folder.id">
-                {{ folder.name }}
-              </option>
-            </select>
-          </div>
-          <div class="dropdown-group">
-            <label>Ingrese el folio del archivo</label>
-            <input
-              type="text"
-              [(ngModel)]="folio"
-              (keypress)="validateNumber($event)"
-              maxlength="3"
-            />
-          </div>
+  <label>Selecciona la carpeta donde se subirá el archivo</label>
+  <select [(ngModel)]="selectedFolderId">
+    <option *ngFor="let folder of folders" [ngValue]="folder.id">
+      {{ folder.name }}
+    </option>
+  </select>
+</div>
+<div class="dropdown-group">
+  <label>Ingrese el folio del archivo</label>
+  <input type="text" [(ngModel)]="folio"  (keypress)="validateNumber($event)" maxlength="3">
+</div>
 
           <button
             class="selection-button"
@@ -60,39 +50,35 @@
       </div>
     </ng-container>
 
-    <div class="content-section">
-      <div class="section-header" (click)="toggleRecentFiles()">
-        <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
-        <h3>Archivos recientes</h3>
-      </div>
-      <div class="files-table-container" *ngIf="showRecentFiles">
-        <table class="files-table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Última modificación</th>
-              <th>Fecha de creación</th>
-              <th>Tipo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let file of recentFiles"
-              class="file-row"
-              (click)="onFileClick(file)"
-            >
-              <td class="file-name">{{ file.name }}</td>
-              <td class="file-modified">{{ file.lastModified }}</td>
-              <td class="file-created">{{ file.creationDate }}</td>
-              <td class="file-type">
-                <span
-                  class="type-badge"
-                  [class]="'type-' + file.type.toLowerCase()"
-                >
-                  {{ file.type }}
-                </span>
-              </td>
-              <td>
+         <div class="content-section">
+    <div class="section-header" (click)="toggleRecentFiles()">
+      <i class="toggle-icon" [class.rotated]="!showRecentFiles">▼</i>
+      <h3>Archivos recientes</h3>
+    </div>
+    <div  class="files-table-container" *ngIf="showRecentFiles">
+      <table class="files-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Última modificación</th>
+            <th>Fecha de creación</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr 
+            *ngFor="let file of recentFiles" 
+            class="file-row"
+            (click)="onFileClick(file)">
+            <td class="file-name">{{ file.nombre }}</td>
+            <td class="file-modified">{{ file.fecha }}</td>
+            <td class="file-created">{{ file.fecha }}</td>
+          <td class="file-type">
+              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                {{ extensionWhitoutPoints(file.extension) }}
+              </span>
+            </td>
+            <td>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </td>
             </tr>

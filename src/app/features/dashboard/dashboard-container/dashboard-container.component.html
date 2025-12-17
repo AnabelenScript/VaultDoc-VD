@@ -1,15 +1,6 @@
 <div class="dashboard-container">
   <div class="dashboard-header">
     <app-search-bar></app-search-bar>
-    <div class="actions-section">
-      <div class="archive-count">
-        <span class="archive-label">Archivos:</span>
-        <span class="archive-number">{{ archiveCount }}</span>
-      </div>
-      <button class="create-folder-btn" (click)="createNewFolder()" *ngIf="id_rol == 2">
-        Crear carpeta
-      </button>
-    </div>
   </div>
   <div class="content-section">
     <div class="section-header" (click)="toggleRecentFolders()">
@@ -26,7 +17,7 @@
         <span class="folder-name">{{ folder.name }}</span>
       </div>
     </div>
-    <h3 *ngIf="!recentFolders">No se hayaron carpetas</h3>
+    <h3 *ngIf="!recentFolders">No se encontraron carpetas</h3>
   </div>
   <div class="content-section">
     <div class="section-header" (click)="toggleRecentFiles()">
