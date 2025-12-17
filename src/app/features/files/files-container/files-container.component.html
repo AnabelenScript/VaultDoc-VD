@@ -34,8 +34,8 @@
           <ng-content *ngFor="let file of files">
             <tr *ngIf="hasPermissionInThisfile(file.id)" class="file-row" (click)="onClickedFile(file.id); addRecentFile(file)">
               <td class="file-name">{{ filenameWhitoutExtensions(file.nombre) }}</td>
-              <td class="file-modified">{{ "02/12/2005 12:23" }}</td>
-              <td class="file-created">{{ "02/12/2005 12:23" }}</td>
+<td class="file-modified">{{ file.updated_at | date:'dd/MM/yyyy HH:mm' }}</td>
+<td class="file-created">{{ file.created_at| date:'dd/MM/yyyy HH:mm' }}</td>
               <td class="file-type">
                 <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
                   {{ extensionWhitoutPoints(file.extension) }}
