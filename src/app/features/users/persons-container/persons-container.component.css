@@ -1,4 +1,3 @@
-/* features/users/persons-container/persons-container.component.css */
 .persons-container{
      padding: 50px;
   background: white;
@@ -113,6 +112,7 @@
     display: flex;
     gap: 30px;
     margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
 }
 
 .action-buttons button{
@@ -130,6 +130,7 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  font-family: "Poppins", sans-serif;
 }
 
 .action-buttons button:hover{
@@ -285,7 +286,7 @@
 
 .Addcontainer {
   width: 40%;
-  height: 80%;
+  height: 68%;
 }
 
 .DeleteContainer {
@@ -376,6 +377,15 @@
   border-top-left-radius: 40px;
 }
 
+.cancelDeleteButton{
+  background-color: #009887;;
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+}
+
+
+
+
 .Addbutton{
   background-color: #009887;
   border-bottom-right-radius: 40px;
@@ -392,7 +402,7 @@
   background-color: #811119;
 }
 
-.Addbutton:hover{
+.Addbutton:hover, .cancelDeleteButton:hover{
   background-color:#016c60;
 }
 
