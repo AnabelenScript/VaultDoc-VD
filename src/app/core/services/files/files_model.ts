@@ -22,7 +22,8 @@ export interface FileCreated {
 	filename: string
 	size: number
 	department: string
-	folio: string
+	folio: string,
+	id: number
 }
 
 export interface FileUpdated {

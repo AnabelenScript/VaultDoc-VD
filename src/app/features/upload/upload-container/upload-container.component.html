@@ -19,7 +19,7 @@
           <div class="dropdown-group">
   <label>Selecciona la carpeta donde se subirá el archivo</label>
   <select [(ngModel)]="selectedFolderId">
-    <option *ngFor="let folder of folders" [value]="folder.id">
+    <option *ngFor="let folder of folders" [ngValue]="folder.id">
       {{ folder.name }}
     </option>
   </select>
@@ -61,12 +61,12 @@
             *ngFor="let file of recentFiles" 
             class="file-row"
             (click)="onFileClick(file)">
-            <td class="file-name">{{ file.name }}</td>
-            <td class="file-modified">{{ file.lastModified }}</td>
-            <td class="file-created">{{ file.creationDate }}</td>
-            <td class="file-type">
-              <span class="type-badge" [class]="'type-' + file.type.toLowerCase()">
-                {{ file.type }}
+            <td class="file-name">{{ file.nombre }}</td>
+            <td class="file-modified">{{ file.fecha }}</td>
+            <td class="file-created">{{ file.fecha }}</td>
+          <td class="file-type">
+              <span class="type-badge" [class]="'type-' + extensionWhitoutPoints(file.extension).toLowerCase()">
+                {{ extensionWhitoutPoints(file.extension) }}
               </span>
             </td>
             <td>

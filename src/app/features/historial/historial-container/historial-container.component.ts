@@ -42,7 +42,7 @@ export class HistorialContainerComponent implements OnInit {
 
     if (department) {
       this.historialService.getHistoryByDepartment(department).subscribe({
-        next: (data) => this.historial = data,
+        next: (data) => {this.historial = data; console.log(data)},
         error: (err) => console.error('Error al obtener historial:', err)
       });
     }

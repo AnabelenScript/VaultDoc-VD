@@ -18,6 +18,8 @@ export class FileServices{
     ): Observable<FileCreated>{
         const formData = new FormData();
         formData.append("file", file);
+        console.log(typeof id_folder)
+        ;
         let requestJson = {
             folio: folio,
             id_folder: id_folder,
@@ -25,6 +27,7 @@ export class FileServices{
         }
         formData.append("json", JSON.stringify(requestJson))
         return this.__http.post<FileCreated>(this.__apiUrl, formData)
+        
     }
 
     getFilesByFolder(folder_id: number): Observable<FileDataReceive>{

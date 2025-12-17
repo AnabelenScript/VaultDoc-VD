@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
 export interface HistoryEntry {
   Movimiento: string;
   Fecha_registro: string;
-  Id_file: { nombre: string };
+  Id_file: { nombre: string } | null;
   Id_user: { nombre: string };
   Id_folder: { nombre: string };
 }
 
 @Injectable({ providedIn: 'root' })
 export class HistorialService {
-  private apiUrl = 'http://localhost:8081/historial/';
+  private apiUrl = 'http://localhost:8081/history/';
 
   constructor(private http: HttpClient) {}
 
