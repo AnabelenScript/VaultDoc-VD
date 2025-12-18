@@ -110,28 +110,6 @@ app-search-bar {
   font-weight: 600;
 }
 
-.create-folder-btn {
-  background: #009887;
-  color: white;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items:center ;
-  padding: 14px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.create-folder-btn:hover {
-  background: #1DA674;
-  transform: translateY(-1px);
-}
-
 /* Content Sections */
 .content-section {
   border-radius: 16px;
@@ -362,6 +340,10 @@ app-search-bar {
   .section-header {
     padding: 16px;
   }
+
+  .modal-content {
+    width: 80%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -380,6 +362,7 @@ app-search-bar {
 }
 
 .modal {
+  width: 100%;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.5);
@@ -404,17 +387,24 @@ app-search-bar {
 
 .modal-content {
   background: white;
-  padding: 20px;
+  padding: 36px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   width: 300px;
   text-align: center;
+
+}
+
+.modal-content h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
 }
 
 .modal-input {
   width: 100%;
   padding: 8px;
-  margin: 12px 0;
+  margin: 24px 0;
   font-size: 16px;
   text-align: center;
 }
@@ -422,4 +412,38 @@ app-search-bar {
 .modal-actions {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
+}
+
+.modal-actions button,
+.create-folder-btn {
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items:center ;
+  padding: 12px 24px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-create-folder-btn {
+  background: #AE1922;
+}
+
+.create-folder-btn {
+  background: #009887;
+  width: 100%;
+}
+
+.create-folder-btn:hover,
+.cancel-create-folder-btn:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+  transition: 0.3s;
 }
