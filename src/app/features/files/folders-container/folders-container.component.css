@@ -92,9 +92,8 @@ app-search-bar {
 }
 
 .folder-count {
-  background: #009887;
-  color: white;
-  padding: 12px 20px;
+  color: #009887;
+  padding: 12px 0px;
   border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
@@ -340,7 +339,7 @@ app-search-bar {
   }
   
   .actions-section {
-    flex-direction: column;
+    justify-content: space-between;
     align-items: end;
   }
   

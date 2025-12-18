@@ -1,5 +1,5 @@
-.persons-container{
-     padding: 50px;
+.persons-container {
+  padding: 50px;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
   border-radius: 20px;
@@ -21,23 +21,22 @@
 }
 
 .search-bar {
-    padding-left: 20px;
-    background-color:white;
+  padding-left: 20px;
+  background-color: white;
   border: none;
   display: flex;
   align-items: center;
   border-radius: 8px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.142),
-              inset 0 -1px 2px rgba(0, 0, 0, 0.142);
+    inset 0 -1px 2px rgba(0, 0, 0, 0.142);
   font-size: 14px;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
   outline: none;
-
 }
 
 .search-bar:focus-within {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.364),
-              inset 0 -1px 2px rgba(0, 0, 0, 0.364);
+    inset 0 -1px 2px rgba(0, 0, 0, 0.364);
 }
 
 .search-icon {
@@ -55,7 +54,7 @@
   padding: 14px 0;
   font-size: 14px;
   color: #000000;
-  background-color:transparent; 
+  background-color: transparent;
 }
 
 .search-input::placeholder {
@@ -84,12 +83,12 @@
 .actions-section {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
 }
 
-.archive-count {
-  background: #009887;
-  color: white;
+.persons-count {
+  color: #009887;
   padding: 12px 20px;
   border-radius: 10px;
   font-weight: 500;
@@ -99,24 +98,23 @@
   gap: 8px;
 }
 
-.archive-label {
+.persons-label {
   opacity: 0.9;
 }
 
-.archive-number {
+.persons-number {
   font-weight: 600;
 }
 
-.action-buttons{
-    width: 100%;
-    display: flex;
-    gap: 30px;
-    margin-bottom: 30px;
-    font-family: "Poppins", sans-serif;
+.action-buttons {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  font-family: "Poppins", sans-serif;
 }
 
-.action-buttons button{
-    background-color:#009887;
+.actions-section button {
+  background-color: #009887;
   color: white;
   border: none;
   border-radius: 10px;
@@ -131,10 +129,15 @@
   gap: 8px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
+  text-wrap: nowrap;
 }
 
-.action-buttons button:hover{
-    background-color:#016c60;
+.history-action-btn {
+  background-color: #656565;
+}
+
+.actions-section button:hover {
+  background-color: #016c60;
 }
 
 .content-section {
@@ -154,8 +157,8 @@
   background-color: rgba(211, 194, 180, 0.3);
 }
 
-.section-header:hover{
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
+.section-header:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
 }
 
 .toggle-icon {
@@ -176,7 +179,7 @@
   font-weight: 600;
 }
 
-.userinfo{
+.userinfo {
   display: flex;
   padding: 10px 25px;
   box-sizing: border-box;
@@ -187,13 +190,13 @@
   align-items: center;
 }
 
-.userinfo h4{
+.userinfo h4 {
   font-weight: 400;
   margin: 0;
 }
 
-.userinfo:hover{
-  background-color: #F2F2F2;
+.userinfo:hover {
+  background-color: #f2f2f2;
 }
 
 .user-actions {
@@ -202,7 +205,7 @@
   gap: 15px;
 }
 
-.user-img{
+.user-img {
   width: 40px;
   height: 40px;
   border: 1px solid #656565;
@@ -220,7 +223,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s ease;
-  color: #AE1922;
+  color: #ae1922;
   font-size: 18px;
 }
 
@@ -243,7 +246,9 @@
   font-size: 14px;
 }
 
-.Addmodal, .AddModal, .DeleteModal{
+.Addmodal,
+.AddModal,
+.DeleteModal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,7 +258,7 @@
   z-index: 300;
 }
 
-.modalbackground{
+.modalbackground {
   position: fixed;
   z-index: 100;
   width: 100vw;
@@ -263,7 +268,8 @@
   left: 0;
 }
 
-.Addcontainer, .DeleteContainer {
+.Addcontainer,
+.DeleteContainer {
   background-color: white;
   border-radius: 10px;
   position: fixed;
@@ -290,12 +296,13 @@
 }
 
 .DeleteContainer {
-    width: fit-content;
-   height: fit-content;
+  width: fit-content;
+  height: fit-content;
   justify-content: center;
 }
 
-.Addcontainer h4, .DeleteContainer h4{
+.Addcontainer h4,
+.DeleteContainer h4 {
   margin: 5px;
   padding: 0;
   font-size: 18px;
@@ -310,19 +317,20 @@
 }
 
 .warning-text {
-  color: #AE1922;
+  color: #ae1922;
   font-weight: 500;
   font-size: 12px;
 }
 
-.inputform{
+.inputform {
   display: flex;
   flex-direction: column;
   gap: 5px;
   width: 100%;
 }
 
-.inputform input, .department-select{
+.inputform input,
+.department-select {
   width: 100%;
   height: 45px;
   border-radius: 10px;
@@ -344,21 +352,21 @@
   box-shadow: 0 0 0 2px rgba(0, 152, 135, 0.2);
 }
 
-.datosPersonales{
+.datosPersonales {
   width: 100%;
   gap: 15px;
   display: flex;
   flex-direction: column;
 }
 
-.Optionsbuttons{
+.Optionsbuttons {
   width: 290px;
   height: 45px;
   display: flex;
   gap: 10px;
 }
 
-.Optionsbuttons button{
+.Optionsbuttons button {
   width: 100%;
   height: 45px;
   padding: 0;
@@ -371,39 +379,37 @@
   transition: background-color 0.2s ease;
 }
 
-.cancelButton{
-  background-color: #AE1922;
+.cancelButton {
+  background-color: #ae1922;
   border-bottom-left-radius: 40px;
   border-top-left-radius: 40px;
 }
 
-.cancelDeleteButton{
-  background-color: #009887;;
+.cancelDeleteButton {
+  background-color: #009887;
   border-bottom-left-radius: 40px;
   border-top-left-radius: 40px;
 }
 
-
-
-
-.Addbutton{
+.Addbutton {
   background-color: #009887;
   border-bottom-right-radius: 40px;
   border-top-right-radius: 40px;
 }
 
 .deleteButton {
-  background-color: #AE1922;
+  background-color: #ae1922;
   border-bottom-right-radius: 40px;
   border-top-right-radius: 40px;
 }
 
-.cancelButton:hover{
+.cancelButton:hover {
   background-color: #811119;
 }
 
-.Addbutton:hover, .cancelDeleteButton:hover{
-  background-color:#016c60;
+.Addbutton:hover,
+.cancelDeleteButton:hover {
+  background-color: #016c60;
 }
 
 .deleteButton:hover {
@@ -426,7 +432,12 @@
     max-height: 80vh;
     overflow-y: auto;
   }
-  
+
+  .actions-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -436,16 +447,40 @@
     max-height: 80vh;
     overflow-y: auto;
   }
-  
+
   .DeleteContainer {
     width: 85%;
   }
-  .Optionsbuttons{
-  width: 100%;
+  .Optionsbuttons {
+    width: 100%;
+  }
+
+  .convert-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .actions-section {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: auto;
+  }
+
+  .actions-section button {
+    width: auto;
+  }
+
+  .actions-section button:not(.history-action-btn) {
+    width: 100%;
+  }
+
+  .persons-count {
+    padding: 12px 0px;
+  }
 }
 
-.convert-header {
-  flex-direction: column;
-  align-items: end;
-}
+@media (max-width: 412px) {
+  .actions-section button {
+    width: 100%;
+  }
 }
