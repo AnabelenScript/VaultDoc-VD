@@ -24,17 +24,31 @@
   <input type="text" [(ngModel)]="folio"  (keypress)="validateNumber($event)" maxlength="3">
 </div>
 
-<button class="selection-button" (click)="triggerFileInput(fileInput)">
-  {{ selectedFile?.name || 'Selecciona las imágenes que deseas agregar' }}<br> <i class='bx bxs-plus-square'></i>
-</button>
-<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"/>
+          <button
+            class="selection-button"
+            (click)="triggerFileInput(fileInput)"
+          >
+            {{
+              selectedFile?.name ||
+                "Selecciona las imágenes que deseas agregar"
+            }}<br />
+            <i class="bx bxs-plus-square"></i>
+          </button>
+          <input
+            type="file"
+            #fileInput
+            style="display: none"
+            (change)="onFileSelected($event)"
+          />
 
-<div class="generate-button-container">
-  <button class="generate-button" (click)="checkNewFolio()">Subir archivo</button>
-</div>
-</div>
+          <div class="generate-button-container">
+            <button class="generate-button" (click)="checkNewFolio()">
+              Subir archivo
+            </button>
+          </div>
+        </div>
       </div>
-       </ng-container>
+    </ng-container>
 
          <div class="content-section">
     <div class="section-header" (click)="toggleRecentFiles()">
@@ -66,16 +80,16 @@
             </td>
             <td>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="load-more-container">
-        <button class="load-more-btn" (click)="loadMoreFiles()">
-          <i class="load-more-icon">▼</i>
-        </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="load-more-container">
+          <button class="load-more-btn" (click)="loadMoreFiles()">
+            <i class="load-more-icon">▼</i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

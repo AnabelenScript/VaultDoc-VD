@@ -75,6 +75,7 @@ app-search-bar {
 }
 
 .archive-count {
+  width: fit-content;
   background: #009887;
   color: white;
   padding: 12px 20px;
@@ -142,7 +143,7 @@ app-search-bar {
 }
 
 .toggle-icon.rotated {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 
 .section-header h3 {
@@ -304,7 +305,11 @@ app-search-bar {
 }
 @media (max-width: 768px) {
   .dashboard-container {
-    padding: 16px;
+    position: relative;
+    width: 95vw;
+    box-sizing: border-box;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .dashboard-header {
@@ -318,7 +323,7 @@ app-search-bar {
   
   .actions-section {
     flex-direction: column;
-    align-items: stretch;
+    align-items: end;
   }
   
   .archive-count,

@@ -126,21 +126,6 @@
   align-items: end;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    width: 60px;
-  }
-  
-  .navbar.expanded {
-    width: 200px;
-  }
-  
-  .profile-image {
-    width: 40px;
-    height: 40px;
-  }
-}
-
 .icon-placeholder {
   display: inline-block;
   width: 20px;
@@ -177,20 +162,28 @@
   height: 100px;
 }
 
-@media (max-height: 670px) {
+@media (max-width: 768px) {
   .navbar {
-    padding: 10px 5px;
+    position: fixed;
+    padding: 45px 5px;
+    height: 95dvh;
+  }
+
+  .profile-section {
+    width: 50%;
+    height: auto;
   }
 
   .profile-image {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 15px;
-    margin-top: 15px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    padding: 0%;
+    border: none;
   }
 
   .usericon {
-    width: 48px;
+    width: 100%;
   }
 
   .menu-item {
@@ -228,13 +221,17 @@
     height: 40px;
   }
 
+  .navbar.expanded {
+    width: 265px;
+  }
+
   .navbar.expanded .logo-image {
-    width: 70px;
+    width: auto;
     height: 70px;
   }
     .navbar.expanded .menu-item{
     width: 100%;
-    padding-left: 35px;
+    padding-left: 16px;
     
   }
 }

@@ -91,10 +91,9 @@ app-search-bar {
   gap: 16px;
 }
 
-.archive-count {
-  background: #009887;
-  color: white;
-  padding: 12px 20px;
+.folder-count {
+  color: #009887;
+  padding: 12px 0px;
   border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
@@ -103,11 +102,11 @@ app-search-bar {
   gap: 8px;
 }
 
-.archive-label {
+.folder-label {
   opacity: 0.9;
 }
 
-.archive-number {
+.folder-number {
   font-weight: 600;
 }
 
@@ -327,7 +326,7 @@ app-search-bar {
 }
 @media (max-width: 768px) {
   .dashboard-container {
-    padding: 16px;
+    padding: 50px;
   }
   
   .dashboard-header {
@@ -340,13 +339,14 @@ app-search-bar {
   }
   
   .actions-section {
-    flex-direction: column;
-    align-items: stretch;
+    justify-content: space-between;
+    align-items: end;
   }
   
-  .archive-count,
+  .folder-count,
   .create-folder-btn {
     text-align: center;
+    width: fit-content;
   }
   
   .folders-grid {

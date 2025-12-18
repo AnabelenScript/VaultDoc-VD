@@ -5,9 +5,9 @@
     <app-search-bar></app-search-bar>
 
     <div class="actions-section">
-      <div class="archive-count">
-        <span class="archive-label">Carpetas:</span>
-        <span class="archive-number">{{ countFolders() }}</span>
+      <div class="folder-count">
+        <span class="folder-label">Carpetas:</span>
+        <span class="folder-number">{{ countFolders() }}</span>
       </div>
       
       <button class="create-folder-btn" (click)="toggleCreateModal()" *ngIf="getIDRol() == 2">
