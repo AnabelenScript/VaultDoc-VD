@@ -362,7 +362,6 @@
 
 .Optionsbuttons {
   width: 100%;
-  min-width: 290px;
   height: 45px;
   display: flex;
   gap: 10px;
@@ -428,7 +427,7 @@
   .Addcontainer {
     width: 50%;
     height: auto;
-    max-height: 80vh;
+    max-height: 90vh;
     overflow-y: auto;
   }
 
@@ -481,5 +480,15 @@
 @media (max-width: 450px) {
   .actions-section button {
     width: 100%;
+  }
+
+  .Optionsbuttons {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+
+  .Optionsbuttons button {
+    width: 100%;
+    min-height: 45px;
   }
 }

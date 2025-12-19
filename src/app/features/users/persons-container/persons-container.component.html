@@ -23,7 +23,7 @@
             Historial de acciones
           </button>
           <button (click)="toggleAddModal()">
-            Agregar jefe de departamento
+            Agregar usuario
           </button>
     </div>
   </div>
@@ -86,9 +86,7 @@
   <div class="AddModal" *ngIf="showAddModal">
     <div class="modalbackground" (click)="toggleAddModal()"></div>
     <div class="Addcontainer">
-      <h4>
-        {{ currentUser?.roleId === 2 ? "Agregar trabajador" : "Agregar jefe" }}
-      </h4>
+      <h4>Agregar usuario</h4>
 
       <div class="inputform">
         <label for="nombre">Nombre</label>
@@ -111,6 +109,19 @@
       </div>
 
       <div class="inputform">
+        <label for="role">Tipo de usuario</label>
+        <select
+          id="role"
+          [(ngModel)]="newUser.roleId"
+          class="department-select"
+        >
+          <option selected value="0" disabled>Seleccionar tipo de usuario</option>
+          <option value="2">Jefe de departamento</option>
+          <option value="1">Empleado</option>
+        </select>
+      </div>
+
+      <div class="inputform">
         <label for="department">Departamento</label>
         <ng-container *ngIf="currentUser?.roleId === 2; else deptSelect">
           <input
@@ -127,7 +138,7 @@
             [(ngModel)]="newUser.department"
             class="department-select"
           >
-            <option value="">Seleccionar departamento</option>
+            <option value="" disabled>Seleccionar departamento</option>
             <option *ngFor="let dept of departments" [value]="dept">
               {{ dept }}
             </option>

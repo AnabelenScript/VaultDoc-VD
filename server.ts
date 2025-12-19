@@ -17,8 +17,37 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
+  // Configurar para aceptar solicitudes del túnel de Cloudflare
+  server.set('trust proxy', true);
+
+  // Middleware para validar hosts permitidos
+  server.use((req, res, next) => {
+    const host = req.get('host');
+    const allowedHosts = [
+      'localhost:4000',
+      'localhost:4200',
+      '.trycloudflare.com' // Permite todos los subdominios de trycloudflare.com
+    ];
+
+    const isAllowed = allowedHosts.some(allowedHost => {
+      if (allowedHost.startsWith('.')) {
+        // Para dominios con wildcard como .trycloudflare.com
+        return host?.endsWith(allowedHost.substring(1));
+      }
+      return host === allowedHost;
+    });
+
+    if (!isAllowed) {
+      res.status(403).send(`Host "${host}" is not allowed`);
+      return; // Importante: return después de res.send()
+    }
+
+    next();
+  });
+
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
+
   // Serve static files from /browser
   server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',

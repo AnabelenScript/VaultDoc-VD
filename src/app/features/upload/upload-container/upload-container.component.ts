@@ -13,7 +13,7 @@ import { FileData } from '../../../core/services/files/files_model';
 })
 export class UploadContainerComponent implements OnInit {
   folders: FolderData[] = [];
-  selectedFolderId: number = 0;
+  selectedFolderId: number|null = null;
   folio: string = '';
   selectedFile: File | null = null;
   archiveCount = 178;
