@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../core/services/user/user_service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-persons-container',
@@ -31,7 +32,8 @@ export class PersonsContainerComponent implements OnInit {
     password: '',
     department: '',
     nombre: '',
-    apellidos: ''
+    apellidos: '',
+    roleId: 0
   };
 
   constructor(private profileService: ProfileService) {
@@ -126,13 +128,13 @@ export class PersonsContainerComponent implements OnInit {
       password: '',
       department: '',
       nombre: '',
-      apellidos: ''
+      apellidos: '',
+      roleId: 0
     };
   }
 
   addUser() {
     if (this.validateForm()) {
-      const assignedRoleId = this.currentUser?.roleId === 2 ? 1 : 2;
 
       const userData = {
         email: this.newUser.email,
@@ -140,8 +142,10 @@ export class PersonsContainerComponent implements OnInit {
         departamento: this.newUser.department,
         nombre: this.newUser.nombre,
         apellidos: this.newUser.apellidos,
-        roleId: assignedRoleId
+        roleId: this.newUser.roleId
       };
+
+      console.log('Datos del nuevo usuario:', userData);
 
       this.profileService.postUser(userData).subscribe({
         next: (response) => {

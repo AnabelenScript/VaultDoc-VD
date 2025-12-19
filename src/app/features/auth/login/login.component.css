@@ -28,6 +28,9 @@
 .logosGOB{
     width: 430px;
 }
+.logosGOBhor {
+  display: none;
+}
 
 .LoginInfo h1{
     width: 100%;
@@ -114,15 +117,47 @@ button{
     width: 60vw;
   }
 
-  .logosGOB {
-    display: none;
-  }
-
   .LoginInfo h1 {
     font-size: 38px;
   }
 
   .loginForm {
     gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .LoginInfoContainer {
+    height: 100%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .LoginInfo {
+    width: 80vw;
+    height: 55%;
+    top: auto;
+  }
+
+  .logosGOB {
+    left: 0%;
+    display: none;
+  }
+
+  .logosGOBhor {
+    display: block;
+    width: 80%;
+  }
+
+  .LoginInfo h1 {
+    font-size: 32px;
+  }
+
+  .loginForm {
+    padding: 0px 30px;
+    gap: 15px;
   }
 }

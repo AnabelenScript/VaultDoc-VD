@@ -35,17 +35,17 @@
 <ng-container *ngIf="showRecentFiles">
   <div class="datosPersonalesContainer">
     <div class="data1">
-      <div class="inputform">
+      <div class="inputform name">
         <label>Nombre(s)</label>
         <input type="text" [(ngModel)]="profileData.nombre" [disabled]="!editMode">
       </div>
-      <div class="inputform">
+      <div class="inputform lastname">
         <label>Apellido(s)</label>
         <input type="text" [(ngModel)]="profileData.apellidos" [disabled]="!editMode">
       </div>
     </div>
 
-    <div class="data1">
+    <div class="data2">
       <div class="inputform">
         <label>Correo electrónico</label>
         <input type="email" [(ngModel)]="profileData.email" [disabled]="!editMode">
