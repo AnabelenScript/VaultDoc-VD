@@ -1,0 +1,18 @@
+<div class="main">
+  <button class="menu-toggle" *ngIf="!isNavbarVisible" (click)="toggleNavbar()">☰</button>
+
+  <div class="overlay" *ngIf="isOverlayActive" (click)="closeNavbar()"></div>
+
+  <div class="navbar-main-container" *ngIf="isNavbarVisible">
+    <app-navbar
+      [forceExpanded]="isMobileView && isNavbarVisible"
+      (expandedChange)="onNavbarExpandedChange($event)">
+    </app-navbar>
+  <button class="menu-toggle-expanded" *ngIf="isNavbarVisible" (click)="closeNavbar()">×</button>
+
+  </div>
+
+  <div class="main-layout" [class.expanded]="isNavbarExpanded">
+    <router-outlet></router-outlet>
+  </div>
+</div>

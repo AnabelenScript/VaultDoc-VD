@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    background-image: url('assets/Fondo_Claro.png');
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    background-position: top center;
+    scrollbar-width: none;
+    overflow-x: hidden;
+}
+
+* input:-webkit-autofill {
+    background: white !important;
+    box-shadow: 0 0 0px 1000px white inset !important
+}

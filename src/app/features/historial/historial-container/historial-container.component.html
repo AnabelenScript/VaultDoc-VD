@@ -1,0 +1,44 @@
+<div class="historial-container">
+  <div class="convert-header">
+    <div class="search-section">
+      <div class="search-bar">
+        <i class="search-icon"><i class='bx bx-search-alt-2'></i></i>
+        <input 
+          type="text" 
+          placeholder="Buscar" 
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+          class="search-input">
+        <button class="filter-button" type="button"></button>
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <div class="archive-count">
+        <span class="archive-label">Personas:</span>
+        <span class="archive-number">{{ archiveCount }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="historial-list">
+    <div *ngFor="let entry of historial" class="historial-card">
+      <div class="historial-row">
+        <span class="label">📄 Archivo:</span>
+        <span class="value">{{ "n" }}</span>
+      </div>
+      <div class="historial-row">
+        <span class="label">🔧 Acción:</span>
+        <span class="value">{{ "n" }}</span>
+      </div>
+      <div class="historial-row">
+        <span class="label">🕒 Fecha:</span>
+        <span class="value">{{ "n"  }}</span>
+      </div>
+      <div class="historial-row">
+        <span class="label">👤 Usuario:</span>
+        <span class="value">{{ "n"  }}</span>
+      </div>
+      <div class="historial-divider"></div>
+    </div>
+  </div>
+</div>

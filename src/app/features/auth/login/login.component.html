@@ -1,0 +1,20 @@
+<div class="LoginInfoContainer">
+  <img src="assets/logosGOB.svg" alt="" class="logosGOB">
+  <img src="assets/logosGOBhor.svg" alt="logo" class="logosGOBhor">
+  <div class="LoginInfo">
+    <h1>Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="loginForm">
+      <div class="inputform">
+        <label>Correo electrónico</label>
+        <input type="email" formControlName="email">
+      </div>
+      <div class="inputform">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password">
+      </div>
+      <button class="loginbutton" type="submit">
+        Continuar
+      </button>
+    </form>
+  </div>
+</div>
