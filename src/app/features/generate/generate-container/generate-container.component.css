@@ -1,5 +1,5 @@
 .generate-container{
-     padding: 50px;
+  padding: 50px;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.284);
   border-radius: 20px;
@@ -300,3 +300,9 @@
      background-color:#016c60;
      cursor: pointer;
 }
+
+@media (max-width: 480px) {
+  .generate-container {
+    padding: 24px;
+  }
+} 

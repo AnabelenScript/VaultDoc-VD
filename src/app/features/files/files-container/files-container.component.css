@@ -87,8 +87,7 @@
 }
 
 .archive-count {
-  background: #009887;
-  color: white;
+  color: #009887;
   padding: 12px 20px;
   border-radius: 10px;
   font-weight: 500;
@@ -321,7 +320,7 @@
 }
 @media (max-width: 768px) {
   .dashboard-container {
-    padding: 16px;
+    padding: 50px;
   }
   
   .dashboard-header {
@@ -331,6 +330,10 @@
   
   .search-section {
     max-width: none;
+  }
+
+  .archive-count {
+    padding: 0px 20px;
   }
   
   .actions-section {
@@ -354,7 +357,7 @@
   }
   
   .section-header {
-    padding: 16px;
+    padding: 0px 16px 16px 16px;
   }
 
 
@@ -383,6 +386,7 @@
     border-radius: 8px;
     background: #f9f9f9;
     cursor: pointer;
+    box-sizing: border-box;
   }
 
   .files-table td {
@@ -423,6 +427,10 @@
 }
 
 @media (max-width: 480px) {
+  .dashboard-container {
+    padding: 24px;
+  }
+  
   .files-table {
     font-size: 12px;
   }

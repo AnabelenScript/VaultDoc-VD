@@ -477,7 +477,11 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+  .persons-container {
+    padding: 24px;
+  }
+
   .actions-section button {
     width: 100%;
   }
