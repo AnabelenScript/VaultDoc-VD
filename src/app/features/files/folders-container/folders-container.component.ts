@@ -183,4 +183,8 @@ export class FoldersContainerComponent implements OnInit {
   addRecentFolder(folder: FolderData){
     this.recentElementService.setRecentFolder(folder);
   }
+
+  goToHistorial(){
+    this.router.navigate(['/historial']);
+  }
 }

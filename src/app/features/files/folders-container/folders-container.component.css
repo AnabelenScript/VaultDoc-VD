@@ -317,8 +317,13 @@ app-search-bar {
   }
   
   .actions-section {
-    justify-content: space-between;
-    align-items: end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .actions-section > :nth-child(3){
+    grid-column: 1 / -1;
   }
   
   .folder-count,
@@ -438,6 +443,7 @@ app-search-bar {
   box-sizing: border-box;
   border-radius: 10px;
   font-weight: 500;
+  text-wrap: nowrap;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;

@@ -7,8 +7,8 @@ export interface HistoryEntry {
   Movimiento: string;
   Fecha_registro: string;
   Id_file: { nombre: string } | null;
-  Id_user: { nombre: string };
-  Id_folder: { nombre: string };
+  Id_user: { nombre: string, apellidos: string };
+  Id_folder: { name: string };
 }
 
 @Injectable({ providedIn: 'root' })
