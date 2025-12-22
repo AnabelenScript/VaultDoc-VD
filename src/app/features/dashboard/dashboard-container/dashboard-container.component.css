@@ -210,7 +210,6 @@ app-search-bar {
 .file-row {
   cursor: pointer;
   transition: background 0.2s ease;
-  border-bottom: #656565 1px solid;
   box-sizing: border-box;
 }
 
@@ -380,7 +379,6 @@ app-file-options button:hover {
     box-sizing: border-box;
     left: 50%;
     transform: translateX(-50%);
-    padding: 20px;
   }
   
   .dashboard-header {

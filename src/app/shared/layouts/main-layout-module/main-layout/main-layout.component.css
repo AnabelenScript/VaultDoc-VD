@@ -42,7 +42,7 @@
 }
 
 .navbar-main-container:hover{
-  width: 265px;
+  width: 345px;
 }
 
 .overlay {
@@ -60,6 +60,7 @@
   padding: 35px;
   box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
   gap: 40px;
 }
 
