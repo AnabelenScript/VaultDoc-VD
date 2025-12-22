@@ -20,25 +20,30 @@
       </div>
     </div>
   </div>
-  <div class="historial-list">
-    <div *ngFor="let entry of historial" class="historial-card">
-      <div class="historial-row">
-        <span class="label">📄 Archivo:</span>
-        <span class="value">{{ "n" }}</span>
-      </div>
-      <div class="historial-row">
-        <span class="label">🔧 Acción:</span>
-        <span class="value">{{ "n" }}</span>
-      </div>
-      <div class="historial-row">
-        <span class="label">🕒 Fecha:</span>
-        <span class="value">{{ "n"  }}</span>
-      </div>
-      <div class="historial-row">
-        <span class="label">👤 Usuario:</span>
-        <span class="value">{{ "n"  }}</span>
-      </div>
-      <div class="historial-divider"></div>
-    </div>
+  
+  <div class="actions-table-container">
+    <table class="actions-table">
+      <thead>
+        <tr>
+          <th>Nombre del archivo</th>
+          <th>Hora</th>
+          <th>Tipo de acción</th>
+          <th>Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let action of historial" class="action-row">
+          <td class="action-item">{{ action.Id_file?.nombre }}</td>
+          <td class="action-timestamp">{{ action.Fecha_registro| date : "dd/MM/yyyy HH:mm" }}</td>
+          <td class="action-type">{{ action.Movimiento }}</td>
+          <td class="action-user">
+            {{ (action.Id_user.nombre ? action.Id_user.nombre : "") 
+                + " " + 
+                (action.Id_user.apellidos ? action.Id_user.apellidos : "") }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  
 </div>
