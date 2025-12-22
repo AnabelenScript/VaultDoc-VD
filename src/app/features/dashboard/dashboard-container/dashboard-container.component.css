@@ -158,11 +158,11 @@ app-search-bar {
 }
 
 .folder-item {
-  width: 100%;
+  width: 200px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px;
+  padding: 16px 28px 16px 24px;
   background-color: white;
   border-radius: 12px;
   cursor: pointer;
@@ -403,8 +403,10 @@ app-file-options button:hover {
   }
   
   .folders-grid {
-    grid-template-columns: 1fr;
-    padding: 0 16px 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    padding: 0 0px 16px;
   }
   
   .section-header {
@@ -413,6 +415,7 @@ app-file-options button:hover {
 
   .folder-item {
     padding: 12px;
+    width: auto;
   }
 
   .files-table thead {
