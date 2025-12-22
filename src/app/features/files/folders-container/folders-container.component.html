@@ -14,7 +14,7 @@
         Crear carpeta
       </button>
 
-      <button class="create-folder-btn" (click)="goToHistorial()">
+      <button class="create-folder-btn" (click)="goToHistorial()" *ngIf="getIDRol() == 2">
         Historial de acciones
       </button>
     </div>
