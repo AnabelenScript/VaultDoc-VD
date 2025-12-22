@@ -317,7 +317,7 @@
 }
 @media (max-width: 768px) {
   .dashboard-container {
-    padding: 16px;
+    padding: 50px
   }
   
   .dashboard-header {
@@ -355,6 +355,10 @@
 }
 
 @media (max-width: 480px) {
+  .dashboard-container {
+    padding: 24px;
+  }
+
   .files-table {
     font-size: 12px;
   }

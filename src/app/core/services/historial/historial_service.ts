@@ -20,4 +20,4 @@ export class HistorialService {
   getHistoryByDepartment(department: string): Observable<HistoryEntry[]> {
     return this.http.get<HistoryEntry[]>(`${this.apiUrl}${encodeURIComponent(department)}`);
   }
-}
+} 

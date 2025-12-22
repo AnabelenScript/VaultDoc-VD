@@ -140,3 +140,8 @@
   margin-top: 8px;
 }
 
+@media (max-width: 480px) {
+  .historial-container {
+    padding: 24px;
+  }
+} 

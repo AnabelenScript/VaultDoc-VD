@@ -164,9 +164,14 @@ export class FilesContainerComponent implements OnInit {
   }
 
   getIDUser(): number {
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  return user?.id || 0;
-}
+    let string_user: string | null = localStorage.getItem('user_data');
+    if (string_user != null){
+      const user = JSON.parse(string_user);
+      return user.userId;
+    } else {
+      return 0;
+    }
+  }
 
 
   selectButton(event: KeyboardEvent) {

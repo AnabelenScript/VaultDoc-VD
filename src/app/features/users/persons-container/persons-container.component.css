@@ -120,7 +120,7 @@
   border-radius: 10px;
   padding: 12px 20px;
   font-size: 14px;
-  width: 100%;
+  width: auto;
   align-items: center;
   justify-content: center;
   font-weight: 600;
@@ -459,7 +459,6 @@
   }
 
   .actions-section {
-    width: 100%;
     flex-wrap: wrap;
     gap: auto;
   }
@@ -467,17 +466,17 @@
   .actions-section button {
     width: auto;
   }
-
-  .actions-section button:not(.history-action-btn) {
-    width: 100%;
-  }
-
+  
   .persons-count {
     padding: 12px 0px;
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+  .persons-container {
+    padding: 24px;
+  }
+
   .actions-section button {
     width: 100%;
   }

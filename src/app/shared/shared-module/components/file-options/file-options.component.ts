@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { FileServices } from '../../../../core/services/files/files_service';
-import { error } from 'console';
+import { error, log } from 'console';
 import { PermissionService } from '../../../../core/services/permissions/permissions_services';
 import { UserData } from '../../../../core/services/auth/auth_model';
 
@@ -25,8 +25,12 @@ export class FileOptionsComponent {
   constructor(private fileService: FileServices, private permissionService: PermissionService){  }
 
   downloadFile(){
+    console.log("User", this.idUser, "ID", this.idFile, "Nombre archivo", this.filename);
+    
     if (this.idUser && this.idFile && this.filename) {
       this.fileService.downloadFile(this.idFile, this.idUser, this.filename);
+      console.log("Descargando...");
+      
     }
   }
 
