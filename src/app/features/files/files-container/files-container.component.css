@@ -370,8 +370,7 @@
   }
 
   .files-table,
-  .files-table tbody,
-  .files-table tr {
+  .files-table tbody {
     display: block;
     width: 100%;
   }

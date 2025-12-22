@@ -36,10 +36,18 @@
           <td class="action-item">{{ action.Id_file?.nombre }}</td>
           <td class="action-date">{{ action.Fecha_registro| date : "dd/MM/yyyy HH:mm" }}</td>
           <td class="action-type">{{ action.Movimiento }}</td>
+          <td class="action-date-and-type">
+            {{ action.Movimiento }} 
+            <br>
+            {{(action.Fecha_registro| date : "dd/MM/yyyy") + " a las " + (action.Fecha_registro| date : "HH:mm")}}
+          </td>
           <td class="action-user">
-            {{ (action.Id_user.nombre ? action.Id_user.nombre : "") 
-                + " " + 
-                (action.Id_user.apellidos ? action.Id_user.apellidos : "") }}
+            <span>
+              {{ (action.Id_user.nombre ? action.Id_user.nombre : "") 
+                  + " " + 
+                  (action.Id_user.apellidos ? action.Id_user.apellidos : "") }}
+            </span>
+            <img src="assets/user.png" class="user-photo" >
           </td>
         </tr>
       </tbody>
