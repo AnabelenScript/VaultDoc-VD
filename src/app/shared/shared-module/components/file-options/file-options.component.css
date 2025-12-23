@@ -172,8 +172,8 @@
   left: 0;
 }
 
-.Addcontainer,
 .DeleteContainer {
+  max-width: 500px;
   background-color: white;
   border-radius: 10px;
   position: fixed;

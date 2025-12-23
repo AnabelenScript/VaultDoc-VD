@@ -9,6 +9,7 @@ import { FileServices } from "../../../../core/services/files/files_service";
 import { error, log } from "console";
 import { PermissionService } from "../../../../core/services/permissions/permissions_services";
 import { UserData } from "../../../../core/services/auth/auth_model";
+import { AlertService } from "../../../../core/services/alerts/alerts";
 
 @Component({
   selector: "app-file-options",
@@ -32,7 +33,8 @@ export class FileOptionsComponent {
 
   constructor(
     private fileService: FileServices,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private alertService: AlertService
   ) {}
 
   downloadFile() {
@@ -74,8 +76,14 @@ export class FileOptionsComponent {
             id_user: idUser!,
             fecha_registro: new Date().toISOString(),
           };
+
+          this.alertService.success("Archivo eliminado correctamente.");
+          this.closeDeleteModal();
         },
-        (error) => console.log("Error:", error)
+        (error) => {
+          console.log("Error:", error)
+          this.alertService.error("Error al eliminar el archivo.");
+        }
       );
     }
   }

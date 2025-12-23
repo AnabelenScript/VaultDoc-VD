@@ -130,8 +130,7 @@
 /* Content Sections */
 .content-section {
   border-radius: 16px;
-  margin-bottom: 24px;
-  overflow: hidden;
+  margin-bottom: 24px; 
 }
 
 .section-header {
