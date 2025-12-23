@@ -1,23 +1,51 @@
 <div class="options-menu" (click)="$event.stopPropagation()">
-    <button (click)="downloadFile()"><i class="fa-solid fa-download"></i></button>
-    <button (click)="deleteFile(idUser, idFile)"><i class='bx  bx-trash'  ></i> </button>
-    <button *ngIf="getIDRol() === 2" (click)="showModal()"><i class="fa-solid fa-share-nodes"></i></button>
-    <div class="modal" *ngIf="showShareModal" (click)="closeModal()">
-        <div class="modal-content" (click)="$event.stopPropagation()">
-          <div class="modal-actions">
-            <div>
-              <div>
-                <h4>Usuarios sin permiso</h4>
-                <div *ngFor="let user_wp of usersWhitoutChangePermission" (click)="giveChangePermission(user_wp.id)">
-                  <p>{{ user_wp.nombre + " " + user_wp.apellidos }}</p>
-                </div>
-                <h4>Usuarios con permiso</h4>
-                <div *ngFor="let user_p of usersWhitChangePermission" (click)="revokeChangePermission(user_p.id)">
-                  <p>{{ user_p.nombre + " " + user_p.apellidos }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+  <button (click)="downloadFile()"><i class="fa-solid fa-download"></i></button>
+  <button (click)="openDeleteModal()">
+    <i class="bx bx-trash"></i>
+  </button>
+  <button *ngIf="getIDRol() === 2" (click)="showModal()">
+    <i class="fa-solid fa-share-nodes"></i>
+  </button>
+  <div class="modal" *ngIf="showShareModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-actions">
+        <h4>Usuarios sin permiso</h4>
+        <div
+          *ngFor="let user_wp of usersWhitoutChangePermission"
+          (click)="giveChangePermission(user_wp.id)"
+        >
+          <p>{{ user_wp.nombre + " " + user_wp.apellidos }}</p>
+        </div>
+        <h4>Usuarios con permiso</h4>
+        <div
+          *ngFor="let user_p of usersWhitChangePermission"
+          (click)="revokeChangePermission(user_p.id)"
+        >
+          <p>{{ user_p.nombre + " " + user_p.apellidos }}</p>
         </div>
       </div>
+    </div>
+  </div>
+
+   <div class="DeleteModal" *ngIf="showDeleteModal">
+    <div class="modalbackground" (click)="closeDeleteModal()"></div>
+    <div class="DeleteContainer">
+      <h4>Confirmar eliminación</h4>
+      <p>
+        ¿Está seguro de que desea eliminar el archivo:
+        <strong>{{ filename }}</strong
+        >?
+      </p>
+      <p class="warning-text">Esta acción no se puede deshacer.</p>
+
+      <div class="Optionsbuttons">
+        <button class="cancelDeleteButton" (click)="closeDeleteModal()">
+          Cancelar
+        </button>
+        <button class="deleteButton" (click)="deleteFile(idUser, idFile)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -297,6 +297,7 @@
 
 .DeleteContainer {
   width: fit-content;
+  max-width: 500px;
   height: fit-content;
   justify-content: center;
 }

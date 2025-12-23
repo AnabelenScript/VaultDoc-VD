@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ProfileService } from "../../../core/services/user/user_service";
+import { AlertService } from "../../../core/services/alerts/alerts";
 import { log } from "console";
 
 @Component({
@@ -43,7 +44,10 @@ export class PersonsContainerComponent implements OnInit {
     roleId: 0,
   };
 
-  constructor(private profileService: ProfileService) {
+  constructor(
+    private profileService: ProfileService,
+    private alertService: AlertService
+  ) {
     this.departments.forEach((dept) => {
       this.departmentVisibility[dept] = true;
     });
@@ -202,6 +206,7 @@ export class PersonsContainerComponent implements OnInit {
       this.profileService.deleteUserById(this.userToDelete.id).subscribe({
         next: (response) => {
           console.log("Usuario eliminado exitosamente:", response);
+          this.alertService.success("Usuario eliminado correctamente.");
           this.closeDeleteModal();
 
           if (this.currentUser?.roleId === 3) {
