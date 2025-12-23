@@ -16,7 +16,8 @@
   transition: width 0.1s ease-in-out;
 }
 .navbar.expanded {
-  width: 220px;
+  position: absolute;
+  width: 265px;
 }
 
 .profile-image {
@@ -221,9 +222,6 @@
     height: 40px;
   }
 
-  .navbar.expanded {
-    width: 265px;
-  }
 
   .navbar.expanded .logo-image {
     width: auto;
