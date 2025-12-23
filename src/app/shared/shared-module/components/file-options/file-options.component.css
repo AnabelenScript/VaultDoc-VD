@@ -264,3 +264,9 @@
   background-color: #811119;
 }
 
+
+@media (max-width: 768px) {
+  .DeleteContainer {
+    width: 85vw;
+  }
+}
