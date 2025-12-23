@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface HistoryEntry {
-  Movimiento: string;
-  Fecha_registro: string;
-  Id_file: { nombre: string } | null;
-  Id_user: { nombre: string, apellidos: string };
-  Id_folder: { name: string };
+  movimiento: string;
+  fecha_registro: string;
+  file: { nombre: string } | null;
+  user: { nombre: string, apellidos: string };
+  folder: { name: string };
 }
 
 @Injectable({ providedIn: 'root' })

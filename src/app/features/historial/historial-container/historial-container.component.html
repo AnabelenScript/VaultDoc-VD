@@ -33,19 +33,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let action of historial" class="action-row">
-          <td class="action-item">{{ action.Id_file?.nombre }}</td>
-          <td class="action-date">{{ action.Fecha_registro| date : "dd/MM/yyyy HH:mm" }}</td>
-          <td class="action-type">{{ action.Movimiento }}</td>
+          <td class="action-item">{{ action.file?.nombre }}</td>
+          <td class="action-date">{{ action.fecha_registro| date : "dd/MM/yyyy HH:mm" }}</td>
+          <td class="action-type">{{ action.movimiento }}</td>
           <td class="action-date-and-type">
-            {{ action.Movimiento }} 
+            {{ action.movimiento }} 
             <br>
-            {{(action.Fecha_registro| date : "dd/MM/yyyy") + " a las " + (action.Fecha_registro| date : "HH:mm")}}
+            {{(action.fecha_registro| date : "dd/MM/yyyy") + " a las " + (action.fecha_registro| date : "HH:mm")}}
           </td>
           <td class="action-user">
             <span>
-              {{ (action.Id_user.nombre ? action.Id_user.nombre : "") 
+              {{ (action.user.nombre ? action.user.nombre : "") 
                   + " " + 
-                  (action.Id_user.apellidos ? action.Id_user.apellidos : "") }}
+                  (action.user.apellidos ? action.user.apellidos : "") }}
             </span>
             <img src="assets/user.png" class="user-photo" >
           </td>
