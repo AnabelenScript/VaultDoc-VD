@@ -3,7 +3,7 @@
 
   <div class="overlay" *ngIf="isOverlayActive" (click)="closeNavbar()"></div>
 
-  <div class="navbar-main-container" *ngIf="isNavbarVisible">
+  <div class="navbar-main-container" [ngClass]="{'mobile': isOverlayActive}" *ngIf="isNavbarVisible">
     <app-navbar
       [forceExpanded]="isMobileView && isNavbarVisible"
       (expandedChange)="onNavbarExpandedChange($event)">

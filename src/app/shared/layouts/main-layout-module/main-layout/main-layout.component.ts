@@ -46,6 +46,6 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onNavbarExpandedChange(expanded: boolean) {
-    this.isNavbarExpanded = true; 
+    this.isNavbarExpanded = expanded; 
   }
 }
