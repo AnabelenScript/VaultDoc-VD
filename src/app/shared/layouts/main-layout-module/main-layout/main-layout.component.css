@@ -45,6 +45,10 @@
   width: 345px;
 }
 
+.navbar-main-container.mobile:hover {
+  width: 265px;
+}
+
 .overlay {
   position: fixed;
   top: 0;
