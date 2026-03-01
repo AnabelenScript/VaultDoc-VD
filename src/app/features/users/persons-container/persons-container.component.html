@@ -19,12 +19,9 @@
         <span class="persons-label">Personas:</span>
         <span class="persons-number">{{ archiveCount }}</span>
       </div>
-          <button class="history-action-btn">
-            Historial de acciones
-          </button>
-          <button (click)="toggleAddModal()">
-            Agregar usuario
-          </button>
+      <button (click)="toggleAddModal()" *ngIf="isAdmin()">
+        Agregar usuario
+      </button>
     </div>
   </div>
 
@@ -64,7 +61,7 @@
                   : user.email
               }}
             </h4>
-            <div class="user-actions">
+            <div class="user-actions" *ngIf="isAdmin()">
               <button
                 class="delete-btn"
                 (click)="openDeleteModal(user)"
@@ -115,7 +112,9 @@
           [(ngModel)]="newUser.roleId"
           class="department-select"
         >
-          <option selected value="0" disabled>Seleccionar tipo de usuario</option>
+          <option selected value="0" disabled>
+            Seleccionar tipo de usuario
+          </option>
           <option value="2">Jefe de departamento</option>
           <option value="1">Empleado</option>
         </select>

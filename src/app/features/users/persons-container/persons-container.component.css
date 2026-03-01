@@ -12,7 +12,6 @@
   align-items: center;
   margin-bottom: 32px;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .search-section {
@@ -83,7 +82,7 @@
 .actions-section {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
   gap: 16px;
 }
 
@@ -120,7 +119,7 @@
   border-radius: 10px;
   padding: 12px 20px;
   font-size: 14px;
-  width: 100%;
+  width: auto;
   align-items: center;
   justify-content: center;
   font-weight: 600;
@@ -298,6 +297,7 @@
 
 .DeleteContainer {
   width: fit-content;
+  max-width: 500px;
   height: fit-content;
   justify-content: center;
 }
@@ -431,10 +431,6 @@
     overflow-y: auto;
   }
 
-  .actions-section {
-    width: 100%;
-    justify-content: space-between;
-  }
 
 }
 
@@ -455,29 +451,32 @@
 
   .convert-header {
     flex-direction: column;
-    align-items: center;
+    align-items: start;
   }
 
   .actions-section {
-    width: 100%;
-    flex-wrap: wrap;
     gap: auto;
   }
 
   .actions-section button {
     width: auto;
   }
-
-  .actions-section button:not(.history-action-btn) {
-    width: 100%;
-  }
-
+  
   .persons-count {
     padding: 12px 0px;
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+  .persons-container {
+    padding: 24px;
+  }
+  
+  .convert-header {
+    flex-direction: column;
+    align-items: start;
+  }
+
   .actions-section button {
     width: 100%;
   }
@@ -490,5 +489,9 @@
   .Optionsbuttons button {
     width: 100%;
     min-height: 45px;
+  }
+
+  .persons-count {
+    padding: 0px;
   }
 }

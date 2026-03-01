@@ -1,26 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../../core/services/user/user_service';
-import { log } from 'console';
+import { Component, OnInit } from "@angular/core";
+import { ProfileService } from "../../../core/services/user/user_service";
+import { AlertService } from "../../../core/services/alerts/alerts";
+import { log } from "console";
 
 @Component({
-  selector: 'app-persons-container',
-  templateUrl: './persons-container.component.html',
-  styleUrl: './persons-container.component.css'
+  selector: "app-persons-container",
+  templateUrl: "./persons-container.component.html",
+  styleUrl: "./persons-container.component.css",
 })
 export class PersonsContainerComponent implements OnInit {
   archiveCount = 0;
-  searchTerm = '';
+  searchTerm = "";
   showAddModal = false;
   showDeleteModal = false;
   userToDelete: any = null;
 
   departments = [
-    "Dirección General", "Área Técnica", "Comisaria", "Coordinación Juridica",
-    "Gerencia Administrativa", "Gerencia Operativa", "Departamento de Finanzas",
-    "Departamento de Planeación", "Departamento de Sistema Eléctrico",
+    "Dirección General",
+    "Área Técnica",
+    "Comisaria",
+    "Coordinación Juridica",
+    "Gerencia Administrativa",
+    "Gerencia Operativa",
+    "Departamento de Finanzas",
+    "Departamento de Planeación",
+    "Departamento de Sistema Eléctrico",
     "Departamento de Sistema Hidrosánitario y Aire Acondicionado",
-    "Departamento de Mantenimiento General", "Departamento de Voz y Datos",
-    "Departamento de Seguridad e Higiene"
+    "Departamento de Mantenimiento General",
+    "Departamento de Voz y Datos",
+    "Departamento de Seguridad e Higiene",
   ];
 
   departmentVisibility: { [key: string]: boolean } = {};
@@ -28,38 +36,43 @@ export class PersonsContainerComponent implements OnInit {
   currentUser: any = null;
 
   newUser = {
-    email: '',
-    password: '',
-    department: '',
-    nombre: '',
-    apellidos: '',
-    roleId: 0
+    email: "",
+    password: "",
+    department: "",
+    nombre: "",
+    apellidos: "",
+    roleId: 0,
   };
 
-  constructor(private profileService: ProfileService) {
-    this.departments.forEach(dept => {
+  constructor(
+    private profileService: ProfileService,
+    private alertService: AlertService
+  ) {
+    this.departments.forEach((dept) => {
       this.departmentVisibility[dept] = true;
     });
+    const userData = localStorage.getItem("user_data");
+    const user = userData ? JSON.parse(userData) : null;
+    const roleId = user?.roleId;
   }
 
   ngOnInit() {
-  const storedUser = localStorage.getItem('user_data');
-  if (storedUser) {
-    this.currentUser = JSON.parse(storedUser);
-  }
+    const storedUser = localStorage.getItem("user_data");
+    if (storedUser) {
+      this.currentUser = JSON.parse(storedUser);
+    }
 
-  if (this.currentUser?.roleId === 3) {
-    this.departments.forEach(dept => {
-      this.departmentVisibility[dept] = true;
-    });
-    this.loadAllUsers();
-  } else if (this.currentUser?.roleId === 2) {
-    this.departments = [this.currentUser.department];
-    this.departmentVisibility[this.currentUser.department] = true;
-    this.loadUsersByDepartment(this.currentUser.department);
+    if (this.currentUser?.roleId === 3) {
+      this.departments.forEach((dept) => {
+        this.departmentVisibility[dept] = true;
+      });
+      this.loadAllUsers();
+    } else if (this.currentUser?.roleId === 2) {
+      this.departments = [this.currentUser.department];
+      this.departmentVisibility[this.currentUser.department] = true;
+      this.loadUsersByDepartment(this.currentUser.department);
+    }
   }
-}
-
 
   loadAllUsers() {
     this.profileService.getAllUsers().subscribe({
@@ -68,8 +81,8 @@ export class PersonsContainerComponent implements OnInit {
         this.archiveCount = users.length;
       },
       error: (error) => {
-        console.error('Error loading users:', error);
-      }
+        console.error("Error loading users:", error);
+      },
     });
   }
 
@@ -80,17 +93,17 @@ export class PersonsContainerComponent implements OnInit {
         this.archiveCount = users.length;
       },
       error: (error) => {
-        console.error('Error loading department users:', error);
-      }
+        console.error("Error loading department users:", error);
+      },
     });
   }
 
   organizeUsersByDepartment(users: any[]) {
-    this.departments.forEach(dept => {
+    this.departments.forEach((dept) => {
       this.usersByDepartment[dept] = [];
     });
 
-    users.forEach(user => {
+    users.forEach((user) => {
       const dept = user.departamento;
       if (!dept || !this.usersByDepartment[dept]) return;
 
@@ -100,7 +113,7 @@ export class PersonsContainerComponent implements OnInit {
 
   onSearch() {
     if (this.searchTerm.trim()) {
-      console.log('Buscando:', this.searchTerm);
+      console.log("Buscando:", this.searchTerm);
     } else {
       if (this.currentUser?.roleId === 3) {
         this.loadAllUsers();
@@ -111,7 +124,8 @@ export class PersonsContainerComponent implements OnInit {
   }
 
   toggleDepartmentVisibility(department: string) {
-    this.departmentVisibility[department] = !this.departmentVisibility[department];
+    this.departmentVisibility[department] =
+      !this.departmentVisibility[department];
   }
 
   toggleAddModal() {
@@ -124,32 +138,31 @@ export class PersonsContainerComponent implements OnInit {
 
   resetForm() {
     this.newUser = {
-      email: '',
-      password: '',
-      department: '',
-      nombre: '',
-      apellidos: '',
-      roleId: 0
+      email: "",
+      password: "",
+      department: "",
+      nombre: "",
+      apellidos: "",
+      roleId: 0,
     };
   }
 
   addUser() {
     if (this.validateForm()) {
-
       const userData = {
         email: this.newUser.email,
         password: this.newUser.password,
         departamento: this.newUser.department,
         nombre: this.newUser.nombre,
         apellidos: this.newUser.apellidos,
-        roleId: this.newUser.roleId
+        id_rol: Number(this.newUser.roleId),
       };
 
-      console.log('Datos del nuevo usuario:', userData);
+      console.log("Datos del nuevo usuario:", userData);
 
       this.profileService.postUser(userData).subscribe({
         next: (response) => {
-          console.log('Usuario agregado exitosamente:', response);
+          console.log("Usuario agregado exitosamente:", response);
           this.toggleAddModal();
 
           if (this.currentUser?.roleId === 3) {
@@ -159,19 +172,23 @@ export class PersonsContainerComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.error('Error al agregar usuario:', error);
-          alert('Error al agregar usuario. Por favor, verifica los datos e intenta nuevamente.');
-        }
+          console.error("Error al agregar usuario:", error);
+          alert(
+            "Error al agregar usuario. Por favor, verifica los datos e intenta nuevamente."
+          );
+        },
       });
     }
   }
 
   validateForm(): boolean {
-    return !!(this.newUser.email &&
-              this.newUser.password &&
-              this.newUser.department &&
-              this.newUser.nombre &&
-              this.newUser.apellidos);
+    return !!(
+      this.newUser.email &&
+      this.newUser.password &&
+      this.newUser.department &&
+      this.newUser.nombre &&
+      this.newUser.apellidos
+    );
   }
 
   openDeleteModal(user: any) {
@@ -188,7 +205,8 @@ export class PersonsContainerComponent implements OnInit {
     if (this.userToDelete && this.userToDelete.id) {
       this.profileService.deleteUserById(this.userToDelete.id).subscribe({
         next: (response) => {
-          console.log('Usuario eliminado exitosamente:', response);
+          console.log("Usuario eliminado exitosamente:", response);
+          this.alertService.success("Usuario eliminado correctamente.");
           this.closeDeleteModal();
 
           if (this.currentUser?.roleId === 3) {
@@ -198,9 +216,9 @@ export class PersonsContainerComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.error('Error al eliminar usuario:', error);
+          console.error("Error al eliminar usuario:", error);
           this.closeDeleteModal();
-        }
+        },
       });
     }
   }
@@ -212,5 +230,9 @@ export class PersonsContainerComponent implements OnInit {
   hasUsersInDepartment(department: string): boolean {
     const users = this.getUsersForDepartment(department);
     return users && users.length > 0;
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser?.roleId === 3;
   }
 }
