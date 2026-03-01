@@ -13,6 +13,8 @@ import { FileServices } from '../../../core/services/files/files_service';
 import { FileData } from '../../../core/services/files/files_model';
 import { RecentElementsServices } from '../../../core/services/recents/RecentElementsServices';
 import { PermissionService } from '../../../core/services/permissions/permissions_services';
+import { ImageItem } from '../../../core/models/image-item.model';
+import { ScannerService } from '../../../core/services/scanner/scanner.service';
 
 @Component({
   selector: 'app-files-container',
@@ -36,6 +38,12 @@ export class FilesContainerComponent implements OnInit {
 
   showUploadModal = false;
   newFolio = '';
+  
+  // Scanner functionality
+  showScannerModal = false;
+  showEditorModal = false;
+  selectedImage?: ImageItem;
+  scannedImages: ImageItem[] = [];
 
   openFileId: number | null = null;
 
@@ -44,6 +52,7 @@ export class FilesContainerComponent implements OnInit {
     private fileService: FileServices,
     private recentElementService: RecentElementsServices,
     private permissionServices: PermissionService,
+    private scannerService: ScannerService,
   ){  }
 
   ngOnInit(): void {
@@ -277,6 +286,89 @@ export class FilesContainerComponent implements OnInit {
     else {
       return false;
     }
+  }
+
+  // Scanner Methods
+  openScannerUpload() {
+    this.showScannerModal = true;
+  }
+
+  closeScannerModal() {
+    this.showScannerModal = false;
+    this.scannedImages = [];
+  }
+
+  onScannerFilesSelected(event: any) {
+    const files: File[] = Array.from(event.target.files);
+    files.forEach((f) => {
+      const url = URL.createObjectURL(f);
+      this.scannedImages = [
+        ...this.scannedImages,
+        {
+          file: f,
+          name: f.name,
+          previewUrl: url,
+          status: 'pending',
+        },
+      ];
+    });
+    event.target.value = '';
+  }
+
+  editScannedImage(img: ImageItem) {
+    this.selectedImage = img;
+    this.showEditorModal = true;
+  }
+
+  closeEditorModal() {
+    this.showEditorModal = false;
+  }
+
+  allScannedReady(): boolean {
+    return this.scannedImages.length > 0 && this.scannedImages.every(img => img.status === 'ready');
+  }
+
+  sendAllScanned() {
+    if (!this.allScannedReady() || !this.newFolio) return;
+
+    const user = this.getUserData();
+    if (!user?.userId) return;
+
+    let completed = 0;
+
+    this.scannedImages.forEach((img) => {
+      const fileToSend = img.transformedPreview
+        ? this.base64ToFile(img.transformedPreview, img.name)
+        : img.file;
+
+      this.fileService.uploadFile(fileToSend, this.newFolio, this.idFolder, user.userId).subscribe({
+        next: (response) => {
+          console.log('Archivo escaneado subido:', response);
+          completed++;
+          if (completed === this.scannedImages.length) {
+            this.closeScannerModal();
+            this.newFolio = '';
+            this.getFilesInfo();
+          }
+        },
+        error: (error) => {
+          console.error('Error al subir archivo escaneado:', error);
+        }
+      });
+    });
+  }
+
+  private base64ToFile(base64: string, originalName: string): File {
+    const arr = base64.split(',');
+    const mime = arr[0].match(/:(.*?);/)?.[1] || 'image/jpeg';
+    const bstr = atob(arr[1]);
+    const n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    for (let i = 0; i < n; i++) {
+      u8arr[i] = bstr.charCodeAt(i);
+    }
+    const name = originalName.replace(/\.[^/.]+$/, '') + '_scanned.jpg';
+    return new File([u8arr], name, { type: mime });
   }
 
 }
