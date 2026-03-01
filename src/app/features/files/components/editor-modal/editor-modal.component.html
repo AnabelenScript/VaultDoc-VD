@@ -1,0 +1,61 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Editar Imagen</h2>
+      <button class="btn-close" (click)="closeModal()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Detectando esquinas...</p>
+      </div>
+
+      <!-- Transforming State -->
+      <div *ngIf="transforming" class="loading-state">
+        <div class="spinner"></div>
+        <p>Transformando imagen...</p>
+      </div>
+
+      <!-- Transform Success State -->
+      <div *ngIf="!loading && !transforming && showTransformSuccess && resultPreview" class="result-preview">
+        <img [src]="resultPreview" alt="Imagen transformada">
+        <p class="success-message">✓ Imagen transformada exitosamente</p>
+      </div>
+
+      <!-- Preview State -->
+      <div *ngIf="!loading && !transforming && !isEditing && !showTransformSuccess && resultPreview" class="result-preview">
+        <img [src]="resultPreview" alt="Imagen transformada">
+      </div>
+
+      <!-- Canvas State -->
+      <div *ngIf="!loading && !transforming && isEditing" class="canvas-wrapper">
+        <div class="image-container">
+          <img #img [src]="image.previewUrl" class="base-image">
+          <div class="dark-filter"></div>
+          <canvas
+            #canvas
+            class="editor-canvas"
+            (mousedown)="onCanvasMouseDown($event)"
+            (mousemove)="onCanvasMouseMove($event)"
+            (mouseup)="onCanvasMouseUp()"
+            (mouseleave)="onCanvasMouseUp()">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Footer - Modo Edición -->
+    <div class="modal-footer" *ngIf="!loading && !transforming && isEditing">
+      <button class="btn-cancel" (click)="closeModal()">Cancelar</button>
+      <button class="btn-save" (click)="save()">Guardar</button>
+    </div>
+
+    <!-- Modal Footer - Modo Vista Previa -->
+    <div class="modal-footer" *ngIf="!loading && !transforming && !isEditing && !showTransformSuccess">
+      <button class="btn-cancel" (click)="closeModal()">Cerrar</button>
+      <button class="btn-edit" (click)="enterEditMode()">Editar</button>
+    </div>
+  </div>
+</div>

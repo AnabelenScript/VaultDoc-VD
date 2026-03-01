@@ -7,6 +7,12 @@
         <span class="archive-label">Archivos:</span>
         <span class="archive-number">{{ countFiles() }}</span>
       </div>
+        <button class="create-folder-btn" (click)="uploadFile()">
+          Subir archivo
+        </button>
+        <button class="create-folder-btn scanner-btn" (click)="openScannerUpload()">
+          Escanear documento
+        </button>
     </div>
   </div>
 
@@ -116,14 +122,68 @@
         </div>
       </div>
     </div>
-    <button class="create-folder-btn" (click)="uploadFile()">
-      Subir archivo
-    </button>
+    
     <input
       type="file"
       #fileInput
       style="display: none"
       (change)="onSelectedFile($event)"
     />
+
+    <!-- Scanner Modal -->
+    <div class="modal scanner-upload-modal" *ngIf="showScannerModal">
+      <div class="modal-content scanner-modal-content" (click)="$event.stopPropagation()">
+        <div class="scanner-header">
+          <h3>Escanear Documentos</h3>
+          <button class="close-btn" (click)="closeScannerModal()">×</button>
+        </div>
+
+        <div class="scanner-folio-section" *ngIf="scannedImages.length === 0">
+          <label>Folio del documento:</label>
+          <input
+            type="text"
+            inputmode="numeric"
+            (keypress)="validateNumber($event)"
+            [(ngModel)]="newFolio"
+            maxlength="3"
+            pattern="[0-9]{3}"
+            placeholder="Ingrese 3 dígitos"
+            class="modal-input"
+          />
+        </div>
+
+        <div class="scanner-upload-section">
+          <input #scannerFileInput type="file" multiple (change)="onScannerFilesSelected($event)" accept="image/*" hidden>
+          <button class="btn-upload-scanner" (click)="scannerFileInput.click()" [disabled]="!newFolio">
+            Seleccionar imágenes
+          </button>
+        </div>
+
+        <div class="scanned-images-grid" *ngIf="scannedImages.length > 0">
+          <div class="scanned-image-card" *ngFor="let img of scannedImages">
+            <div class="image-info">
+              <p class="image-name">{{img.name}}</p>
+              <span class="status-badge" [class]="'status-' + img.status">{{img.status}}</span>
+            </div>
+            <img [src]="img.transformedPreview || img.previewUrl" width="120" class="image-preview">
+            <button (click)="editScannedImage(img)" class="btn-edit-scan">Editar</button>
+          </div>
+        </div>
+
+        <div class="scanner-actions" *ngIf="scannedImages.length > 0">
+          <button class="btn-cancel-scanner" (click)="closeScannerModal()">Cancelar</button>
+          <button class="btn-send-scanner" (click)="sendAllScanned()" [disabled]="!allScannedReady()">
+            Enviar todos
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor Modal -->
+    <app-editor-modal
+      *ngIf="showEditorModal && selectedImage"
+      [image]="selectedImage"
+      (close)="closeEditorModal()">
+    </app-editor-modal>
   </div>
 </div>

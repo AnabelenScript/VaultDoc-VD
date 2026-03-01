@@ -8,7 +8,7 @@ import { FilesContainerComponent } from './files-container/files-container.compo
 import { SharedModule } from "../../shared/shared-module/shared.module";
 import { SearchPageComponent } from './views/search-page/search-page.component';
 import { SearchContainerComponent } from './search-container/search-container.component';
-
+import { EditorModalComponent } from './components/editor-modal/editor-modal.component';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { SearchContainerComponent } from './search-container/search-container.co
     FoldersContainerComponent,
     FilesContainerComponent,
     SearchPageComponent,
-    SearchContainerComponent
+    SearchContainerComponent,
+    EditorModalComponent
   ],
   imports: [
     CommonModule,
